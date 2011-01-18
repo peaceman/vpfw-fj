@@ -2,6 +2,49 @@
 class Vpfw_Request_Http implements Vpfw_Request_Interface {
     private $parameters;
 
+    /**
+     * Wird auf True gesetzt sobald der aktuelle Dispatchprozess
+     * abeschlossen ist.
+     * 
+     * @var bool 
+     */
+    private $isHandled;
+
+    /**
+     * Array aus dem Namen des als nächstes auszuführenden ActionControllers und
+     * dem Namen der entsprechenden Methode.
+     *
+     * @var array
+     */
+    private $nextActionController = array(
+        'ControllerName' => null,
+        'MethodName' => null,
+    );
+
+    /**
+     * Beauftragt die Vpfw_Factory damit, den definierten ActionController zu
+     * erzeugen und diesem mitzuteilen, welche Methode er auszuführen hat.
+     *
+     * @return Vpfw_Controller_Action_Abstract
+     */
+    public function getNextActionController() {
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHandled() {
+        return $this->isHandled;
+    }
+
+    /**
+     * @param bool $state
+     */
+    public function setHandleState($state) {
+        $this->isHandled = (bool)$state;
+    }
+
     public function __construct() {
         $this->parameters = $_REQUEST;
         array_walk($this->parameters, 'trim');

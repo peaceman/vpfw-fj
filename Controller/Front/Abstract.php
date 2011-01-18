@@ -21,7 +21,7 @@ class Vpfw_Controller_Front_Abstract implements Vpfw_Controller_Front_Interface 
      * @param Vpwf_Request_Interface $request
      * @param Vpfw_Response_Interface $response
      */
-    public function handleRequest(Vpfw_Request_Interface $request, Vpfw_Response_Interface $response) {
+    public function dispatch(Vpfw_Request_Interface $request, Vpfw_Response_Interface $response) {
         $this->layout = Vpfw_Factory::getActionController('Layout', 'index');
         $actionController = $this->router->getActionController($request);
         $this->layout->addChildController('content', $actionController);
