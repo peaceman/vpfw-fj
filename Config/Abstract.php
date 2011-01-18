@@ -45,13 +45,13 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
      * @param mixed $value
      */
     public function setValue($key, $value) {
-        if (false === strpos('.', $key)) {
+        if (false === strpos($key, '.')) {
             $this->configArray[$key] = $value;
         } else {
             $targetReference = &$this->configArray;
             $keys = explode('.', $key);
-            foreach ($keys as $key) {
-                $targetReference = &$targetReference[$key];
+            foreach ($keys as $subKey) {
+                $targetReference = &$targetReference[$subKey];
             }
             $targetReference = $value;
         }
