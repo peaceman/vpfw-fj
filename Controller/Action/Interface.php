@@ -16,4 +16,9 @@ interface Vpfw_Controller_Action_Interface {
      * @param mixed $ctrlInfo Array aus controllerName und actionName oder der ActionController als Objekt
      */
     public function addChildController($placeHolderName, $ctrlInfo);
+
+    /**
+     * @return string
+     */
+    public function renderView();
 }

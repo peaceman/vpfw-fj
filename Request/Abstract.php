@@ -3,7 +3,7 @@ abstract class Vpfw_Request_Abstract implements Vpfw_Request_Interface {
     /**
      * @var array
      */
-    private $parameters;
+    private $parameters = array();
 
     /**
      * Array aus Arrays, welche Informationen zu den als nächstes auszu-
@@ -13,7 +13,7 @@ abstract class Vpfw_Request_Abstract implements Vpfw_Request_Interface {
      *
      * @var array
      */
-    private $actionControllerInfos = array();
+    protected $actionControllerInfos = array();
 
     /**
      * @var bool
@@ -89,6 +89,7 @@ abstract class Vpfw_Request_Abstract implements Vpfw_Request_Interface {
         if (true == empty($this->parameters[$name])) {
             return false;
         }
+        return true;
     }
 
 
@@ -151,7 +152,7 @@ abstract class Vpfw_Request_Abstract implements Vpfw_Request_Interface {
         if (false == isset($info['MethodName'])) {
             $info['MethodName'] = 'index';
         }
-        array_push($this->actionControllerInfos, $info);
+        $this->actionControllerInfos[] = $info;
         return $this;
     }
 
@@ -203,6 +204,7 @@ abstract class Vpfw_Request_Abstract implements Vpfw_Request_Interface {
      * @return array
      */
     public function getNextActionControllerInfo() {
-        return array_shift($this->actionControllerInfos);
+        $infos = array_shift($this->actionControllerInfos);
+        return $infos;
     }
 }

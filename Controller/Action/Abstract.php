@@ -30,6 +30,8 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
      */
     protected $childControllers = array();
 
+    protected $isExecuted = false;
+
     /**
      *
      * @param string $name Name der Aktion ohne den Zusatz 'Action'
@@ -69,17 +71,33 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
      * @param Vpfw_Response_Interface $response
      */
     public function execute(Vpfw_Request_Interface $request, Vpfw_Response_Interface $response) {
+        if (true == $this->isExecuted) {
+            return;
+        }
         $this->request = $request;
         $this->response = $response;
         $this->{$this->actionToExecute}();
-        foreach ($this->childControllers as $placeHolderName => $controller) {
+        foreach ($this->childControllers as $placeHolderName => &$controller) {
             if (true == is_array($controller)) {
-            list($controllerName, $actionName) = $controller;
+                list($controllerName, $actionName) = $controller;
                 $controller = Vpfw_Factory::getActionController($controllerName, $actionName);
             }
             $controller->execute($request, $response);
-            $this->view->setVar($placeHolderName, $controller->getView()->render());
         }
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function renderView() {
+        foreach ($this->childControllers as $placeHolderName => $controller) {
+            if (false == is_object($controller)) {
+                throw new Vpfw_Exception_Logical('Da die renderView Methode erst nach der execute Methode aufgerufen werden darf, sind eigentlich schon alle ActionController-Informationen dazu genutzt worden, die Objekte zu erzeugen.');
+            }
+            $this->view->setVar($placeHolderName, $controller->renderView());
+        }
+        return $this->getView()->render();
     }
 
     /**
