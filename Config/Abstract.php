@@ -88,7 +88,7 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
                 throw new Vpfw_Exception_Feature('Das zurückschreiben der geänderten Konfiguration konnte aufgrund von fehlenden Dateirechten nicht durchgeführt werden');
             }
         }
-        $fileHandle = fopen($this->fileName, 'a');
+        $fileHandle = fopen($this->fileName, 'w');
         if (false == $fileHandle) {
             // Sollte eigentlich nicht vorkommen, da wir ja vorher schon die Dateirechte
             // überprüft haben, aber man weiß ja nie
@@ -97,7 +97,6 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
         if (false == flock($fileHandle, LOCK_EX)) {
             throw new Vpfw_Exception_Feature('Die Konfigurationsdatei (' . $this->fileName . ') konnte nicht gelockt werden');
         }
-        ftruncate($fileHandle, 0);
         return $fileHandle;
     }
 
