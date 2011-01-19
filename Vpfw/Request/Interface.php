@@ -5,4 +5,7 @@ interface Vpfw_Request_Interface {
     public function getParameter($name);
     public function getHeader($name);
     public function getRemoteAddress();
+    public function areParametersSet(array $names);
+    public function isHandled();
+    public function setHandleState($state);
 }
