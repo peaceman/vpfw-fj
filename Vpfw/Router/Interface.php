@@ -1,12 +1,20 @@
 <?php
+/**
+ * Der Router ist dafür zuständig aus den Paramtern des Request-Objektes den
+ * Namen des ActionControllers und den Namen der auszuführenden Methode zu
+ * extrahieren.
+ */
 interface Vpfw_Router_Interface {
     /**
-     * @return Vpfw_Controller_Action_Interface
+     * Liefert den Namen des ActionControllers und der auszuführenden
+     * Methode. Sollte im Request-Objekt kein Hinweis auf die auszuführende
+     * Methode zu finden sein, wird automatisch die index Methode eingetragen.
+     *
+     * array(
+     *     'ControllerName' => 'User',
+     *     'MethodName' => 'index',
+     * )
+     * @return array
      */
-    public function getActionController(Vpfw_Request_Interface $request);
-
-    /**
-     * @param Vpfw_Controller_Action_Abstract
-     */
-    public function setActionController(Vpfw_Controller_Action_Abstract $actionController);
+    public function getActionControllerInfo(Vpfw_Request_Interface $request);
 }

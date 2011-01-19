@@ -1,5 +1,4 @@
 <?php
-
 class Vpfw_Config_Ini extends Vpfw_Config_Abstract {
     protected function parseFile() {
         parent::parseFile();
@@ -14,11 +13,11 @@ class Vpfw_Config_Ini extends Vpfw_Config_Abstract {
         
         // Wir gehen alle sections durch
         foreach ($this->configArray as $sectionName => $values) {
-            // Der Konfigurationsarray muss Sections (arrays enhalten) sonst ist er invalid!
+            // Das Konfigurationsarray muss Sections (arrays enhalten) sonst ist es invalid!
             if (!is_array($values))
-                throw new Vpfw_Exception_Logical('Config array have to contain sections!');
+                throw new Vpfw_Exception_Logical('Config array has to contain sections!');
 
-            $iniStr .= '['.$sectionName.']' . PHP_EOL;
+            $iniStr .= '[' . $sectionName . ']' . PHP_EOL;
 
             // Wir gehen nun alle Werte der Section durch und
             // schreiben sie in die Konfigurationsdatei
@@ -38,5 +37,3 @@ class Vpfw_Config_Ini extends Vpfw_Config_Abstract {
         fclose($fileHandle);
     }
 }
-
-?>

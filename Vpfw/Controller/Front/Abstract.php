@@ -15,6 +15,7 @@ class Vpfw_Controller_Front_Abstract implements Vpfw_Controller_Front_Interface 
      */
     public function __construct(Vpfw_Router_Interface $router) {
         $this->router = $router;
+        $this->layout = Vpfw_Factory::getActionController('Layout', 'index');
     }
 
     /**
@@ -22,8 +23,15 @@ class Vpfw_Controller_Front_Abstract implements Vpfw_Controller_Front_Interface 
      * @param Vpfw_Response_Interface $response
      */
     public function dispatch(Vpfw_Request_Interface $request, Vpfw_Response_Interface $response) {
-        $this->layout = Vpfw_Factory::getActionController('Layout', 'index');
-        $actionController = $this->router->getActionController($request);
-        $this->layout->addChildController('content', $actionController);
+        $initialActionControllerInfo = $this->router->getActionControllerInfo($request);
+        $request->addActionControllerInfo($initialActionControllerInfo);
+
+        while (false == $request->isDispatched()) {
+            $info = $request->getNextActionControllerInfo();
+            $contentActionController = Vpfw_Factory::getActionController($info['ControllerName'], $info['MethodName']);
+            $contentActionController->execute($request, $response);
+        }
+        
+        $this->layout->addChildController('content', $contentActionController);
     }
 }
