@@ -1,81 +1,8 @@
 <?php
-class Vpfw_Request_Http implements Vpfw_Request_Interface {
-    private $parameters;
-
-    /**
-     * Wird auf True gesetzt sobald der aktuelle Dispatchprozess
-     * abeschlossen ist.
-     * 
-     * @var bool 
-     */
-    private $isHandled;
-
-    /**
-     * Array aus dem Namen des als nächstes auszuführenden ActionControllers und
-     * dem Namen der entsprechenden Methode.
-     *
-     * @var array
-     */
-    private $nextActionController = array(
-        'ControllerName' => null,
-        'MethodName' => null,
-    );
-
-    /**
-     * Beauftragt die Vpfw_Factory damit, den definierten ActionController zu
-     * erzeugen und diesem mitzuteilen, welche Methode er auszuführen hat.
-     *
-     * @return Vpfw_Controller_Action_Abstract
-     */
-    public function getNextActionController() {
-
-    }
-
-    /**
-     * @return bool
-     */
-    public function isHandled() {
-        return $this->isHandled;
-    }
-
-    /**
-     * @param bool $state
-     */
-    public function setHandleState($state) {
-        $this->isHandled = (bool)$state;
-    }
-
+class Vpfw_Request_Http extends Vpfw_Request_Abstract {
     public function __construct() {
-        $this->parameters = $_REQUEST;
-        array_walk($this->parameters, 'trim');
-    }
-
-    public function issetParameter($name) {
-        return isset($this->parameters[$name]);
-    }
-
-    public function areParametersSet(array $parameterNames) {
-        foreach ($parameterNames as $parameterName) {
-            if (false == $this->issetParameter($parameterName)) {
-                return false;
-            }
-            $parameter = $this->getParameter($parameterName);
-            if (true == empty($parameter)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public function getParameter($name) {
-        if (true == isset($this->parameters[$name])) {
-            return $this->parameters[$name];
-        }
-        return null;
-    }
-
-    public function getParameterNames() {
-        return array_keys($this->parameters);
+        array_walk($_REQUEST, 'trim');
+        $this->setParameters($_REQUEST);
     }
 
     public function getHeader($name) {
@@ -97,4 +24,6 @@ class Vpfw_Request_Http implements Vpfw_Request_Interface {
         }
         return $retUrl;
     }
+
+
 }
