@@ -1,5 +1,5 @@
 <?php
-require_once 'functions.php';
+require_once 'Vpfw/functions.php';
 try {
     $stdCfg = new Vpfw_Config_Standard('std.cfg');
     Vpfw_Factory::setConfig($stdCfg);
