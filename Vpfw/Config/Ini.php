@@ -8,7 +8,6 @@ class Vpfw_Config_Ini extends Vpfw_Config_Abstract {
     }
 
     protected function writeBack() {
-        $fileHandle = parent::writeBack();
         $iniStr = '';
         
         // Wir gehen alle sections durch
@@ -23,15 +22,25 @@ class Vpfw_Config_Ini extends Vpfw_Config_Abstract {
             // schreiben sie in die Konfigurationsdatei
             foreach ($values as $keyName => $value) {
                 if (!is_null($value)) {
-                    if (is_bool($value) || is_int($value))
+                    if (is_int($value))
                         $iniStr .= $keyName . ' = ' . $value . PHP_EOL;
-                    else if(is_string($value))
+                    elseif (is_bool($value)) {
+                        if (false === $value) {
+                            $iniStr .= $keyName . ' = 1' . PHP_EOL;
+                        } else {
+                            $iniStr .= $keyName . ' = 0' . PHP_EOL;
+                        }
+                    }
+                    elseif (is_string($value))
                         $iniStr .= $keyName . ' = "' . $value . '"' . PHP_EOL;
+                    elseif (is_array($value))
+                        throw new Vpfw_Exception_Logical('Bei einer Konfiguration mit INI-Datei ist es nicht möglich die Konfiguration mit mehr als einer Unterebene zu gestalten.');
                     else
                         throw new Vpfw_Exception_InvalidArgument('Configuration type does not support datatype!');
                 }
             }
         }
+        $fileHandle = parent::writeBack();
         fwrite($fileHandle, $iniStr);
         flock($fileHandle, LOCK_UN);
         fclose($fileHandle);

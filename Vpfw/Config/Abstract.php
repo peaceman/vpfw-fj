@@ -51,6 +51,10 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
             $targetReference = &$this->configArray;
             $keys = explode('.', $key);
             foreach ($keys as $subKey) {
+                if (false == is_array($targetReference) && false == is_null($targetReference)) {
+                    $actualPosition = implode('.', array_slice($keys, 0, count($keys) - 1));
+                    throw new Vpfw_Exception_Logical('An dem Konfigurationspunkt ' . $actualPosition . ' ist bereits ein Wert gespeichert, somit kann dieser Punkt nicht mehr als Konfigurationskategorie genutzt werden.');
+                }
                 $targetReference = &$targetReference[$subKey];
             }
             $targetReference = $value;
@@ -88,7 +92,7 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
                 throw new Vpfw_Exception_Feature('Das zurückschreiben der geänderten Konfiguration konnte aufgrund von fehlenden Dateirechten nicht durchgeführt werden');
             }
         }
-        $fileHandle = fopen($this->fileName, 'w');
+        $fileHandle = fopen($this->fileName, 'a');
         if (false == $fileHandle) {
             // Sollte eigentlich nicht vorkommen, da wir ja vorher schon die Dateirechte
             // überprüft haben, aber man weiß ja nie
@@ -97,6 +101,7 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
         if (false == flock($fileHandle, LOCK_EX)) {
             throw new Vpfw_Exception_Feature('Die Konfigurationsdatei (' . $this->fileName . ') konnte nicht gelockt werden');
         }
+        ftruncate($fileHandle, 0);
         return $fileHandle;
     }
 

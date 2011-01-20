@@ -4,7 +4,7 @@ try {
     $stdCfg = new Vpfw_Config_Standard('std.cfg');
     Vpfw_Factory::setConfig($stdCfg);
     $stdCfg->setLogObject(Vpfw_Factory::getLog());
-    
+
     $request = new Vpfw_Request_Http();
     $response = new Vpfw_Response_Http();
     $router = new Vpfw_Router_Standard();
@@ -22,7 +22,7 @@ try {
     echo $e->getFile() . ' @ ' . $e->getLine() . PHP_EOL;
     echo '<pre>';
 } catch (Vpfw_Exception_Die $e) {
-    
+
 }
 
 try {
