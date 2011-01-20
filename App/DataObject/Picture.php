@@ -16,11 +16,22 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     private $deletion;
 
     /**
+     * @var App_DataMapper_PictureComment
+     */
+    private $commentMapper;
+
+    /**
+     * @var array
+     */
+    private $comments;
+
+    /**
      * @param App_Validator_Picture $validator
      * @param array $properties
      */
-    public function __construct(App_Validator_Picture $validator, $properties = null) {
+    public function __construct(App_Validator_Picture $validator, App_DataMapper_PictureComment $commentMapper, $properties = null) {
         $this->validator = $validator;
+        $this->commentMapper = $commentMapper;
         $this->data = array(
             'Id' => null,
             'Md5' => null,
@@ -39,11 +50,21 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     }
 
     /**
+     * @return array
+     */
+    public function getComments() {
+        if (true == is_null($this->comments)) {
+            $this->comments = $this->commentMapper->getEntriesByFieldValue(array('i|PictureId|' . $this->getId()));
+        }
+        return $this->comments;
+    }
+
+    /**
      * @return string
      */
     public function getMd5() {
-        //TODO convert binary md5 into string
-        return $this->getData('Md5');
+        list($toReturn) = array_values(unpack('H*', $this->getData('Md5')));
+        return $toReturn;
     }
 
     /**
@@ -126,8 +147,7 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
             if (true == $validation) {
                 $this->validator->validateMd5($md5);
             }
-            //TODO convert from string to binary
-            $this->setData('Md5', $md5);
+            $this->setData('Md5', pack('H*', $md5));
         }
     }
 
@@ -164,7 +184,9 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     public function setSession(App_DataObject_Session $session) {
         $this->session = $session;
         if (true == is_object($session)) {
-            $this->setData('SessionId', $session->getId());
+            if ($this->getSessionId() != $session->getId()) {
+                $this->setData('SessionId', $session->getId());
+            }
         }
     }
 
@@ -240,7 +262,9 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     public function setDeletion(App_DataObject_Deletion $deletion) {
         $this->deletion = $deletion;
         if (true == is_object($deletion)) {
-            $this->setData('DeletionId', $deletion->getId());
+            if ($this->getDeletionId() != $deletion->getId()) {
+                $this->setData('DeletionId', $deletion->getId());
+            }
         }
     }
 }

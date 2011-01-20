@@ -54,8 +54,7 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
      * @return string
      */
     public function getIp() {
-        //TODO convert ip into human readable form
-        return $this->getData('Ip');
+        return inet_ntop($this->getData('Ip'));
     }
 
     /**
@@ -122,8 +121,7 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validateIp($ip);
             }
-            //TODO convert ip from human readable form into an integer
-            $this->setData('Ip', $ip);
+            $this->setData('Ip', inet_pton($ip));
         }
     }
 

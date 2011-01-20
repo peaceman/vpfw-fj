@@ -1,6 +1,6 @@
 <?php
 class Vpfw_Factory {
-    private static $objectCache = array();
+    public static $objectCache = array();
     /**
      *
      * @var Vpfw_Config_Abstract 

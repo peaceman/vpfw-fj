@@ -2,30 +2,40 @@
 class App_Factory {
     public static function getValidator($type) {
         switch ($type) {
+            case 'Picture':
+                return new App_Validator_Picture();
+                break;
+            case 'Session':
+                return new App_Validator_Session();
+                break;
+            case 'PictureComment':
+                return new App_Validator_PictureComment();
+                break;
             default:
                 throw new Vpfw_Exception_Logical('Die Abhängigkeiten des Validators mit dem Typ ' . $type . ' konnten nicht aufgelöst werden');
         }
     }
 
     public static function getDataMapper($type) {
+        $className = 'App_DataMapper_' . $type;
         switch ($type) {
             case 'User':
-                Vpfw_Factory::$objectCache[$className] = new App_DataMapper_User(Vpfw_Factory::getDatabase());
+                return new App_DataMapper_User(Vpfw_Factory::getDatabase());
                 break;
             case 'Deletion':
-                Vpfw_Factory::$objectCache[$className] = new App_DataMapper_Deletion(Vpfw_Factory::getDatabase());
+                return new App_DataMapper_Deletion(Vpfw_Factory::getDatabase());
                 break;
             case 'Session':
-                Vpfw_Factory::$objectCache[$className] = new App_DataMapper_Session(Vpfw_Factory::getDatabase());
+                return new App_DataMapper_Session(Vpfw_Factory::getDatabase());
                 break;
             case 'Picture':
-                Vpfw_Factory::$objectCache[$className] = new App_DataMapper_Picture(Vpfw_Factory::getDatabase());
+                return new App_DataMapper_Picture(Vpfw_Factory::getDatabase());
                 break;
             case 'RuleViolation':
-                Vpfw_Factory::$objectCache[$className] = new App_DataMapper_RuleViolation(Vpfw_Factory::getDatabase());
+                return new App_DataMapper_RuleViolation(Vpfw_Factory::getDatabase());
                 break;
             case 'PictureComment':
-                Vpfw_Factory::$objectCache[$className] = new App_DataMapper_PictureComment(Vpfw_Factory::getDatabase());
+                return new App_DataMapper_PictureComment(Vpfw_Factory::getDatabase());
                 break;
             default:
                 throw new Vpfw_Exception_Logical('Die Abhängigkeiten des DataMappers mit dem Typ ' . $type . ' konnten nicht aufgelöst werden');
@@ -131,7 +141,7 @@ class App_Factory {
                      * Wenn wir Informationen über die Session bekommen haben,
                      * wird daraus ein DataObject erzeugt.
                      */
-                    if (true == isset($properties['SesUserId'])) {
+                    if (true == isset($properties['SesIp'])) {
                         try {
                             $session = Vpfw_Factory::getDataMapper('Session')->getEntryById($properties['SessionId'], false);
                         } catch (Vpfw_Exception_OutOfRange $e) {
@@ -184,7 +194,7 @@ class App_Factory {
                               $properties['DelReason']);
                     }
                 }
-                $dataObject = new App_DataObject_Picture(Vpfw_Factory::getValidator('Picture'), $properties);
+                $dataObject = new App_DataObject_Picture(Vpfw_Factory::getValidator('Picture'), Vpfw_Factory::getDataMapper('PictureComment'), $properties);
                 if (false == is_null($session)) {
                     $dataObject->setSession($session);
                 }
@@ -257,12 +267,12 @@ class App_Factory {
                 }
                 return $dataObject;
                 break;
-            case 'PictureMapper':
+            case 'PictureComment':
                 $session = null;
                 $picture = null;
                 $deletion = null;
                 if (false == is_null($properties)) {
-                    if (true == isset($properties['SesUserId'])) {
+                    if (true == isset($properties['SesIp'])) {
                         try {
                             $session = Vpfw_Factory::getDataMapper('Session')->getEntryById($properties['SessionId'], false);
                         } catch (Vpfw_Exception_OutOfRange $e) {

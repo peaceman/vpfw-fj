@@ -7,9 +7,9 @@ try {
 
     $request = new Vpfw_Request_Http();
     $response = new Vpfw_Response_Http();
-    $router = new Vpfw_Router_Standard();
+    $router = new Vpfw_Router_Http();
     $fC = new App_Controller_Front_Explicit($router);
-    $fC->handleRequest($request, $response);
+    $fC->dispatch($request, $response);
 } catch (Vpfw_Exception_Critical $e) {
     echo '<pre>';
     echo $e->getMessage();
@@ -28,5 +28,9 @@ try {
 try {
     Vpfw_Cleaner::work();
 } catch (Vpfw_Exception_Critical $e) {
-    echo $e->getMessage();
+    echo '<pre>';
+    echo $e->getTraceAsString() . PHP_EOL;
+    echo $e->getMessage() . PHP_EOL;
+    echo $e->getFile() . ' @ ' . $e->getLine() . PHP_EOL;
+    echo '<pre>';
 }

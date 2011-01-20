@@ -47,8 +47,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @return string 
      */
     public function getCreationIp() {
-        //TODO convert ip into human readable form
-        return $this->getData('CreationIp');
+        return inet_ntop($this->getData('CreationIp'));
     }
     
     /**
@@ -74,8 +73,8 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @return string 
      */
     public function getPasshash() {
-        //TODO convert from bytecode into hex
-        return $this->getData('Passhash');
+        list($toReturn) = array_values(unpack('H*', $this->getData('Passhash')));
+        return $toReturn;
     }
     
     /**
@@ -114,8 +113,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validateCreationIp($ip);
             }
-            //TODO convert human readable ip into int
-            $this->setData('CreationIp', $ip);
+            $this->setData('CreationIp', inet_pton($ip));
         }
     }
     
@@ -165,8 +163,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validatePasshash($passhash);
             }
-            //TODO convert hex md5 string into bytecode
-            $this->setData('Passhash', $passhash);
+            $this->setData('Passhash', pack('H*', $passhash));
         }
     }
     

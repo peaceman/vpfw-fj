@@ -1,0 +1,28 @@
+<div class="image-container">
+    <img width="300" height="350" src="pics/<?php HE($this->pictureOne->getMd5()) ?>.jpg" />
+    <div class="image-additions">
+        <img class="thumb-up" />
+        <img class="thumb-down" />
+        <div class="image-comments">
+            <?php foreach ($this->pictureOneComments as $comment): ?>
+            <div class="image-comment">
+                <?php HE($comment->getTime() . ' | ' . $comment->getText()) ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+<div class="image-container">
+    <img width="300" height="350" src="pics/<?php HE($this->pictureTwo->getMd5()) ?>.jpg" />
+    <div class="image-additions">
+        <img class="thumb-up" />
+        <img class="thumb-down" />
+        <div class="image-comments">
+            <?php foreach ($this->pictureTwoComments as $comment): ?>
+            <div class="image-comment">
+                <?php HE($comment->getTime() . ' | ' . $comment->getText()) ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
