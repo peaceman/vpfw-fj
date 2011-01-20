@@ -74,35 +74,4 @@ class Vpfw_Config_Ini extends Vpfw_Config_Abstract {
 			throw new Vpfw_Exception_Critical(implode("\n", $errorMessages));
 			
     }
-	
-	/**
-	/**
-	 * This is method writeKeyValuePair
-	 *
-	 * @param string $keyName
-	 * @param string $valueName
-	 * @return string 
-	 *
-	 */
-	private function writeKeyValuePair($keyName, $value)
-	{
-		$retStr = '';
-		
-		if (!is_null($value)) {
-			if (is_bool($value) || is_int($value))
-				$retStr .= $keyName . ' = ' . $value . PHP_EOL;
-			else if(is_string($value))
-				$retStr .= $keyName . ' = "' . $value . '"' . PHP_EOL;
-			else
-				throw new Vpfw_Exception_InvalidArgument('Configuration type does not support datatype!');
-		}
-	}
-	
-    public function writeBack() {
-        $fileHandle = parent::writeBack();
-		$iniStr = '';
-        fwrite($fileHandle, $iniStr);
-        flock($fileHandle, LOCK_UN);
-        fclose($fileHandle);
-    }
 }
