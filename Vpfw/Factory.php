@@ -27,16 +27,28 @@ class Vpfw_Factory {
      * @return Vpfw_DataMapper_Interface
      */
     public static function getDataMapper($type) {
-        $className = 'App_DataMapper_' . $type;
-        if (true == isset(self::$objectCache[$className])) {
-            return self::$objectCache[$className];
+        $classNameExtern = 'App_DataMapper_' . $type;
+        $classNameIntern = 'Vpfw_DataMapper_' . $type;
+        if (true == isset(self::$objectCache[$classNameExtern])) {
+            return self::$objectCache[$classNameExtern];
+        } elseif (true == isset(self::$objectCache[$classNameIntern])) {
+            return self::$objectCache[$classNameIntern];
         }
 
-        if (false == class_exists($className)) {
+        if (false == class_exists($classNameExtern) && false == class_exists($classNameIntern)) {
             throw new Vpfw_Exception_Logical('Ein DataMapper des Typs ' . $type . ' existiert nicht');
         }
 
-        self::$objectCache[$className] = App_Factory::getDataMapper($type);
+        switch ($type) {
+            case 'RbacObject':
+                break;
+            case 'RbacPermission':
+                break;
+            case 'RbacRole':
+                break;
+            default:
+                self::$objectCache[$className] = App_Factory::getDataMapper($type);
+        }
         return self::$objectCache[$className];
     }
 
@@ -48,9 +60,18 @@ class Vpfw_Factory {
      * @return Vpfw_DataObject_Interface
      */
     public static function getDataObject($type, $properties = null) {
-        $className = 'App_DataObject_' . $type;
-        if (false == class_exists($className)) {
+        $classNameExtern = 'Vpfw_DataObject_' . $type;
+        $classNameIntern = 'App_DataObject_' . $type;
+        if (false == class_exists($classNameIntern) && false == class_exists($classNameExtern)) {
             throw new Vpfw_Exception_Logical('Ein DataObject des Typs ' . $type . ' existiert nicht');
+        }
+        switch ($type) {
+            case 'RbacObject':
+                break;
+            case 'RbacPermission':
+                break;
+            case 'RbacRole':
+                break;
         }
         return App_Factory::getDataObject($type, $properties);
     }
@@ -139,5 +160,9 @@ class Vpfw_Factory {
         }
 
         return new Vpfw_View_Std($viewPath);
+    }
+
+    public static function getRbacRole(Vpfw_DataObject_RbacRole $role) {
+        return new Vpfw_Rbac_Role($role, self::getDataMapper('RbacObject'), self::getDataMapper('RbacPermission'));
     }
 }
