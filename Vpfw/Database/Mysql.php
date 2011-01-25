@@ -11,7 +11,7 @@ class Vpfw_Database_Mysql extends Vpfw_Abstract_Loggable implements Vpfw_Interfa
      * ähnlichem gespeichert.
      * @var array
      */
-    private $executedQueries;
+    private $executedQueries = array();
 
     /**
      * Konfigurationsarray

@@ -5,11 +5,23 @@ try {
     Vpfw_Factory::setConfig($stdCfg);
     $stdCfg->setLogObject(Vpfw_Factory::getLog());
 
+//    $roleDao = Vpfw_Factory::getDataMapper('RbacRole')->createEntry();
+//    /* @var $roleDao Vpfw_DataObject_RbacRole */
+//    $role = Vpfw_Factory::getRbacRole($roleDao);
+
+    $objectDao = Vpfw_Factory::getDataMapper('RbacObject')->createEntry();
+    /* @var $objectDao Vpfw_DataObject_RbacObject */
+    $objectDao->setName('test');
+    $objectDao->setDefault(false);
+
+    /**
     $request = new Vpfw_Request_Http();
     $response = new Vpfw_Response_Http();
     $router = new Vpfw_Router_Http();
     $fC = new App_Controller_Front_Explicit($router);
     $fC->dispatch($request, $response);
+     *
+     */
 } catch (Vpfw_Exception_Critical $e) {
     echo '<pre>';
     echo $e->getMessage();

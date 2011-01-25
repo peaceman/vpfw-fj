@@ -1,6 +1,12 @@
 <?php
 class Vpfw_DataObject_RbacObject extends Vpfw_DataObject_Abstract {
-    public function __construct($properties = null) {
+    /**
+     *
+     * @var Vpfw_Validator_RbacObject
+     */
+    private $validator;
+    public function __construct(Vpfw_Validator_RbacObject $validator, $properties = null) {
+        $this->validator = $validator;
         $this->data = array(
             'Id' => null,
             'Default' => null,
@@ -13,7 +19,11 @@ class Vpfw_DataObject_RbacObject extends Vpfw_DataObject_Abstract {
     }
 
     public function getDefault() {
-        if (0 == $this->getData('Default')) {
+        $state = $this->getData('Default');
+        if (true == is_null($state)) {
+            return null;
+        }
+        if (0 === $this->getData('Default')) {
             return false;
         } else {
             return true;
@@ -21,7 +31,7 @@ class Vpfw_DataObject_RbacObject extends Vpfw_DataObject_Abstract {
     }
 
     public function getName() {
-        return $this->getName('Name');
+        return $this->getData('Name');
     }
 
     public function setDefault($state, $validate = true) {
@@ -42,7 +52,7 @@ class Vpfw_DataObject_RbacObject extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validateName($name);
             }
-            $this->setData('Name', $id);
+            $this->setData('Name', $name);
         }
     }
 }

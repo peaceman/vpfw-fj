@@ -9,6 +9,11 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
      * @var Vpfw_DataObject_RbacPermission[]
      */
     private $permissions;
+
+    /**
+     * @var Vpfw_DataObject_RbacPermissions[]
+     */
+    private $permissionsByName;
     
     /**
      * @var Vpfw_DataMapper_RbacPermission
@@ -30,6 +35,7 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
     public function __construct(Vpfw_Validator_RbacRole $validator, $properties = null) {
         $this->validator = $validator;
         $this->permissions = new Vpfw_ObserverArray();
+        $this->permissionsByName = new Vpfw_ObserverArray();
         $this->data = array(
             'Id' => null,
             'Name' => null,

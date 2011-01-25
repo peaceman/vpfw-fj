@@ -125,7 +125,7 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
         $j = 0;
         $k = 0;
         foreach ($this->dataColumns as $key => $value) {
-            $columns .= $key;
+            $columns .= '`' . $key . '`';
             if ($i != $countDataColumns - 1) {
                 $columns .= ',' . PHP_EOL;
             }
@@ -137,7 +137,7 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
                     $values .= ',' . PHP_EOL;
                 }
                 $j++;
-                $columnsWithoutId .= $key;
+                $columnsWithoutId .= '`' . $key . '`';
                 if ($k != $countDataColumns - 2) {
                     $columnsWithoutId .= ',' . PHP_EOL;
                 }

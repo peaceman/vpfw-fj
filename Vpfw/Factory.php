@@ -22,6 +22,12 @@ class Vpfw_Factory {
         }
 
         switch($type) {
+            case 'RbacRole':
+                return self::$objectCache[$classNameIntern] = new Vpfw_Validator_RbacRole();
+                break;
+            case 'RbacObject':
+                return self::$objectCache[$classNameIntern] = new Vpfw_Validator_RbacObject(self::getDataMapper('RbacObject'));
+                break;
             default:
                self::$objectCache[$className] = App_Factory::getValidator($type);
         }
@@ -49,17 +55,17 @@ class Vpfw_Factory {
 
         switch ($type) {
             case 'RbacObject':
-                self::$objectCache[$classNameExtern] = new Vpfw_DataMapper_RbacObject(self::getDatabase());
+                return self::$objectCache[$classNameIntern] = new Vpfw_DataMapper_RbacObject(self::getDatabase());
                 break;
             case 'RbacPermission':
+                return self::$objectCache[$classNameIntern] = new Vpfw_DataMapper_RbacPermission(self::getDatabase());
                 break;
             case 'RbacRole':
-                self::$objectCache[$classNameExtern] = new Vpfw_DataMapper_RbacRole(self::getDatabase());
+                return self::$objectCache[$classNameIntern] = new Vpfw_DataMapper_RbacRole(self::getDatabase());
                 break;
             default:
-                self::$objectCache[$classNameIntern] = App_Factory::getDataMapper($type);
+                return self::$objectCache[$classNameExtern] = App_Factory::getDataMapper($type);
         }
-        return self::$objectCache[$classNameIntern];
     }
 
     /**
@@ -77,7 +83,7 @@ class Vpfw_Factory {
         }
         switch ($type) {
             case 'RbacObject':
-                return new Vpfw_DataObject_RbacObject($properties);
+                return new Vpfw_DataObject_RbacObject(self::getValidator('RbacObject'), $properties);
                 break;
             case 'RbacPermission':
                 $roleDao = null;
