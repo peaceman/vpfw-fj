@@ -8,16 +8,24 @@ class Vpfw_Factory {
     private static $configObject;
 
     public static function getValidator($type) {
-        $className = 'App_Validator_' . $type;
-        if (true == isset(self::$objectCache[$className])) {
-            return self::$objectCache[$className];
+        $classNameExtern = 'App_Validator_' . $type;
+        $classNameIntern = 'Vpfw_Validator_'  . $type;
+        if (true == isset(self::$objectCache[$classNameIntern])) {
+            return self::$objectCache[$classNameIntern];
+        }
+        if (true == isset(self::$objectCache[$classNameExtern])) {
+            return self::$objectCache[$classNameExtern];
         }
 
-        if (false == class_exists($className)) {
+        if (false == class_exists($classNameIntern) && false == class_exists($classNameExtern)) {
             throw new Vpfw_Exception_Logical('Eine Validator des Typs ' . $type . ' existiert nicht');
         }
 
-        self::$objectCache[$className] = App_Factory::getValidator($type);
+        switch($type) {
+            default:
+               self::$objectCache[$className] = App_Factory::getValidator($type);
+        }
+        
         return self::$objectCache[$className];
     }
 
