@@ -13,6 +13,12 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
     protected $sthChanged = false;
 
     /**
+     * Dieses Array speichert den Status der Objekte, die via lazyloading
+     * nachgeladen werden können.
+     */
+    protected $lazyLoadState;
+
+    /**
      * @var array Beinhaltet die ObserverArrays in denen dieses Objekt referenziert ist.
      */
     private $observers = array();
@@ -190,6 +196,12 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
             return true;
         } else {
             return $validationErrors;
+        }
+    }
+
+    public static function checkDataObjectForId(Vpfw_DataObject_Interface $dataObject) {
+        if (true == is_null($dataObject->getId())) {
+            throw new Vpfw_Exception_Logical('Ein DataObject, das einem anderen DataObject als Eigenschaft hinzugefügt wird, muss auf jeden fall eine Id besitzen.');
         }
     }
 }

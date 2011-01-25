@@ -41,15 +41,17 @@ class Vpfw_Factory {
 
         switch ($type) {
             case 'RbacObject':
+                self::$objectCache[$classNameExtern] = new Vpfw_DataMapper_RbacObject(self::getDatabase());
                 break;
             case 'RbacPermission':
                 break;
             case 'RbacRole':
+                self::$objectCache[$classNameExtern] = new Vpfw_DataMapper_RbacRole(self::getDatabase());
                 break;
             default:
-                self::$objectCache[$className] = App_Factory::getDataMapper($type);
+                self::$objectCache[$classNameIntern] = App_Factory::getDataMapper($type);
         }
-        return self::$objectCache[$className];
+        return self::$objectCache[$classNameIntern];
     }
 
     /**
@@ -67,10 +69,85 @@ class Vpfw_Factory {
         }
         switch ($type) {
             case 'RbacObject':
+                return new Vpfw_DataObject_RbacObject($properties);
                 break;
             case 'RbacPermission':
+                $roleDao = null;
+                $objectDao = null;
+                if (false == is_null($properties)) {
+                    if (true == isset($properties['RoleName'])) {
+                        try {
+                            $roleDao = Vpfw_Factory::getDataMapper('RbacRole')->getEntryById($properties['RoleId'], false);
+                        } catch (Vpfw_Exception_OutOfRange $e) {
+                            $roleDao = Vpfw_Factory::getDataMapper('RbacRole')->createEntry(
+                                array(
+                                    'Id' => $properties['RoleId'],
+                                    'Name' => $properties['RoleName'],
+                                )
+                            );
+                        }
+                        unset($properties['RoleName']);
+                    }
+
+                    if (true == isset($properties['ObjectDefault'])) {
+                        try {
+                            $objectDao = Vpfw_Factory::getDataMapper('RbacObject')->getEntryById($properties['ObjectId'], false);
+                        } catch (Vpfw_Exception_OutOfRange $e) {
+                            $objectDao = Vpfw_Factory::getDataMapper('RbacObject')->createEntry(
+                                array(
+                                    'Id' => $properties['ObjectId'],
+                                    'Default' => $properties['ObjectDefault'],
+                                    'Name' => $properties['ObjectName'],
+                                )
+                            );
+                        }
+                        unset($properties['ObjectDefault'],
+                              $properties['ObjectName']);
+                    }
+                }
+                $dataObject = new Vpfw_DataObject_RbacPermission(Vpfw_Factory::getValidator('RbacPermission'), Vpfw_Factory::getDataMapper('RbacRole'), Vpfw_Factory::getDataMapper('RbacObject'), $properties);
+                if (false == is_null($roleDao)) {
+                    $dataObject->setRole($roleDao);
+                }
+                if (false == is_null($objectDao)) {
+                    $dataObject->setObject($objectDao);
+                }
+                return $dataObject;
                 break;
             case 'RbacRole':
+                /* @var $permissions Vpfw_DataObject_RbacPermission[] */
+                $permissions = null;
+                if (false == is_null($properties)) {
+                    if (true == isset($properties['PermIds'])) {
+                        $permissions = array();
+                        $permIds = explode(',', $properties['PermIds']);
+                        $permObjectIds = explode(',', $properties['PermObjectIds']);
+                        $permStates = explode(',', $properties['PermStates']);
+                        foreach ($permIds as $key => $permId) {
+                            try {
+                                $permission = Vpfw_Factory::getDataMapper('RbacPermission')->getEntryById($permIds, false);
+                            } catch (Vpfw_Exception_OutOfRange $e) {
+                                $permission = Vpfw_Factory::getDataMapper('RbacPermission')->createEntry(
+                                    array(
+                                        'Id' => $permId,
+                                        'RoleId' => $properties['Id'],
+                                        'ObjectId' => $permObjectIds[$key],
+                                        'State' => $permStates[$key],
+                                    )
+                                );
+                            }
+                            $permission[] = $permission;
+                        }
+                        unset($properties['PermIds'],
+                              $properties['PermObjectIds'],
+                              $properties['PermStates']);
+                    }
+                }
+                $dataObject = new Vpfw_DataObject_RbacRole(Vpfw_Factory::getValidator('RbacRole'), $properties);
+                if (false == is_null($permissions)) {
+                    $dataObject->setPermissions($permissions);
+                }
+                return $dataObject;
                 break;
         }
         return App_Factory::getDataObject($type, $properties);

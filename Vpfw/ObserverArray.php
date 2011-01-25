@@ -57,4 +57,12 @@ class Vpfw_ObserverArray implements ArrayAccess, Iterator, Countable, Vpfw_Inter
             unset($this->storage[$key]);
         }
     }
+
+    /**
+     *
+     * @return array
+     */
+    public function getArray() {
+        return $this->storage;
+    }
 }
