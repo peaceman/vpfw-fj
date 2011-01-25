@@ -57,18 +57,18 @@ class Vpfw_Database_MysqlStmt extends Vpfw_Abstract_Loggable {
                     $type = '%d';
                     break;
                 case 's':
-                    $type = '%s';
+                    $type = "'%s'";
                     break;
                 default:
                     throw new Vpfw_Exception_Logical('Undefinierter Parametertyp ' . $type .' in ' . __METHOD__);        
             }
         }
-        //TODO KAPUT
         while (false !== $pos = strpos($this->qry, '?')) {
             $this->qry = substr_replace($this->qry, array_shift($typesArr), $pos, 1);
         }
         $args = func_get_args();
         array_shift($args);
+        array_unshift($args, $this->qry);
         // Allmighty sprintf macht den Rest
         $this->qry = call_user_func_array('sprintf', $args);
         return call_user_method_array('bind_param', $this->stmt, func_get_args());

@@ -288,7 +288,7 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
      * @return Vpfw_DataObject_Interface
      */
     public function getEntryById($id, $autoLoad = true) {
-        if (true == isset($this->cache[$id])) {
+        if (true == array_key_exists($id, $this->cache)) {
             return $this->cache[$id];
         }
         if (false == $autoLoad) {

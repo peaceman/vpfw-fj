@@ -3,7 +3,7 @@
 # Server version:               5.1.37-community
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2011-01-20 16:46:29
+# Date/time:                    2011-01-25 11:20:51
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `comparison_log` (
   KEY `PictureId2` (`PictureId2`),
   KEY `SessionId` (`SessionId`),
   CONSTRAINT `FK_picture` FOREIGN KEY (`PictureId1`) REFERENCES `picture` (`Id`),
-  CONSTRAINT `FK_session` FOREIGN KEY (`SessionId`) REFERENCES `session` (`Id`),
-  CONSTRAINT `FK_picture_2` FOREIGN KEY (`PictureId2`) REFERENCES `picture` (`Id`)
+  CONSTRAINT `FK_picture_2` FOREIGN KEY (`PictureId2`) REFERENCES `picture` (`Id`),
+  CONSTRAINT `FK_session` FOREIGN KEY (`SessionId`) REFERENCES `session` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `rbac_object` (
   `Default` tinyint(3) unsigned NOT NULL,
   `Name` varchar(32) NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `Name` (`Name`)
+  UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.
@@ -146,7 +146,8 @@ DROP TABLE IF EXISTS `rbac_role`;
 CREATE TABLE IF NOT EXISTS `rbac_role` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(32) NOT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.
@@ -217,8 +218,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Email` varchar(128) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `Email` (`Email`),
-  KEY `Username` (`Username`),
   KEY `DeletionId` (`DeletionId`),
+  KEY `Username` (`Username`),
   CONSTRAINT `FK_user_deletion` FOREIGN KEY (`DeletionId`) REFERENCES `deletion` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

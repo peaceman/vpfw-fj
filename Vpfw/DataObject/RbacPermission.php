@@ -110,11 +110,16 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
      */
     public function getRole() {
         if (true == is_null($this->roleDao)) {
-            if (false === $this->lazyLoadState['Role']) {
-                $this->lazyLoadRole();
-            }
+            $this->lazyLoadRole();
         }
         return $this->roleDao;
+    }
+
+    public function lazyLoadRole() {
+        if (false === $this->lazyLoadState['Role']) {
+            $this->roleDao = $this->roleMapper->getEntryById($this->getRoleId());
+            $this->lazyLoadState['Role'] = true;
+        }
     }
 
     /**
@@ -138,6 +143,13 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
             }
         }
         return $this->objectDao;
+    }
+
+    public function lazyLoadObject() {
+        if (false === $this->lazyLoadState['Object']) {
+            $this->object = $this->objectMapper->getEntryById($this->getObjectId());
+            $this->lazyLoadState['Object'] = true;
+        }
     }
 
     /**

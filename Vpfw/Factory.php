@@ -23,16 +23,16 @@ class Vpfw_Factory {
 
         switch($type) {
             case 'RbacRole':
-                return self::$objectCache[$classNameIntern] = new Vpfw_Validator_RbacRole();
+                return self::$objectCache[$classNameIntern] = new Vpfw_Validator_RbacRole(self::getDataMapper('RbacRole'));
                 break;
             case 'RbacObject':
                 return self::$objectCache[$classNameIntern] = new Vpfw_Validator_RbacObject(self::getDataMapper('RbacObject'));
                 break;
+            case 'RbacPermission':
+                return self::$objectCache[$classNameIntern] = new Vpfw_Validator_RbacPermission();
             default:
-               self::$objectCache[$className] = App_Factory::getValidator($type);
+               return self::$objectCache[$classNameExtern] = App_Factory::getValidator($type);
         }
-        
-        return self::$objectCache[$className];
     }
 
     /**
@@ -139,7 +139,7 @@ class Vpfw_Factory {
                         $permStates = explode(',', $properties['PermStates']);
                         foreach ($permIds as $key => $permId) {
                             try {
-                                $permission = Vpfw_Factory::getDataMapper('RbacPermission')->getEntryById($permIds, false);
+                                $permission = Vpfw_Factory::getDataMapper('RbacPermission')->getEntryById($permId, false);
                             } catch (Vpfw_Exception_OutOfRange $e) {
                                 $permission = Vpfw_Factory::getDataMapper('RbacPermission')->createEntry(
                                     array(
@@ -150,14 +150,14 @@ class Vpfw_Factory {
                                     )
                                 );
                             }
-                            $permission[] = $permission;
+                            $permissions[] = $permission;
                         }
-                        unset($properties['PermIds'],
-                              $properties['PermObjectIds'],
-                              $properties['PermStates']);
                     }
                 }
-                $dataObject = new Vpfw_DataObject_RbacRole(Vpfw_Factory::getValidator('RbacRole'), $properties);
+                unset($properties['PermIds'],
+                      $properties['PermObjectIds'],
+                      $properties['PermStates']);
+                $dataObject = new Vpfw_DataObject_RbacRole(self::getDataMapper('RbacPermission'), Vpfw_Factory::getValidator('RbacRole'), $properties);
                 if (false == is_null($permissions)) {
                     $dataObject->setPermissions($permissions);
                 }
@@ -255,5 +255,9 @@ class Vpfw_Factory {
 
     public static function getRbacRole(Vpfw_DataObject_RbacRole $role) {
         return new Vpfw_Rbac_Role($role, self::getDataMapper('RbacObject'), self::getDataMapper('RbacPermission'));
+    }
+
+    public static function getRbacUser(App_DataObject_User $user = null) {
+        return new Vpfw_Rbac_User(self::getDataMapper('RbacObject'), $user);
     }
 }

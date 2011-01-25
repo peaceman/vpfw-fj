@@ -14,7 +14,7 @@ class Vpfw_DataMapper_RbacRole extends Vpfw_DataMapper_Abstract {
                                             GROUP_CONCAT(b.State) AS PermStates
                                         FROM
                                             {TableName} AS a
-                                        INNER JOIN
+                                        LEFT JOIN
                                             rbac_permission AS b ON
                                             a.Id = b.RoleId
                                         WHERE
@@ -29,7 +29,7 @@ class Vpfw_DataMapper_RbacRole extends Vpfw_DataMapper_Abstract {
                                             GROUP_CONCAT(b.State) AS PermStates
                                         FROM
                                             {TableName} AS a
-                                        INNER JOIN
+                                        LEFT JOIN
                                             rbac_permission AS b ON
                                             a.Id = b.RoleId
                                         WHERE
@@ -44,7 +44,7 @@ class Vpfw_DataMapper_RbacRole extends Vpfw_DataMapper_Abstract {
                                             GROUP_CONCAT(b.State) AS PermStates
                                         FROM
                                             {TableName} AS a
-                                        INNER JOIN
+                                        LEFT JOIN
                                             rbac_permission AS b ON
                                             a.Id = b.RoleId
                                         GROUP BY
