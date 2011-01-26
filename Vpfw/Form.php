@@ -43,6 +43,7 @@ class Vpfw_Form {
     public function __construct(Vpfw_Request_Interface $request, $name, array $fields, Vpfw_View_Interface $view) {
         $this->request = $request;
         $this->view = $view;
+        $this->name = $name;
         $this->errorMessages = array(
             'form' => array(),
             'field' => array(),
@@ -83,8 +84,8 @@ class Vpfw_Form {
         if (true == $this->formWasSent()) {
             $this->checkExistanceOfAllRequiredFields();
             $this->processSentFields();
-            $this->fillView();
         }
+        $this->fillView();
     }
 
     private function formWasSent() {
@@ -123,14 +124,15 @@ class Vpfw_Form {
     }
 
     private function fillView() {
-        if (false == $this->allIsValid) {
-            foreach ($this->fields as $field) {
-                $this->view->{$this->name}[$field->getName() . '-value'] = $field->getValue();
-            }
-            foreach ($this->errorMessages['field'] as $fieldName => $errors) {
-                $this->view->{$this->name}[$fieldName . '-errors'] = $errors;
-            }
-            $this->view->{$this->name}['errors'] = $this->errorMessages;
+        $viewArray = array();
+        foreach ($this->fields as $field) {
+            $viewArray[$field->getName() . '-value'] = $field->getValue();
+            $viewArray[$field->getName() . '-errors'] = array();
         }
+        foreach ($this->errorMessages['field'] as $fieldName => $errors) {
+            $viewArray[$fieldName . '-errors'] = $errors;
+        }
+        $viewArray['errors'] = $this->errorMessages['form'];
+        $this->view->setVar($this->name, $viewArray);
     }
 }

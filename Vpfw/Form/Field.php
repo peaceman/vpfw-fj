@@ -173,7 +173,7 @@ class Vpfw_Form_Field {
         }
         $validationErrors = array();
         foreach ($this->validators as $validator) {
-            $validationResult = $validator->run($value);
+            $validationResult = $validator->run($this->value);
             if (true !== $validationResult) {
                 $validationErrors[] = $validationResult;
             }
@@ -191,7 +191,7 @@ class Vpfw_Form_Field {
             throw new Vpfw_Exception_Logical('Die Filtern sollten nicht ausgeführt werden, wenn das Value sowieso keinen Wert enthält');
         }
         foreach ($this->filters as $filter) {
-            $this->value = $filter->run($value);
+            $this->value = $filter->run($this->value);
         }
         return $this;
     }
