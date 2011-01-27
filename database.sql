@@ -3,7 +3,7 @@
 # Server version:               5.1.37-community
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2011-01-25 11:20:51
+# Date/time:                    2011-01-27 17:00:31
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `favorite_comparison` (
 DROP TABLE IF EXISTS `picture`;
 CREATE TABLE IF NOT EXISTS `picture` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `Md5` binary(16) NOT NULL COMMENT 'MD5 Hash des Bildes. Mit diesem Hash wird überprüft, ob sich das Bild bereits auf der Plattform existiert.',
+  `Md5` char(32) NOT NULL COMMENT 'MD5 Hash des Bildes. Mit diesem Hash wird überprüft, ob sich das Bild bereits auf der Plattform existiert.',
   `Gender` tinyint(4) unsigned NOT NULL COMMENT 'Geschlecht der auf dem Bild befindlichen Person. 0 = Männlich 1 = Weiblich',
   `SessionId` int(10) unsigned NOT NULL COMMENT 'Wer hat das Bild hochgeladen?',
   `UploadTime` int(10) unsigned NOT NULL COMMENT 'Wann wurde das Bild hochgeladen?',
@@ -213,8 +213,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `CreationTime` int(10) unsigned NOT NULL,
   `CreationIp` int(10) unsigned NOT NULL,
   `DeletionId` int(10) unsigned DEFAULT NULL COMMENT 'Der Benutzer gilt als gelöscht, wenn hier eine Id vermerkt ist.',
+  `Passhash` char(32) NOT NULL COMMENT 'MD5-Hash in der Hexdarstellung.',
   `Username` varchar(32) NOT NULL,
-  `Passhash` binary(16) NOT NULL COMMENT 'MD5-Hash in der Binärdarstellung.',
   `Email` varchar(128) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `Email` (`Email`),
