@@ -117,10 +117,62 @@ class App_DataMapper_Picture extends Vpfw_DataMapper_Abstract {
                                                 ORDER BY
                                                     RAND()
                                                 LIMIT 2';
+        $this->sqlQueries['getTop10ByGender'] = 'SELECT
+                                                    a.Id,
+                                                    a.Md5,
+                                                    a.Gender,
+                                                    a.SessionId,
+                                                    a.UploadTime,
+                                                    a.SiteHits,
+                                                    a.PositiveRating,
+                                                    a.NegativeRating,
+                                                    a.DeletionId,
+                                                    b.UserId AS SesUserId,
+                                                    b.Ip AS SesIp,
+                                                    b.StartTime AS SesStartTime,
+                                                    b.LastRequest AS SesLastRequest,
+                                                    b.Hits AS SesHits,
+                                                    b.UserAgent AS SesUserAgent
+                                                FROM
+                                                    {TableName} AS a
+                                                INNER JOIN
+                                                    session AS b ON
+                                                    a.SessionId = b.Id
+                                                WHERE
+                                                    a.DeletionId IS NULL AND
+                                                    a.Gender = ?
+                                                ORDER BY
+                                                    a.PositiveRating - a.NegativeRating
+                                                LIMIT 10';
     }
 
     public function getTwoRandomPictures($gender) {
         $stmt = $this->db->prepare($this->sqlQueries['get2RndByGender']);
+        $stmt->bind_param('i', $gender);
+        $stmt->execute();
+        $stmt->store_result();
+        $metaData = $stmt->result_metadata();
+        $params = array();
+        $row = array();
+        while ($field = $metaData->fetch_field()) {
+            $params[] = &$row[$field->name];
+        }
+        call_user_func_array(array($stmt, 'bind_result'), $params);
+
+        $toReturn = array();
+        while ($stmt->fetch()) {
+            if (false == isset($this->cache[$row['Id']])) {
+                $toReturn[] = $this->createEntry($row);
+            } else {
+                $toReturn[] = $this->cache[$row['Id']];
+            }
+        }
+        $stmt->close();
+        return $toReturn;
+    }
+
+    public function getTop10ByGender($gender) {
+        $stmt = $this->db->prepare($this->sqlQueries['getTop10ByGender']);
         $stmt->bind_param('i', $gender);
         $stmt->execute();
         $stmt->store_result();

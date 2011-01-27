@@ -266,5 +266,9 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
             }
         }
     }
+
+    public function getRating() {
+        return $this->getPositiveRating() - $this->getNegativeRating();
+    }
 }
  
