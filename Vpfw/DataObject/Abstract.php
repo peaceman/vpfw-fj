@@ -204,4 +204,14 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
             throw new Vpfw_Exception_Logical('Ein DataObject, das einem anderen DataObject als Eigenschaft hinzugefügt wird, muss auf jeden fall eine Id besitzen.');
         }
     }
+
+    public function getCountOfRequiredColumns() {
+        $count = 0;
+        foreach ($this->data as $data) {
+            if (true == $data['required']) {
+                $count++;
+            }
+        }
+        return $count;
+    }
 }

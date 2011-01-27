@@ -207,7 +207,7 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
     protected function insert(Vpfw_DataObject_Interface $dataObject) {
         $data = $dataObject->exportData(Vpfw_DataObject_Interface::WITHOUT_ID);
         // -1 wegen der id
-        if (count($data) != count($this->dataColumns) - 1) {
+        if (count($data) != $dataObject->getCountOfRequiredColumns() - 1) {
             throw new Vpfw_Exception_Logical('Es wurden nicht alle Eigenschaften des DataObjects gefüllt');
         }
         $stmt = $this->db->prepare($this->sqlQueries['insert']);
@@ -216,12 +216,20 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
         foreach ($this->dataColumns as $colName => $dataType) {
             if ($colName != 'Id') {
                 $dataTypes .= $dataType;
-                $values[] = $data[$colName];
+                if (true == array_key_exists($colName, $data)) {
+                    $values[] = $data[$colName];
+                } else {
+                    $values[] = null;
+                }
             }
         }
         array_unshift($values, $dataTypes);
         call_user_func_array(array($stmt, 'bind_param'), $values);
         $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->errno) {
+            throw new Vpfw_Exception_Critical('MySQL-Error: ' . $stmt->errno . ' (' . $stmt->error . ')');
+        }
         if (true == is_null($stmt->insert_id)) {
             throw new Vpfw_Exception_Critical('Nach einem Insert in die Datenbank konnte die Insert-Id nicht ermittelt werden');
         }

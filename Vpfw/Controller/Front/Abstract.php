@@ -33,5 +33,6 @@ class Vpfw_Controller_Front_Abstract implements Vpfw_Controller_Front_Interface 
         }
         
         $this->layout->addChildController('content', $contentActionController);
+        $this->layout->execute($request, $response);
     }
 }

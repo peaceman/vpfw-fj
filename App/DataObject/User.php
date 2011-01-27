@@ -28,8 +28,9 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
             'Email' => null,
         );
         foreach ($this->data as &$val) {
-            $val = array('val' => null, 'changed' => false);
+            $val = array('val' => null, 'changed' => false, 'required' => true);
         }
+        $this->data['DeletionId']['required'] = false;
         parent::__construct($properties);
     }
     
@@ -47,7 +48,8 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @return string 
      */
     public function getCreationIp() {
-        return inet_ntop($this->getData('CreationIp'));
+        $netIp = $this->getData('CreationIp');
+        return is_null($netIp) ? null : inet_ntop($netIp);
     }
     
     /**
@@ -73,8 +75,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @return string 
      */
     public function getPasshash() {
-        list($toReturn) = array_values(unpack('H*', $this->getData('Passhash')));
-        return $toReturn;
+        return $this->getData('Passhash');
     }
     
     /**
@@ -163,7 +164,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validatePasshash($passhash);
             }
-            $this->setData('Passhash', pack('H*', $passhash));
+            $this->setData('Passhash', $passhash);
         }
     }
     

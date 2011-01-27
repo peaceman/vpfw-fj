@@ -3,7 +3,7 @@ class App_DataMapper_Picture extends Vpfw_DataMapper_Abstract {
     protected function fillDetailData() {
         $this->dataColumns = array(
             'Id' => 'i',
-            'Md5' => 'b',
+            'Md5' => 's',
             'Gender' => 'i',
             'SessionId' => 'i',
             'UploadTime' => 'i',

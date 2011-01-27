@@ -7,7 +7,7 @@ class App_DataMapper_User extends Vpfw_DataMapper_Abstract {
             'CreationIp' => 'i',
             'DeletionId' => 'i',
             'Username' => 's',
-            'Passhash' => 'b', //b für blob, weil passhash binärdaten enthält
+            'Passhash' => 's',
             'Email' => 's',
         );
         $this->tableName = 'user';

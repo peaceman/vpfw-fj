@@ -84,6 +84,7 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
             }
             $controller->execute($request, $response);
         }
+        $this->isExecuted = true;
     }
 
     /**

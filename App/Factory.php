@@ -11,6 +11,9 @@ class App_Factory {
             case 'PictureComment':
                 return new App_Validator_PictureComment();
                 break;
+            case 'User':
+                return new App_Validator_User(self::getDataMapper('User'));
+                break;
             default:
                 throw new Vpfw_Exception_Logical('Die Abhängigkeiten des Validators mit dem Typ ' . $type . ' konnten nicht aufgelöst werden');
         }

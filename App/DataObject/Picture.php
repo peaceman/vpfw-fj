@@ -63,8 +63,7 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
      * @return string
      */
     public function getMd5() {
-        list($toReturn) = array_values(unpack('H*', $this->getData('Md5')));
-        return $toReturn;
+        return $this->getData('Md5');
     }
 
     /**
@@ -147,7 +146,7 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
             if (true == $validation) {
                 $this->validator->validateMd5($md5);
             }
-            $this->setData('Md5', pack('H*', $md5));
+            $this->setData('Md5', $md5);
         }
     }
 

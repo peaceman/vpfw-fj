@@ -33,3 +33,4 @@ try {
     echo $e->getFile() . ' @ ' . $e->getLine() . PHP_EOL;
     echo '<pre>';
 }
+$response->flush();

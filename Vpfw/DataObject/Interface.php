@@ -36,4 +36,5 @@ interface Vpfw_DataObject_Interface {
      * @return bool
      */
     public function isSomethingChanged();
+    public function getCountOfRequiredColumns();
 }

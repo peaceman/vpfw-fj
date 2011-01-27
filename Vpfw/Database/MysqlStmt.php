@@ -57,6 +57,7 @@ class Vpfw_Database_MysqlStmt extends Vpfw_Abstract_Loggable {
                     $type = '%d';
                     break;
                 case 's':
+                case 'b':
                     $type = "'%s'";
                     break;
                 default:

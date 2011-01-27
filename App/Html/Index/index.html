@@ -1,10 +1,11 @@
+<?php foreach ($this->pictures as $picture): ?>
 <div class="image-container">
-    <img width="300" height="350" src="pics/<?php HE($this->pictures[0]->getMd5()) ?>.jpg" />
+    <img width="300" height="350" src="pics/<?php HE($picture->getMd5()) ?>.jpg" />
     <div class="image-additions">
         <img class="thumb-up" />
         <img class="thumb-down" />
         <div class="image-comments">
-            <?php foreach ($this->pictureOneComments as $comment): ?>
+            <?php foreach ($picture->getComments() as $comment): ?>
             <div class="image-comment">
                 <?php HE($comment->getTime() . ' | ' . $comment->getText()) ?>
             </div>
@@ -12,17 +13,4 @@
         </div>
     </div>
 </div>
-<div class="image-container">
-    <img width="300" height="350" src="pics/<?php HE($this->pictures[1]->getMd5()) ?>.jpg" />
-    <div class="image-additions">
-        <img class="thumb-up" />
-        <img class="thumb-down" />
-        <div class="image-comments">
-            <?php foreach ($this->pictureTwoComments as $comment): ?>
-            <div class="image-comment">
-                <?php HE($comment->getTime() . ' | ' . $comment->getText()) ?>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</div>
+<?php endforeach; ?>

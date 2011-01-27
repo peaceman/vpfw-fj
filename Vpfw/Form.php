@@ -33,6 +33,16 @@ class Vpfw_Form {
      */
     private $name;
 
+    /**
+     * @var string
+     */
+    private $method;
+
+    /**
+     * @var string
+     */
+    private $action;
+
 
     /**
      * @param Vpfw_Request_Interface $request
@@ -44,6 +54,7 @@ class Vpfw_Form {
         $this->request = $request;
         $this->view = $view;
         $this->name = $name;
+        $this->method = 'GET';
         $this->errorMessages = array(
             'form' => array(),
             'field' => array(),
@@ -54,7 +65,14 @@ class Vpfw_Form {
             }
             $this->fields[$field->getName()] = $field;
         }
-        $this->handleRequest();
+    }
+
+    public function addErrorForField($fieldName, $message) {
+        $this->errorMessages['field'][$fieldName][] = $message;
+    }
+
+    public function addErrorForForm($message) {
+        $this->errorMessages['form'][] = $message;
     }
 
     /**
@@ -80,15 +98,14 @@ class Vpfw_Form {
         return $returnValues;
     }
 
-    private function handleRequest() {
+    public function handleRequest() {
         if (true == $this->formWasSent()) {
             $this->checkExistanceOfAllRequiredFields();
             $this->processSentFields();
         }
-        $this->fillView();
     }
 
-    private function formWasSent() {
+    public function formWasSent() {
         if (true == $this->request->issetParameter('form-' . $this->name)) {
             return true;
         } else {
@@ -123,7 +140,7 @@ class Vpfw_Form {
         }
     }
 
-    private function fillView() {
+    public function fillView() {
         $viewArray = array();
         foreach ($this->fields as $field) {
             $viewArray[$field->getName() . '-value'] = $field->getValue();
@@ -133,6 +150,28 @@ class Vpfw_Form {
             $viewArray[$fieldName . '-errors'] = $errors;
         }
         $viewArray['errors'] = $this->errorMessages['form'];
+        $viewArray['method'] = $this->method;
+        $viewArray['action'] = $this->action;
         $this->view->setVar($this->name, $viewArray);
+    }
+
+    /**
+     *
+     * @param string $action
+     */
+    public function setAction($action) {
+        $this->action = $action;
+    }
+
+    public function getAction() {
+        return $this->action;
+    }
+
+    public function setMethod($method) {
+        $this->method = $method;
+    }
+
+    public function getMethod() {
+        return $this->method;
     }
 }
