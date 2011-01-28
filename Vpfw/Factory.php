@@ -294,7 +294,7 @@ class Vpfw_Factory {
     }
 
     public static function getView($controllerName, $actionName) {
-        $viewPath = 'App/Html/' . $controllerName . '/' . $actionName . '.html';
+        $viewPath = 'App/Html/' . ucfirst($controllerName) . '/' . lcfirst($actionName) . '.html';
         if (false == file_exists($viewPath)) {
             throw new Vpfw_Exception_Logical('Die Datei ' . $viewPath . ' existiert nicht');
         }
