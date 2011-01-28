@@ -81,6 +81,7 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
             $validValues = $form->getValidValues();
             $validValues['passhash'] = md5($validValues['password']);
             unset($validValues['password']);
+            unset($validValues['password2']);
             $validValues['CreationIp'] = $this->request->getRemoteAddress();
             $validValues['CreationTime'] = time();
             $validValues['DeletionId'] = null;
