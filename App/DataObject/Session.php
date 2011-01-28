@@ -127,7 +127,8 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validateIp($ip);
             }
-            $this->setData('Ip', ip2long($ip));
+            $set = sprintf('%u', ip2long($ip));
+            $this->setData('Ip', $set);
         }
     }
 
