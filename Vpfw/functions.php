@@ -41,9 +41,9 @@ function __autoload($className) {
     $classNameArr = explode('_', $className);
     $classPath = '';
     for ($i = 0; $i < count($classNameArr) - 1; $i++) {
-        $classPath .= $classNameArr[$i] . '/';
+        $classPath .= ucfirst($classNameArr[$i]) . '/';
     }
-    $classPath .= $classNameArr[$i] . '.php';
+    $classPath .= ucfirst($classNameArr[$i]) . '.php';
     if (file_exists($classPath)) {
         require_once($classPath);
         return true;
