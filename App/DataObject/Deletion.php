@@ -25,8 +25,9 @@ class App_DataObject_Deletion extends Vpfw_DataObject_Abstract {
             'Reason' => null
         );
         foreach ($this->data as &$val) {
-            $val = array('val' => null, 'changed' => false);
+            $val = array('val' => null, 'changed' => false, 'required' => true);
         }
+        $this->data['Reason']['required'] = false;
         parent::__construct($properties);
     }
 

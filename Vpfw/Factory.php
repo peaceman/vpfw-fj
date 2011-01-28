@@ -7,6 +7,55 @@ class Vpfw_Factory {
      */
     private static $configObject;
 
+    public static function getAuthSession(Vpfw_Request_Interface $request) {
+        return App_Factory::getAuthSession($request);
+    }
+
+    public static function getAuthAdapter($type) {
+        $classNameExtern = 'App_Auth_Adapter_' . $type;
+        $classNameIntern = 'Vpfw_Auth_Adapter_' . $type;
+        if (true == isset(self::$objectCache[$classNameIntern])) {
+            return self::$objectCache[$classNameIntern];
+        }
+        if (true == isset(self::$objectCache[$classNameExtern])) {
+            return self::$objectCache[$classNameExtern];
+        }
+
+        if (false == class_exists($classNameIntern) && false == class_exists($classNameExtern)) {
+            throw new Vpfw_Exception_Logical('Einen AuthAdapter mit dem Typen ' . $type . ' gibt es nicht');
+        }
+
+        switch ($type) {
+            case 'Database':
+                return self::$objectCache[$classNameIntern] = new Vpfw_Auth_Adapter_Database(self::getDataMapper('User'));
+                break;
+            default:
+                return self::$objectCache[$classNameExtern] = App_Factory::getAuthAdapter($type);
+        }
+    }
+
+    public static function getAuthStorage($type) {
+        $classNameExtern = 'App_Auth_Storage_' . $type;
+        $classNameIntern = 'Vpfw_Auth_Storage_' . $type;
+        if (true == isset(self::$objectCache[$classNameIntern])) {
+            return self::$objectCache[$classNameIntern];
+        }
+        if (true == isset(self::$objectCache[$classNameExtern])) {
+            return self::$objectCache[$classNameExtern];
+        }
+
+        if (false == class_exists($classNameIntern) && false == class_exists($classNameExtern)) {
+            throw new Vpfw_Exception_Logical('Ein AuthStorage mit dem Typen ' . $type . ' gibt es nicht');
+        }
+
+        switch($type) {
+            case 'Session':
+                return self::$objectCache[$classNameIntern] = new Vpfw_Auth_Storage_Session(self::getConfig()->getValue('Session.Name'));
+                break;
+            default:
+                return self::$objectCache[$classNameExtern] = App_Factory::getAuthStorage($type);
+        }
+    }
     public static function getValidator($type) {
         $classNameExtern = 'App_Validator_' . $type;
         $classNameIntern = 'Vpfw_Validator_'  . $type;

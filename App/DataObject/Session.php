@@ -27,8 +27,9 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
             'UserAgent' => null,
         );
         foreach ($this->data as &$val) {
-            $val = array('val' => null, 'changed' => null);
+            $val = array('val' => null, 'changed' => false, 'required' => true);
         }
+        $this->data['UserId']['required'] = false;
         parent::__construct($properties);
     }
 
@@ -54,7 +55,12 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
      * @return string
      */
     public function getIp() {
-        return inet_ntop($this->getData('Ip'));
+        $ip = $this->getData('Ip');
+        if (false == is_null($ip)) {
+            return long2ip($ip);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -121,7 +127,7 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validateIp($ip);
             }
-            $this->setData('Ip', inet_pton($ip));
+            $this->setData('Ip', ip2long($ip));
         }
     }
 

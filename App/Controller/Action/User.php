@@ -23,12 +23,30 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
         $form->setAction(Vpfw_Router_Http::url('user', 'login'));
         $form->setMethod('POST');
         $form->handleRequest();
+
+        if (true == $form->formWasSent() && true == $form->isAllValid()) {
+            $validValues = $form->getValidValues();
+            $loginState = $this->session->login($validValues['username'], $validValues['password']);
+            if (true == $loginState) {
+                $this->response->addHeader('Location', Vpfw_Router_Http::url('Index'));
+            } else {
+                $form->addErrorForForm('Login fehlgeschlagen');
+            }
+        }
+
         $form->fillView();
+    }
+
+    public function logoutAction() {
+        $this->session->logout();
+        //$this->response->addHeader('Location', Vpfw_Router_Http::url('Index'));
+        $this->request->addActionControllerInfo(array('ControllerName' => 'Index'));
     }
 
     public function registerAction() {
         $usernameField = new Vpfw_Form_Field('username');
         $passwordField = new Vpfw_Form_Field('password');
+        $password2Field = new Vpfw_Form_Field('password2');
         $emailField = new Vpfw_Form_Field('email');
 
         $notEmptyValidator = new Vpfw_Form_Validator_NotEmpty();
@@ -38,16 +56,20 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
         $emailValidator = new Vpfw_Form_Validator_Email();
         $trimSpaceFilter = new Vpfw_Form_Filter_TrimSpaces();
 
-        $usernameField->addFilter($trimSpaceFilter);
-        $usernameField->addValidator($lengthValidator)->addValidator($notEmptyValidator);
+        $usernameField->addFilter($trimSpaceFilter)
+                      ->addValidator($lengthValidator)->addValidator($notEmptyValidator);
 
-        $passwordField->addFilter($trimSpaceFilter);
-        $passwordField->setValidators(array($notEmptyValidator, $length2Validator));
+        $passwordField->addFilter($trimSpaceFilter)
+                      ->setValidators(array($notEmptyValidator, $length2Validator));
+
+        $password2Field->addFilter($trimSpaceFilter)
+                       ->setValidators(array($notEmptyValidator, $length2Validator))
+                       ->addValidator(new Vpfw_Form_Validator_Equals($passwordField));
 
         $emailField->addFilter($trimSpaceFilter);
         $emailField->setValidators(array($notEmptyValidator, $length3Validator, $emailValidator));
 
-        $form = new Vpfw_Form($this->request, 'register', array($usernameField, $passwordField, $emailField), $this->view);
+        $form = new Vpfw_Form($this->request, 'register', array($usernameField, $passwordField, $password2Field, $emailField), $this->view);
         $form->setAction(Vpfw_Router_Http::url('user', 'register'));
         $form->setMethod('POST');
         $form->handleRequest();

@@ -1,7 +1,7 @@
 <ul>
-  <li><a href="<?php HE(Vpfw_Router_Http::url('show', 'top10', array('gender' => 'male'))); ?>">Top 10 male</a></li>
-  <li><a href="<?php HE(Vpfw_Router_Http::url('show', 'top10', array('gender' => 'female'))); ?>">Top 10 female</a></li>
-  <li><a href="<?php HE(Vpfw_Router_Http::url('picture', 'upload')); ?>">Upload Picture</a></li>
-  <li><a href="<?php HE(Vpfw_Router_Http::url('user', 'register')); ?>">Register</a></li>
-  <li><a href="<?php HE(Vpfw_Router_Http::url('user', 'login')); ?>">Login</a></li>
+    <?php foreach($this->links as $link): ?>
+    <li>
+        <a href="<?PHP HE($link['url']); ?>"><?php HE($link['name']) ?></a>
+    </li>
+    <?php endforeach; ?>
 </ul>

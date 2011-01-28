@@ -125,7 +125,7 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
      */
     private function checkDataKey($keyName) {
         if (false == array_key_exists($keyName, $this->data)) {
-            throw new Vpfw_Exception_Logical('Ein Attribut mit dem Namen ' . $keyName . ' ist in diesem DataObject nicht bekannt');
+            throw new Vpfw_Exception_Logical('Ein Attribut mit dem Namen ' . $keyName . ' ist in diesem DataObject der Klasse ' . get_called_class() . ' nicht bekannt');
         }
         if (false == array_keys_exists(array('val', 'changed'), $this->data[$keyName])) {
             throw new Vpfw_Exception_Logical('Das data Array in ' . get_called_class() . ' besitzt nicht die erwartete Struktur');

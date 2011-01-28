@@ -7,8 +7,9 @@ try {
     $request = new Vpfw_Request_Http();
     $response = new Vpfw_Response_Http();
     $router = new Vpfw_Router_Http();
+    $session = Vpfw_Factory::getAuthSession($request);
     $fC = new App_Controller_Front_Explicit($router);
-    $fC->dispatch($request, $response);
+    $fC->dispatch($request, $response, $session);
 } catch (Vpfw_Exception_Critical $e) {
     echo '<pre>';
     echo $e->getMessage();

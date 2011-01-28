@@ -29,7 +29,7 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
             'Reason' => null,
         );
         foreach ($this->data as &$val) {
-            $val = array('val' => null, 'changed' => false);
+            $val = array('val' => null, 'changed' => false, 'required' => true);
         }
         parent::__construct($properties);
     }

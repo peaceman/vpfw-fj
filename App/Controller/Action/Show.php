@@ -20,10 +20,10 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
                 case 'female':
                     $genderToShow = 1;
                     break;
-                default:
-                    $genderToShow = mt_rand(0, 1);
-                    break;
             }
+        }
+        if (true == is_null($genderToShow)) {
+            $genderToShow = mt_rand(0, 1);
         }
         return $genderToShow;
     }

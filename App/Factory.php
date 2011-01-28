@@ -1,5 +1,11 @@
 <?php
 class App_Factory {
+    public static function getAuthSession(Vpfw_Request_Interface $request) {
+        return new Vpfw_Auth_Session(Vpfw_Factory::getAuthAdapter('Database'),
+                                     Vpfw_Factory::getAuthStorage('Session'),
+                                     Vpfw_Factory::getDataMapper('Session'),
+                                     $request);
+    }
     public static function getValidator($type) {
         switch ($type) {
             case 'Picture':
@@ -122,13 +128,13 @@ class App_Factory {
                                 )
                             );
                         }
-                        unset($properties['CreationTime'],
-                              $properties['CreationIp'],
-                              $properties['DeletionId'],
-                              $properties['Username'],
-                              $properties['Passhash'],
-                              $properties['Email']);
                     }
+                    unset($properties['CreationTime'],
+                          $properties['CreationIp'],
+                          $properties['DeletionId'],
+                          $properties['Username'],
+                          $properties['Passhash'],
+                          $properties['Email']);
                 }
                 $dataObject = new App_DataObject_Session(Vpfw_Factory::getValidator('Session'), $properties);
                 if (false == is_null($user)) {

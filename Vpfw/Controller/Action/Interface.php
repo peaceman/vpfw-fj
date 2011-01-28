@@ -2,7 +2,7 @@
 interface Vpfw_Controller_Action_Interface {
     public function setActionName($name);
     public function setView(Vpfw_View_Interface $view);
-    public function execute(Vpfw_Request_Interface $request, Vpfw_Response_Interface $response);
+    public function execute(Vpfw_Request_Interface $request, Vpfw_Response_Interface $response, Vpfw_Auth_Session $session);
     /**
      * @return Vpfw_View_Interface
      */

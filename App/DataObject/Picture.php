@@ -44,8 +44,9 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
             'DeletionId' => null,
         );
         foreach ($this->data as &$val) {
-            $val = array('val' => null, 'changed' => false);
+            $val = array('val' => null, 'changed' => false, 'required' => true);
         }
+        $this->data['DeletionId']['required'] = true;
         parent::__construct($properties);
     }
 

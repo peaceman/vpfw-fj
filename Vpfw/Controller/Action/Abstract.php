@@ -25,6 +25,11 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
     protected $view;
 
     /**
+     * @var Vpfw_Auth_Session
+     */
+    protected $session;
+
+    /**
      * Die Schlüssel dieses Arrays sind die Platzhalter im Template
      * @var array Array aus Namen der ActionController
      */
@@ -69,20 +74,22 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
      * ruft die auszuführende Methode auf.
      * @param Vpfw_Request_Interface $request
      * @param Vpfw_Response_Interface $response
+     * @param Vpfw_Auth_Session $session
      */
-    public function execute(Vpfw_Request_Interface $request, Vpfw_Response_Interface $response) {
+    public function execute(Vpfw_Request_Interface $request, Vpfw_Response_Interface $response, Vpfw_Auth_Session $session) {
         if (true == $this->isExecuted) {
             return;
         }
         $this->request = $request;
         $this->response = $response;
+        $this->session = $session;
         $this->{$this->actionToExecute}();
         foreach ($this->childControllers as $placeHolderName => &$controller) {
             if (true == is_array($controller)) {
                 list($controllerName, $actionName) = $controller;
                 $controller = Vpfw_Factory::getActionController($controllerName, $actionName);
             }
-            $controller->execute($request, $response);
+            $controller->execute($request, $response, $session);
         }
         $this->isExecuted = true;
     }

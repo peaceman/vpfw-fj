@@ -24,6 +24,15 @@
             </td>
         </tr>
         <tr>
+            <td>Password Wdh.:</td>
+            <td><input type="password" name="password2" value="<?php HE($this->register['password2-value']) ?>" /></td>
+            <td>
+                <?php foreach ($this->register['password2-errors'] as $error): ?>
+                <?php HE($error); ?><br />
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <tr>
             <td>Email</td>
             <td><input type="text" name="email" value="<?php HE($this->register['email-value']) ?>" /></td>
             <td>
