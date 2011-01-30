@@ -43,6 +43,11 @@ class Vpfw_Form {
      */
     private $action;
 
+    /**
+     * @var string
+     */
+    private $enctype;
+
 
     /**
      * @param Vpfw_Request_Interface $request
@@ -55,6 +60,7 @@ class Vpfw_Form {
         $this->view = $view;
         $this->name = $name;
         $this->method = 'GET';
+        $this->enctype = 'application/x-www-form-urlencoded';
         $this->errorMessages = array(
             'form' => array(),
             'field' => array(),
@@ -173,5 +179,21 @@ class Vpfw_Form {
 
     public function getMethod() {
         return $this->method;
+    }
+
+    public function setEnctype($enctype) {
+        switch($enctype) {
+            case 'application/x-www-form-urlencoded':
+            case 'multipart/form-data':
+            case 'text/plain':
+                $this->enctype = $enctype;
+                break;
+            default:
+                throw new Vpfw_Exception_Logical('Unbekannter Formular-Enctype ' . $enctype);
+        }
+    }
+
+    public function getEnctype() {
+        return $this->enctype;
     }
 }
