@@ -164,23 +164,36 @@ class Vpfw_Form {
     /**
      *
      * @param string $action
+     * @return Vpfw_Form
      */
     public function setAction($action) {
         $this->action = $action;
+        return $this;
     }
 
     public function getAction() {
         return $this->action;
     }
 
+    /**
+     *
+     * @param string $method
+     * @return Vpfw_Form
+     */
     public function setMethod($method) {
         $this->method = $method;
+        return $this;
     }
 
     public function getMethod() {
         return $this->method;
     }
 
+    /**
+     *
+     * @param string $enctype
+     * @return Vpfw_Form
+     */
     public function setEnctype($enctype) {
         switch($enctype) {
             case 'application/x-www-form-urlencoded':
@@ -191,6 +204,7 @@ class Vpfw_Form {
             default:
                 throw new Vpfw_Exception_Logical('Unbekannter Formular-Enctype ' . $enctype);
         }
+        return $this;
     }
 
     public function getEnctype() {
