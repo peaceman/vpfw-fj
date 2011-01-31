@@ -1,0 +1,51 @@
+<form name="picupload" action="<?php HE($this->picupload['action']) ?>" method="<?php HE($this->picupload['method']) ?>" enctype="<?php HE($this->picupload['enctype']) ?>">
+    <?php foreach($this->picupload['errors'] as $error): ?>
+    <h5>
+        <?php HE($error); ?>
+    </h5>
+    <?php endforeach; ?>
+    <table>
+        <tr>
+            <td>
+                Geschlecht
+            </td>
+            <td>
+                <input type="radio" name="gender" value="male" <?php HE($this->picupload['gender-value-male']) ?> /> Männlich<br />
+                <input type="radio" name="gender" value="female" <?php HE($this->picupload['gender-value-female']) ?> /> Weiblich
+            </td>
+            <td>
+                <?php foreach ($this->picupload['gender-errors'] as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Rechte
+            </td>
+            <td>
+                <input type="checkbox" name="rights" value="accepted" /> Ich akzeptiere die Bedingungen
+            </td>
+            <td>
+                <?php foreach ($this->picupload['rights-errors'] as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Bild
+            </td>
+            <td>
+                <input type="file" name="picture" value="meca" />
+            </td>
+            <td>
+                <?php foreach ($this->picupload['picture-errors'] as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="form-picupload" value="lol" />
+    <input type="submit" />
+</form>

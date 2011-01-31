@@ -9,7 +9,7 @@ class Vpfw_Form_Field {
      * 
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * Diese Variable gibt Informationen darüber, ob dieses Feld
@@ -17,7 +17,7 @@ class Vpfw_Form_Field {
      *
      * @var bool
      */
-    private $required;
+    protected $required;
 
     /**
      * Dieses Array beinhaltet die Validatoren, welche auf dieses
@@ -41,7 +41,7 @@ class Vpfw_Form_Field {
      *
      * @var string
      */
-    private $value;
+    protected $value;
 
     /**
      *
@@ -66,6 +66,21 @@ class Vpfw_Form_Field {
      */
     public function getName() {
         return $this->name;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFilled() {
+        if (false == is_null($this->value)) {
+            if (true == empty($this->value)) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -188,11 +203,17 @@ class Vpfw_Form_Field {
      */
     public function executeFilters() {
         if (true == is_null($this->value)) {
-            throw new Vpfw_Exception_Logical('Die Filtern sollten nicht ausgeführt werden, wenn das Value sowieso keinen Wert enthält');
+            throw new Vpfw_Exception_Logical('Die Filter sollten nicht ausgeführt werden, wenn das Value sowieso keinen Wert enthält');
         }
         foreach ($this->filters as $filter) {
             $this->value = $filter->run($this->value);
         }
         return $this;
+    }
+
+    public function fillView() {
+        $viewArray = array();
+        $viewArray[$this->getName() . '-value'] = $this->getValue();
+        return $viewArray;
     }
 }

@@ -123,7 +123,8 @@ class Vpfw_Form {
         foreach ($this->fields as $field) {
             /* @var $field Vpfw_Form_Field */
             if (true == $field->isRequired()) {
-                if (false == $this->request->issetParameter($field->getName())) {
+                $field->setValue($this->request->getParameter($field->getName()));
+                if (false == $field->isFilled()) {
                     $this->errorMessages['form'][] = 'Das Feld ' . $field->getName() . ' muss zwingend ausgefüllt werden';
                     $this->allIsValid = false;
                 }
@@ -134,9 +135,8 @@ class Vpfw_Form {
     private function processSentFields() {
         foreach ($this->fields as $field) {
             /* @var $field Vpfw_Form_Field */
-            if (true == $this->request->issetParameter($field->getName())) {
-                $validationResult = $field->setValue($this->request->getParameter($field->getName()))
-                                          ->executeFilters()
+            if (true == $field->isFilled()) {
+                $validationResult = $field->executeFilters()
                                           ->executeValidators();
                 if (true !== $validationResult) {
                     $this->errorMessages['field'][$field->getName()] = $validationResult;
@@ -149,7 +149,8 @@ class Vpfw_Form {
     public function fillView() {
         $viewArray = array();
         foreach ($this->fields as $field) {
-            $viewArray[$field->getName() . '-value'] = $field->getValue();
+            $fieldViewArray = $field->fillView();
+            $viewArray = array_merge($viewArray, $fieldViewArray);
             $viewArray[$field->getName() . '-errors'] = array();
         }
         foreach ($this->errorMessages['field'] as $fieldName => $errors) {
@@ -158,6 +159,7 @@ class Vpfw_Form {
         $viewArray['errors'] = $this->errorMessages['form'];
         $viewArray['method'] = $this->method;
         $viewArray['action'] = $this->action;
+        $viewArray['enctype'] = $this->enctype;
         $this->view->setVar($this->name, $viewArray);
     }
 

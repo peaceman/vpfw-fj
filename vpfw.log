@@ -1,0 +1,583 @@
+[2011-01-30/20:32:54] mysqlqry | INSERT INTO session (`UserId`, `Ip`, `StartTime`, `LastRequest`, `Hits`, `UserAgent`) VALUES (0, 2130706433, 1296415974, 1296415974, 1, 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.552.237 Safari/534.10')
+[2011-01-30/20:32:54] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:32:57] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:32:57] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:32:57] mysqlqry | UPDATE session SET LastRequest = 1296415977, Hits = 2 WHERE Id = 1
+[2011-01-30/20:32:58] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:32:58] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:32:58] mysqlqry | UPDATE session SET LastRequest = 1296415978, Hits = 3 WHERE Id = 1
+[2011-01-30/20:32:59] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:32:59] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:32:59] mysqlqry | UPDATE session SET LastRequest = 1296415979, Hits = 4 WHERE Id = 1
+[2011-01-30/20:32:59] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:32:59] mysqlqry | UPDATE session SET Hits = 5 WHERE Id = 1
+[2011-01-30/20:33:00] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:00] mysqlqry | UPDATE session SET LastRequest = 1296415980, Hits = 6 WHERE Id = 1
+[2011-01-30/20:33:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:38] mysqlqry | UPDATE session SET LastRequest = 1296416018, Hits = 7 WHERE Id = 1
+[2011-01-30/20:33:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:39] mysqlqry | UPDATE session SET LastRequest = 1296416019, Hits = 8 WHERE Id = 1
+[2011-01-30/20:33:40] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:40] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:33:40] mysqlqry | UPDATE session SET LastRequest = 1296416020, Hits = 9 WHERE Id = 1
+[2011-01-30/20:33:41] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:41] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:33:41] mysqlqry | UPDATE session SET LastRequest = 1296416021, Hits = 10 WHERE Id = 1
+[2011-01-30/20:33:41] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:41] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:33:41] mysqlqry | UPDATE session SET Hits = 11 WHERE Id = 1
+[2011-01-30/20:33:42] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:42] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:33:42] mysqlqry | UPDATE session SET LastRequest = 1296416022, Hits = 12 WHERE Id = 1
+[2011-01-30/20:33:42] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:42] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:33:42] mysqlqry | UPDATE session SET Hits = 13 WHERE Id = 1
+[2011-01-30/20:33:43] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:43] mysqlqry | UPDATE session SET LastRequest = 1296416023, Hits = 14 WHERE Id = 1
+[2011-01-30/20:33:43] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:43] mysqlqry | UPDATE session SET Hits = 15 WHERE Id = 1
+[2011-01-30/20:33:44] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:44] mysqlqry | UPDATE session SET LastRequest = 1296416024, Hits = 16 WHERE Id = 1
+[2011-01-30/20:33:55] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:33:55] mysqlqry | UPDATE session SET LastRequest = 1296416035, Hits = 17 WHERE Id = 1
+[2011-01-30/20:34:09] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:09] mysqlqry | UPDATE session SET LastRequest = 1296416049, Hits = 18 WHERE Id = 1
+[2011-01-30/20:34:44] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:44] mysqlqry | UPDATE session SET LastRequest = 1296416084, Hits = 19 WHERE Id = 1
+[2011-01-30/20:34:45] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:45] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:34:45] mysqlqry | UPDATE session SET LastRequest = 1296416085, Hits = 20 WHERE Id = 1
+[2011-01-30/20:34:45] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:45] mysqlqry | UPDATE session SET Hits = 21 WHERE Id = 1
+[2011-01-30/20:34:49] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:49] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:34:49] mysqlqry | UPDATE session SET LastRequest = 1296416089, Hits = 22 WHERE Id = 1
+[2011-01-30/20:34:50] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:50] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:34:50] mysqlqry | UPDATE session SET LastRequest = 1296416090, Hits = 23 WHERE Id = 1
+[2011-01-30/20:34:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:51] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:34:51] mysqlqry | UPDATE session SET LastRequest = 1296416091, Hits = 24 WHERE Id = 1
+[2011-01-30/20:34:52] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:52] mysqlqry | UPDATE session SET Hits = 25 WHERE Id = 1
+[2011-01-30/20:34:53] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:53] mysqlqry | UPDATE session SET LastRequest = 1296416093, Hits = 26 WHERE Id = 1
+[2011-01-30/20:34:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:54] mysqlqry | UPDATE session SET LastRequest = 1296416094, Hits = 27 WHERE Id = 1
+[2011-01-30/20:34:57] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:34:57] mysqlqry | UPDATE session SET LastRequest = 1296416097, Hits = 28 WHERE Id = 1
+[2011-01-30/20:39:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:39:51] mysqlqry | UPDATE session SET LastRequest = 1296416391, Hits = 29 WHERE Id = 1
+[2011-01-30/20:39:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:39:51] mysqlqry | UPDATE session SET Hits = 30 WHERE Id = 1
+[2011-01-30/20:39:52] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:39:52] mysqlqry | UPDATE session SET LastRequest = 1296416392, Hits = 31 WHERE Id = 1
+[2011-01-30/20:39:52] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:39:52] mysqlqry | UPDATE session SET Hits = 32 WHERE Id = 1
+[2011-01-30/20:39:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:39:54] mysqlqry | UPDATE session SET LastRequest = 1296416394, Hits = 33 WHERE Id = 1
+[2011-01-30/20:40:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:37] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:40:37] mysqlqry | UPDATE session SET LastRequest = 1296416437, Hits = 34 WHERE Id = 1
+[2011-01-30/20:40:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:37] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:40:37] mysqlqry | UPDATE session SET Hits = 35 WHERE Id = 1
+[2011-01-30/20:40:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:38] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:40:38] mysqlqry | UPDATE session SET LastRequest = 1296416438, Hits = 36 WHERE Id = 1
+[2011-01-30/20:40:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:39] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:40:39] mysqlqry | UPDATE session SET LastRequest = 1296416439, Hits = 37 WHERE Id = 1
+[2011-01-30/20:40:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:39] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:40:39] mysqlqry | UPDATE session SET Hits = 38 WHERE Id = 1
+[2011-01-30/20:40:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:39] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:40:39] mysqlqry | UPDATE session SET Hits = 39 WHERE Id = 1
+[2011-01-30/20:40:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:39] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:40:39] mysqlqry | UPDATE session SET Hits = 40 WHERE Id = 1
+[2011-01-30/20:40:40] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:40] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:40:40] mysqlqry | UPDATE session SET LastRequest = 1296416440, Hits = 41 WHERE Id = 1
+[2011-01-30/20:40:40] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:40] mysqlqry | UPDATE session SET Hits = 42 WHERE Id = 1
+[2011-01-30/20:40:58] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:40:58] mysqlqry | UPDATE session SET LastRequest = 1296416458, Hits = 43 WHERE Id = 1
+[2011-01-30/20:41:01] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:01] mysqlqry | UPDATE session SET LastRequest = 1296416461, Hits = 44 WHERE Id = 1
+[2011-01-30/20:41:02] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:02] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:41:02] mysqlqry | UPDATE session SET LastRequest = 1296416462, Hits = 45 WHERE Id = 1
+[2011-01-30/20:41:03] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:03] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:41:03] mysqlqry | UPDATE session SET Hits = 46 WHERE Id = 1
+[2011-01-30/20:41:03] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:03] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:41:03] mysqlqry | UPDATE session SET LastRequest = 1296416463, Hits = 47 WHERE Id = 1
+[2011-01-30/20:41:04] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:04] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:41:04] mysqlqry | UPDATE session SET LastRequest = 1296416464, Hits = 48 WHERE Id = 1
+[2011-01-30/20:41:04] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:04] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:41:04] mysqlqry | UPDATE session SET Hits = 49 WHERE Id = 1
+[2011-01-30/20:41:05] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:05] mysqlqry | UPDATE session SET LastRequest = 1296416465, Hits = 50 WHERE Id = 1
+[2011-01-30/20:41:05] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:05] mysqlqry | UPDATE session SET Hits = 51 WHERE Id = 1
+[2011-01-30/20:41:06] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:41:06] mysqlqry | UPDATE session SET LastRequest = 1296416466, Hits = 52 WHERE Id = 1
+[2011-01-30/20:42:02] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:02] mysqlqry | UPDATE session SET LastRequest = 1296416522, Hits = 53 WHERE Id = 1
+[2011-01-30/20:42:03] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:03] mysqlqry | UPDATE session SET LastRequest = 1296416523, Hits = 54 WHERE Id = 1
+[2011-01-30/20:42:04] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:04] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:42:04] mysqlqry | UPDATE session SET LastRequest = 1296416524, Hits = 55 WHERE Id = 1
+[2011-01-30/20:42:05] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:05] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:42:05] mysqlqry | UPDATE session SET LastRequest = 1296416525, Hits = 56 WHERE Id = 1
+[2011-01-30/20:42:13] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:13] mysqlqry | UPDATE session SET LastRequest = 1296416533, Hits = 57 WHERE Id = 1
+[2011-01-30/20:42:15] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:15] mysqlqry | UPDATE session SET LastRequest = 1296416535, Hits = 58 WHERE Id = 1
+[2011-01-30/20:42:15] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:15] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:42:15] mysqlqry | UPDATE session SET Hits = 59 WHERE Id = 1
+[2011-01-30/20:42:16] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:16] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:42:16] mysqlqry | UPDATE session SET LastRequest = 1296416536, Hits = 60 WHERE Id = 1
+[2011-01-30/20:42:17] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:17] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:42:17] mysqlqry | UPDATE session SET LastRequest = 1296416537, Hits = 61 WHERE Id = 1
+[2011-01-30/20:42:17] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:17] mysqlqry | UPDATE session SET Hits = 62 WHERE Id = 1
+[2011-01-30/20:42:19] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:42:19] mysqlqry | UPDATE session SET LastRequest = 1296416539, Hits = 63 WHERE Id = 1
+[2011-01-30/20:43:00] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:43:00] mysqlqry | UPDATE session SET LastRequest = 1296416580, Hits = 64 WHERE Id = 1
+[2011-01-30/20:43:01] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:43:01] mysqlqry | UPDATE session SET LastRequest = 1296416581, Hits = 65 WHERE Id = 1
+[2011-01-30/20:43:02] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:43:02] mysqlqry | UPDATE session SET LastRequest = 1296416582, Hits = 66 WHERE Id = 1
+[2011-01-30/20:46:26] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:26] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:46:26] mysqlqry | UPDATE session SET LastRequest = 1296416786, Hits = 67 WHERE Id = 1
+[2011-01-30/20:46:26] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:26] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:46:26] mysqlqry | UPDATE session SET Hits = 68 WHERE Id = 1
+[2011-01-30/20:46:27] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:27] mysqlqry | UPDATE session SET LastRequest = 1296416787, Hits = 69 WHERE Id = 1
+[2011-01-30/20:46:28] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:28] mysqlqry | UPDATE session SET LastRequest = 1296416788, Hits = 70 WHERE Id = 1
+[2011-01-30/20:46:29] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:29] mysqlqry | UPDATE session SET LastRequest = 1296416789, Hits = 71 WHERE Id = 1
+[2011-01-30/20:46:29] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:29] mysqlqry | UPDATE session SET Hits = 72 WHERE Id = 1
+[2011-01-30/20:46:31] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:31] mysqlqry | UPDATE session SET LastRequest = 1296416791, Hits = 73 WHERE Id = 1
+[2011-01-30/20:46:31] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:31] mysqlqry | UPDATE session SET Hits = 74 WHERE Id = 1
+[2011-01-30/20:46:34] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:34] mysqlqry | UPDATE session SET LastRequest = 1296416794, Hits = 75 WHERE Id = 1
+[2011-01-30/20:46:45] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:45] mysqlqry | UPDATE session SET LastRequest = 1296416805, Hits = 76 WHERE Id = 1
+[2011-01-30/20:46:46] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:46] mysqlqry | UPDATE session SET LastRequest = 1296416806, Hits = 77 WHERE Id = 1
+[2011-01-30/20:46:48] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:48] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:46:48] mysqlqry | UPDATE session SET LastRequest = 1296416808, Hits = 78 WHERE Id = 1
+[2011-01-30/20:46:49] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:49] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:46:49] mysqlqry | UPDATE session SET LastRequest = 1296416809, Hits = 79 WHERE Id = 1
+[2011-01-30/20:46:49] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:49] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:46:49] mysqlqry | UPDATE session SET Hits = 80 WHERE Id = 1
+[2011-01-30/20:46:50] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:50] mysqlqry | UPDATE session SET LastRequest = 1296416810, Hits = 81 WHERE Id = 1
+[2011-01-30/20:46:50] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:50] mysqlqry | UPDATE session SET Hits = 82 WHERE Id = 1
+[2011-01-30/20:46:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:51] mysqlqry | UPDATE session SET LastRequest = 1296416811, Hits = 83 WHERE Id = 1
+[2011-01-30/20:46:52] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:52] mysqlqry | UPDATE session SET LastRequest = 1296416812, Hits = 84 WHERE Id = 1
+[2011-01-30/20:46:53] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:53] mysqlqry | UPDATE session SET LastRequest = 1296416813, Hits = 85 WHERE Id = 1
+[2011-01-30/20:46:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:54] mysqlqry | UPDATE session SET LastRequest = 1296416814, Hits = 86 WHERE Id = 1
+[2011-01-30/20:46:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:54] mysqlqry | UPDATE session SET Hits = 87 WHERE Id = 1
+[2011-01-30/20:46:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:46:54] mysqlqry | UPDATE session SET Hits = 88 WHERE Id = 1
+[2011-01-30/20:47:18] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:47:18] mysqlqry | UPDATE session SET LastRequest = 1296416838, Hits = 89 WHERE Id = 1
+[2011-01-30/20:47:20] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:47:20] mysqlqry | UPDATE session SET LastRequest = 1296416840, Hits = 90 WHERE Id = 1
+[2011-01-30/20:47:31] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:47:31] mysqlqry | SELECT Id FROM user WHERE DeletionId IS NULL AND Username = 'peaceman'
+[2011-01-30/20:47:31] mysqlqry | SELECT Id FROM user WHERE DeletionId IS NULL AND Email = 'nixalio@googlemail.com'
+[2011-01-30/20:47:31] mysqlqry | UPDATE session SET LastRequest = 1296416851, Hits = 91 WHERE Id = 1
+[2011-01-30/20:47:31] mysqlqry | INSERT INTO user (`CreationTime`, `CreationIp`, `DeletionId`, `Username`, `Passhash`, `Email`) VALUES (1296416851, 0, 0, 'peaceman', '2321837f2b3d3386f50eaeb117189654', 'nixalio@googlemail.com')
+[2011-01-30/20:47:31] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:47:31] mysqlqry | UPDATE session SET Hits = 92 WHERE Id = 1
+[2011-01-30/20:47:33] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:47:33] mysqlqry | UPDATE session SET LastRequest = 1296416853, Hits = 93 WHERE Id = 1
+[2011-01-30/20:47:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:47:37] mysqlqry | SELECT `Id`, `CreationTime`, `CreationIp`, `DeletionId`, `Username`, `Passhash`, `Email` FROM user WHERE DeletionId IS NULL AND Username = 'peaceman'
+[2011-01-30/20:47:37] mysqlqry | UPDATE session SET UserId = 1, LastRequest = 1296416857, Hits = 94 WHERE Id = 1
+[2011-01-30/20:47:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:47:37] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:47:37] mysqlqry | UPDATE session SET UserId = 1, Hits = 95 WHERE Id = 1
+[2011-01-30/20:47:49] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 1
+[2011-01-30/20:47:49] mysqlqry | INSERT INTO session (`UserId`, `Ip`, `StartTime`, `LastRequest`, `Hits`, `UserAgent`) VALUES (0, 2130706433, 1296416869, 1296416869, 1, 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.552.237 Safari/534.10')
+[2011-01-30/20:47:49] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:47:49] mysqlqry | UPDATE session SET UserId = 1, LastRequest = 1296416869, Hits = 96 WHERE Id = 1
+[2011-01-30/20:47:56] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/20:47:56] mysqlqry | UPDATE session SET LastRequest = 1296416876, Hits = 2 WHERE Id = 2
+[2011-01-30/20:48:00] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/20:48:00] mysqlqry | UPDATE session SET LastRequest = 1296416880, Hits = 3 WHERE Id = 2
+[2011-01-30/20:48:02] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/20:48:02] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-30/20:48:02] mysqlqry | UPDATE session SET LastRequest = 1296416882, Hits = 4 WHERE Id = 2
+[2011-01-30/20:51:44] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/20:51:44] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/20:51:44] mysqlqry | UPDATE session SET LastRequest = 1296417104, Hits = 5 WHERE Id = 2
+[2011-01-30/21:59:08] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/21:59:08] mysqlqry | UPDATE session SET LastRequest = 1296421148, Hits = 6 WHERE Id = 2
+[2011-01-30/21:59:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/21:59:38] mysqlqry | UPDATE session SET LastRequest = 1296421177, Hits = 7 WHERE Id = 2
+[2011-01-30/22:00:18] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:00:18] mysqlqry | UPDATE session SET LastRequest = 1296421218, Hits = 8 WHERE Id = 2
+[2011-01-30/22:00:18] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:00:18] mysqlqry | UPDATE session SET Hits = 9 WHERE Id = 2
+[2011-01-30/22:29:10] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:29:10] mysqlqry | UPDATE session SET LastRequest = 1296422950, Hits = 10 WHERE Id = 2
+[2011-01-30/22:29:32] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:29:32] mysqlqry | UPDATE session SET LastRequest = 1296422972, Hits = 11 WHERE Id = 2
+[2011-01-30/22:29:33] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:29:33] mysqlqry | UPDATE session SET LastRequest = 1296422973, Hits = 12 WHERE Id = 2
+[2011-01-30/22:29:34] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:29:34] mysqlqry | UPDATE session SET LastRequest = 1296422974, Hits = 13 WHERE Id = 2
+[2011-01-30/22:29:35] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:29:35] mysqlqry | UPDATE session SET LastRequest = 1296422975, Hits = 14 WHERE Id = 2
+[2011-01-30/22:31:01] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:31:01] mysqlqry | UPDATE session SET LastRequest = 1296423061, Hits = 15 WHERE Id = 2
+[2011-01-30/22:32:08] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:32:08] mysqlqry | UPDATE session SET LastRequest = 1296423128, Hits = 16 WHERE Id = 2
+[2011-01-30/22:32:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:32:54] mysqlqry | UPDATE session SET LastRequest = 1296423174, Hits = 17 WHERE Id = 2
+[2011-01-30/22:33:09] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:33:09] mysqlqry | UPDATE session SET LastRequest = 1296423189, Hits = 18 WHERE Id = 2
+[2011-01-30/22:36:46] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:36:46] mysqlqry | UPDATE session SET LastRequest = 1296423405, Hits = 19 WHERE Id = 2
+[2011-01-30/22:37:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:37:54] mysqlqry | UPDATE session SET LastRequest = 1296423474, Hits = 20 WHERE Id = 2
+[2011-01-30/22:39:02] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:39:02] mysqlqry | UPDATE session SET LastRequest = 1296423542, Hits = 21 WHERE Id = 2
+[2011-01-30/22:39:03] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:39:03] mysqlqry | UPDATE session SET LastRequest = 1296423543, Hits = 22 WHERE Id = 2
+[2011-01-30/22:39:04] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:39:04] mysqlqry | UPDATE session SET LastRequest = 1296423544, Hits = 23 WHERE Id = 2
+[2011-01-30/22:39:16] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:39:16] mysqlqry | UPDATE session SET LastRequest = 1296423556, Hits = 24 WHERE Id = 2
+[2011-01-30/22:39:17] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:39:17] mysqlqry | UPDATE session SET LastRequest = 1296423557, Hits = 25 WHERE Id = 2
+[2011-01-30/22:39:57] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:39:57] mysqlqry | UPDATE session SET LastRequest = 1296423597, Hits = 26 WHERE Id = 2
+[2011-01-30/22:40:33] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:40:33] mysqlqry | UPDATE session SET LastRequest = 1296423633, Hits = 27 WHERE Id = 2
+[2011-01-30/22:41:48] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:41:48] mysqlqry | UPDATE session SET LastRequest = 1296423708, Hits = 28 WHERE Id = 2
+[2011-01-30/22:45:13] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:45:13] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY RAND() LIMIT 2
+[2011-01-30/22:45:13] mysqlqry | UPDATE session SET LastRequest = 1296423913, Hits = 29 WHERE Id = 2
+[2011-01-30/22:47:47] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:47:47] mysqlqry | UPDATE session SET LastRequest = 1296424067, Hits = 30 WHERE Id = 2
+[2011-01-30/22:47:49] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 2
+[2011-01-30/22:47:49] mysqlqry | UPDATE session SET LastRequest = 1296424069, Hits = 31 WHERE Id = 2
+[2011-01-30/22:49:07] mysqlqry | INSERT INTO session (`UserId`, `Ip`, `StartTime`, `LastRequest`, `Hits`, `UserAgent`) VALUES (0, 2130706433, 1296424147, 1296424147, 1, 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.552.237 Safari/534.10')
+[2011-01-30/22:49:09] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:49:09] mysqlqry | UPDATE session SET LastRequest = 1296424149, Hits = 2 WHERE Id = 3
+[2011-01-30/22:49:14] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:49:14] mysqlqry | UPDATE session SET LastRequest = 1296424154, Hits = 3 WHERE Id = 3
+[2011-01-30/22:49:18] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:49:18] mysqlqry | UPDATE session SET LastRequest = 1296424158, Hits = 4 WHERE Id = 3
+[2011-01-30/22:50:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:50:54] mysqlqry | UPDATE session SET LastRequest = 1296424254, Hits = 5 WHERE Id = 3
+[2011-01-30/22:57:35] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:57:35] mysqlqry | UPDATE session SET LastRequest = 1296424655, Hits = 6 WHERE Id = 3
+[2011-01-30/22:57:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:57:39] mysqlqry | UPDATE session SET LastRequest = 1296424659, Hits = 7 WHERE Id = 3
+[2011-01-30/22:57:53] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:57:53] mysqlqry | UPDATE session SET LastRequest = 1296424673, Hits = 8 WHERE Id = 3
+[2011-01-30/22:59:12] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:59:12] mysqlqry | UPDATE session SET LastRequest = 1296424752, Hits = 9 WHERE Id = 3
+[2011-01-30/22:59:30] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:59:30] mysqlqry | UPDATE session SET LastRequest = 1296424770, Hits = 10 WHERE Id = 3
+[2011-01-30/22:59:32] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:59:32] mysqlqry | UPDATE session SET LastRequest = 1296424772, Hits = 11 WHERE Id = 3
+[2011-01-30/22:59:34] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:59:34] mysqlqry | UPDATE session SET LastRequest = 1296424774, Hits = 12 WHERE Id = 3
+[2011-01-30/22:59:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/22:59:37] mysqlqry | UPDATE session SET LastRequest = 1296424777, Hits = 13 WHERE Id = 3
+[2011-01-30/23:00:58] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:00:58] mysqlqry | UPDATE session SET LastRequest = 1296424858, Hits = 14 WHERE Id = 3
+[2011-01-30/23:01:47] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:01:47] mysqlqry | UPDATE session SET LastRequest = 1296424907, Hits = 15 WHERE Id = 3
+[2011-01-30/23:02:08] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:08] mysqlqry | UPDATE session SET LastRequest = 1296424928, Hits = 16 WHERE Id = 3
+[2011-01-30/23:02:13] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:13] mysqlqry | UPDATE session SET LastRequest = 1296424933, Hits = 17 WHERE Id = 3
+[2011-01-30/23:02:14] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:14] mysqlqry | UPDATE session SET Hits = 18 WHERE Id = 3
+[2011-01-30/23:02:15] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:15] mysqlqry | UPDATE session SET LastRequest = 1296424935, Hits = 19 WHERE Id = 3
+[2011-01-30/23:02:15] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:15] mysqlqry | UPDATE session SET Hits = 20 WHERE Id = 3
+[2011-01-30/23:02:15] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:15] mysqlqry | UPDATE session SET Hits = 21 WHERE Id = 3
+[2011-01-30/23:02:15] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:15] mysqlqry | UPDATE session SET Hits = 22 WHERE Id = 3
+[2011-01-30/23:02:18] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:18] mysqlqry | UPDATE session SET LastRequest = 1296424938, Hits = 23 WHERE Id = 3
+[2011-01-30/23:02:19] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:19] mysqlqry | UPDATE session SET LastRequest = 1296424939, Hits = 24 WHERE Id = 3
+[2011-01-30/23:02:22] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:22] mysqlqry | UPDATE session SET LastRequest = 1296424942, Hits = 25 WHERE Id = 3
+[2011-01-30/23:02:25] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:25] mysqlqry | UPDATE session SET LastRequest = 1296424945, Hits = 26 WHERE Id = 3
+[2011-01-30/23:02:26] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:26] mysqlqry | UPDATE session SET LastRequest = 1296424946, Hits = 27 WHERE Id = 3
+[2011-01-30/23:02:28] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:28] mysqlqry | UPDATE session SET LastRequest = 1296424948, Hits = 28 WHERE Id = 3
+[2011-01-30/23:02:28] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:28] mysqlqry | UPDATE session SET Hits = 29 WHERE Id = 3
+[2011-01-30/23:02:31] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:31] mysqlqry | UPDATE session SET LastRequest = 1296424951, Hits = 30 WHERE Id = 3
+[2011-01-30/23:02:33] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:33] mysqlqry | UPDATE session SET LastRequest = 1296424953, Hits = 31 WHERE Id = 3
+[2011-01-30/23:02:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:38] mysqlqry | UPDATE session SET LastRequest = 1296424958, Hits = 32 WHERE Id = 3
+[2011-01-30/23:02:44] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:02:44] mysqlqry | UPDATE session SET LastRequest = 1296424964, Hits = 33 WHERE Id = 3
+[2011-01-30/23:05:58] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 3
+[2011-01-30/23:05:58] mysqlqry | UPDATE session SET LastRequest = 1296425158, Hits = 34 WHERE Id = 3
+[2011-01-31/17:04:11] mysqlqry | INSERT INTO session (`UserId`, `Ip`, `StartTime`, `LastRequest`, `Hits`, `UserAgent`) VALUES (0, 2130706433, 1296489851, 1296489851, 1, 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.552.237 Safari/534.10')
+[2011-01-31/17:04:11] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY RAND() LIMIT 2
+[2011-01-31/17:04:12] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:04:12] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 0 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-31/17:04:12] mysqlqry | UPDATE session SET LastRequest = 1296489852, Hits = 2 WHERE Id = 4
+[2011-01-31/17:04:13] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:04:13] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-31/17:04:13] mysqlqry | UPDATE session SET LastRequest = 1296489853, Hits = 3 WHERE Id = 4
+[2011-01-31/17:04:13] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:04:13] mysqlqry | UPDATE session SET Hits = 4 WHERE Id = 4
+[2011-01-31/17:05:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:05:39] mysqlqry | UPDATE session SET LastRequest = 1296489939, Hits = 5 WHERE Id = 4
+[2011-01-31/17:05:41] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:05:41] mysqlqry | UPDATE session SET LastRequest = 1296489941, Hits = 6 WHERE Id = 4
+[2011-01-31/17:05:41] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:05:41] mysqlqry | UPDATE session SET Hits = 7 WHERE Id = 4
+[2011-01-31/17:06:36] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:36] mysqlqry | UPDATE session SET LastRequest = 1296489996, Hits = 8 WHERE Id = 4
+[2011-01-31/17:06:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:37] mysqlqry | UPDATE session SET LastRequest = 1296489997, Hits = 9 WHERE Id = 4
+[2011-01-31/17:06:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:37] mysqlqry | UPDATE session SET Hits = 10 WHERE Id = 4
+[2011-01-31/17:06:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:38] mysqlqry | UPDATE session SET Hits = 11 WHERE Id = 4
+[2011-01-31/17:06:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:38] mysqlqry | UPDATE session SET LastRequest = 1296489998, Hits = 12 WHERE Id = 4
+[2011-01-31/17:06:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:38] mysqlqry | UPDATE session SET Hits = 13 WHERE Id = 4
+[2011-01-31/17:06:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:38] mysqlqry | UPDATE session SET Hits = 14 WHERE Id = 4
+[2011-01-31/17:06:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:39] mysqlqry | UPDATE session SET LastRequest = 1296489999, Hits = 15 WHERE Id = 4
+[2011-01-31/17:06:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:39] mysqlqry | UPDATE session SET Hits = 16 WHERE Id = 4
+[2011-01-31/17:06:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:39] mysqlqry | UPDATE session SET Hits = 17 WHERE Id = 4
+[2011-01-31/17:06:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:39] mysqlqry | UPDATE session SET Hits = 18 WHERE Id = 4
+[2011-01-31/17:06:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:39] mysqlqry | UPDATE session SET Hits = 19 WHERE Id = 4
+[2011-01-31/17:06:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:06:39] mysqlqry | UPDATE session SET Hits = 20 WHERE Id = 4
+[2011-01-31/17:11:12] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:11:12] mysqlqry | SELECT a.Id, a.Md5, a.Gender, a.SessionId, a.UploadTime, a.SiteHits, a.PositiveRating, a.NegativeRating, a.DeletionId, b.UserId AS SesUserId, b.Ip AS SesIp, b.StartTime AS SesStartTime, b.LastRequest AS SesLastRequest, b.Hits AS SesHits, b.UserAgent AS SesUserAgent FROM picture AS a INNER JOIN session AS b ON a.SessionId = b.Id WHERE a.DeletionId IS NULL AND a.Gender = 1 ORDER BY a.PositiveRating - a.NegativeRating LIMIT 10
+[2011-01-31/17:11:12] mysqlqry | UPDATE session SET LastRequest = 1296490272, Hits = 21 WHERE Id = 4
+[2011-01-31/17:11:12] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:11:12] mysqlqry | UPDATE session SET Hits = 22 WHERE Id = 4
+[2011-01-31/17:11:14] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:11:14] mysqlqry | UPDATE session SET LastRequest = 1296490274, Hits = 23 WHERE Id = 4
+[2011-01-31/17:11:15] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:11:15] mysqlqry | UPDATE session SET LastRequest = 1296490275, Hits = 24 WHERE Id = 4
+[2011-01-31/17:11:16] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:11:16] mysqlqry | UPDATE session SET LastRequest = 1296490276, Hits = 25 WHERE Id = 4
+[2011-01-31/17:15:11] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:15:11] mysqlqry | UPDATE session SET LastRequest = 1296490511, Hits = 26 WHERE Id = 4
+[2011-01-31/17:15:20] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:15:20] mysqlqry | UPDATE session SET LastRequest = 1296490520, Hits = 27 WHERE Id = 4
+[2011-01-31/17:15:26] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:15:26] mysqlqry | UPDATE session SET LastRequest = 1296490526, Hits = 28 WHERE Id = 4
+[2011-01-31/17:15:30] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:15:30] mysqlqry | UPDATE session SET LastRequest = 1296490530, Hits = 29 WHERE Id = 4
+[2011-01-31/17:16:48] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:16:48] mysqlqry | UPDATE session SET LastRequest = 1296490608, Hits = 30 WHERE Id = 4
+[2011-01-31/17:16:50] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:16:50] mysqlqry | UPDATE session SET LastRequest = 1296490609, Hits = 31 WHERE Id = 4
+[2011-01-31/17:16:50] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:16:50] mysqlqry | UPDATE session SET LastRequest = 1296490610, Hits = 32 WHERE Id = 4
+[2011-01-31/17:16:50] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:16:50] mysqlqry | UPDATE session SET Hits = 33 WHERE Id = 4
+[2011-01-31/17:16:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:16:51] mysqlqry | UPDATE session SET LastRequest = 1296490611, Hits = 34 WHERE Id = 4
+[2011-01-31/17:16:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:16:51] mysqlqry | UPDATE session SET Hits = 35 WHERE Id = 4
+[2011-01-31/17:16:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:16:51] mysqlqry | UPDATE session SET Hits = 36 WHERE Id = 4
+[2011-01-31/17:16:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:16:51] mysqlqry | UPDATE session SET Hits = 37 WHERE Id = 4
+[2011-01-31/17:17:20] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:17:20] mysqlqry | UPDATE session SET LastRequest = 1296490640, Hits = 38 WHERE Id = 4
+[2011-01-31/17:17:24] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:17:24] mysqlqry | UPDATE session SET LastRequest = 1296490644, Hits = 39 WHERE Id = 4
+[2011-01-31/17:17:25] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:17:25] mysqlqry | UPDATE session SET LastRequest = 1296490645, Hits = 40 WHERE Id = 4
+[2011-01-31/17:17:25] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:17:25] mysqlqry | UPDATE session SET Hits = 41 WHERE Id = 4
+[2011-01-31/17:17:25] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:17:25] mysqlqry | UPDATE session SET Hits = 42 WHERE Id = 4
+[2011-01-31/17:17:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:17:51] mysqlqry | UPDATE session SET LastRequest = 1296490671, Hits = 43 WHERE Id = 4
+[2011-01-31/17:45:56] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:56] mysqlqry | UPDATE session SET LastRequest = 1296492356, Hits = 44 WHERE Id = 4
+[2011-01-31/17:45:57] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:57] mysqlqry | UPDATE session SET LastRequest = 1296492357, Hits = 45 WHERE Id = 4
+[2011-01-31/17:45:58] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:58] mysqlqry | UPDATE session SET LastRequest = 1296492358, Hits = 46 WHERE Id = 4
+[2011-01-31/17:45:58] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:58] mysqlqry | UPDATE session SET Hits = 47 WHERE Id = 4
+[2011-01-31/17:45:58] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:58] mysqlqry | UPDATE session SET Hits = 48 WHERE Id = 4
+[2011-01-31/17:45:58] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:58] mysqlqry | UPDATE session SET Hits = 49 WHERE Id = 4
+[2011-01-31/17:45:59] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:59] mysqlqry | UPDATE session SET LastRequest = 1296492359, Hits = 50 WHERE Id = 4
+[2011-01-31/17:45:59] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:59] mysqlqry | UPDATE session SET Hits = 51 WHERE Id = 4
+[2011-01-31/17:45:59] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:59] mysqlqry | UPDATE session SET Hits = 52 WHERE Id = 4
+[2011-01-31/17:45:59] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:45:59] mysqlqry | UPDATE session SET Hits = 53 WHERE Id = 4
+[2011-01-31/17:46:00] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:46:00] mysqlqry | UPDATE session SET LastRequest = 1296492360, Hits = 54 WHERE Id = 4
+[2011-01-31/17:46:00] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:46:00] mysqlqry | UPDATE session SET Hits = 55 WHERE Id = 4
+[2011-01-31/17:46:00] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:46:00] mysqlqry | UPDATE session SET Hits = 56 WHERE Id = 4
+[2011-01-31/17:46:29] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:46:29] mysqlqry | UPDATE session SET LastRequest = 1296492389, Hits = 57 WHERE Id = 4
+[2011-01-31/17:47:35] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:35] mysqlqry | UPDATE session SET LastRequest = 1296492455, Hits = 58 WHERE Id = 4
+[2011-01-31/17:47:36] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:36] mysqlqry | UPDATE session SET LastRequest = 1296492456, Hits = 59 WHERE Id = 4
+[2011-01-31/17:47:36] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:36] mysqlqry | UPDATE session SET Hits = 60 WHERE Id = 4
+[2011-01-31/17:47:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:37] mysqlqry | UPDATE session SET LastRequest = 1296492457, Hits = 61 WHERE Id = 4
+[2011-01-31/17:47:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:37] mysqlqry | UPDATE session SET Hits = 62 WHERE Id = 4
+[2011-01-31/17:47:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:37] mysqlqry | UPDATE session SET Hits = 63 WHERE Id = 4
+[2011-01-31/17:47:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:37] mysqlqry | UPDATE session SET Hits = 64 WHERE Id = 4
+[2011-01-31/17:47:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:37] mysqlqry | UPDATE session SET Hits = 65 WHERE Id = 4
+[2011-01-31/17:47:37] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:37] mysqlqry | UPDATE session SET Hits = 66 WHERE Id = 4
+[2011-01-31/17:47:38] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:38] mysqlqry | UPDATE session SET Hits = 67 WHERE Id = 4
+[2011-01-31/17:47:52] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:52] mysqlqry | UPDATE session SET LastRequest = 1296492472, Hits = 68 WHERE Id = 4
+[2011-01-31/17:47:53] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:53] mysqlqry | UPDATE session SET LastRequest = 1296492473, Hits = 69 WHERE Id = 4
+[2011-01-31/17:47:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:47:54] mysqlqry | UPDATE session SET LastRequest = 1296492474, Hits = 70 WHERE Id = 4
+[2011-01-31/17:49:44] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:44] mysqlqry | UPDATE session SET LastRequest = 1296492584, Hits = 71 WHERE Id = 4
+[2011-01-31/17:49:46] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:46] mysqlqry | UPDATE session SET LastRequest = 1296492586, Hits = 72 WHERE Id = 4
+[2011-01-31/17:49:47] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:47] mysqlqry | UPDATE session SET LastRequest = 1296492587, Hits = 73 WHERE Id = 4
+[2011-01-31/17:49:48] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:48] mysqlqry | UPDATE session SET LastRequest = 1296492588, Hits = 74 WHERE Id = 4
+[2011-01-31/17:49:49] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:49] mysqlqry | UPDATE session SET LastRequest = 1296492589, Hits = 75 WHERE Id = 4
+[2011-01-31/17:49:49] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:49] mysqlqry | UPDATE session SET Hits = 76 WHERE Id = 4
+[2011-01-31/17:49:50] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:50] mysqlqry | UPDATE session SET LastRequest = 1296492590, Hits = 77 WHERE Id = 4
+[2011-01-31/17:49:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:51] mysqlqry | UPDATE session SET LastRequest = 1296492591, Hits = 78 WHERE Id = 4
+[2011-01-31/17:49:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:51] mysqlqry | UPDATE session SET Hits = 79 WHERE Id = 4
+[2011-01-31/17:49:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:51] mysqlqry | UPDATE session SET Hits = 80 WHERE Id = 4
+[2011-01-31/17:49:51] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:51] mysqlqry | UPDATE session SET Hits = 81 WHERE Id = 4
+[2011-01-31/17:49:52] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:52] mysqlqry | UPDATE session SET LastRequest = 1296492592, Hits = 82 WHERE Id = 4
+[2011-01-31/17:49:52] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:52] mysqlqry | UPDATE session SET Hits = 83 WHERE Id = 4
+[2011-01-31/17:49:52] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:52] mysqlqry | UPDATE session SET Hits = 84 WHERE Id = 4
+[2011-01-31/17:49:54] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:49:54] mysqlqry | UPDATE session SET LastRequest = 1296492594, Hits = 85 WHERE Id = 4
+[2011-01-31/17:55:03] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:55:03] mysqlqry | UPDATE session SET LastRequest = 1296492903, Hits = 86 WHERE Id = 4
+[2011-01-31/17:59:36] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:59:36] mysqlqry | UPDATE session SET LastRequest = 1296493176, Hits = 87 WHERE Id = 4
+[2011-01-31/17:59:39] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:59:39] mysqlqry | UPDATE session SET LastRequest = 1296493179, Hits = 88 WHERE Id = 4
+[2011-01-31/17:59:42] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/17:59:42] mysqlqry | UPDATE session SET LastRequest = 1296493182, Hits = 89 WHERE Id = 4
+[2011-01-31/18:00:25] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:25] mysqlqry | UPDATE session SET LastRequest = 1296493225, Hits = 90 WHERE Id = 4
+[2011-01-31/18:00:27] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:27] mysqlqry | UPDATE session SET LastRequest = 1296493227, Hits = 91 WHERE Id = 4
+[2011-01-31/18:00:30] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:30] mysqlqry | UPDATE session SET LastRequest = 1296493230, Hits = 92 WHERE Id = 4
+[2011-01-31/18:00:34] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:34] mysqlqry | UPDATE session SET LastRequest = 1296493234, Hits = 93 WHERE Id = 4
+[2011-01-31/18:00:35] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:35] mysqlqry | UPDATE session SET LastRequest = 1296493235, Hits = 94 WHERE Id = 4
+[2011-01-31/18:00:35] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:35] mysqlqry | UPDATE session SET Hits = 95 WHERE Id = 4
+[2011-01-31/18:00:36] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:36] mysqlqry | UPDATE session SET LastRequest = 1296493236, Hits = 96 WHERE Id = 4
+[2011-01-31/18:00:36] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:36] mysqlqry | UPDATE session SET Hits = 97 WHERE Id = 4
+[2011-01-31/18:00:36] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:00:36] mysqlqry | UPDATE session SET Hits = 98 WHERE Id = 4
+[2011-01-31/18:01:06] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:01:06] mysqlqry | UPDATE session SET LastRequest = 1296493266, Hits = 99 WHERE Id = 4
+[2011-01-31/18:01:08] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:01:08] mysqlqry | UPDATE session SET LastRequest = 1296493268, Hits = 100 WHERE Id = 4
+[2011-01-31/18:01:09] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:01:09] mysqlqry | UPDATE session SET LastRequest = 1296493269, Hits = 101 WHERE Id = 4
+[2011-01-31/18:02:27] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:02:27] mysqlqry | UPDATE session SET LastRequest = 1296493347, Hits = 102 WHERE Id = 4
+[2011-01-31/18:02:28] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:02:28] mysqlqry | UPDATE session SET LastRequest = 1296493348, Hits = 103 WHERE Id = 4
+[2011-01-31/18:02:29] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:02:29] mysqlqry | UPDATE session SET LastRequest = 1296493349, Hits = 104 WHERE Id = 4
+[2011-01-31/18:02:30] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:02:30] mysqlqry | UPDATE session SET Hits = 105 WHERE Id = 4
+[2011-01-31/18:04:55] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:04:55] mysqlqry | UPDATE session SET LastRequest = 1296493495, Hits = 106 WHERE Id = 4
+[2011-01-31/18:05:01] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:05:01] mysqlqry | UPDATE session SET LastRequest = 1296493501, Hits = 107 WHERE Id = 4
+[2011-01-31/18:05:02] mysqlqry | SELECT a.Id, a.UserId, a.Ip, a.StartTime, a.LastRequest, a.Hits, a.UserAgent, b.CreationTime, b.CreationIp, b.DeletionId, b.Username, b.Passhash, b.Email FROM session AS a LEFT JOIN user AS b ON a.UserId = b.Id WHERE a.Id = 4
+[2011-01-31/18:05:02] mysqlqry | UPDATE session SET LastRequest = 1296493502, Hits = 108 WHERE Id = 4
