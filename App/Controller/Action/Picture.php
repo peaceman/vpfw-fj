@@ -35,7 +35,11 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                     $im = new Imagick($_FILES['picture']['tmp_name']);
                     $im->setImageFormat('jpg');
                     $im->writeImage('pics/' . $validValues['Md5'] . '.jpg');
-                    //$this->response->addHeader('Location', Vpfw_Router_Http::url('show', 'index'));
+                    if (true == $this->session->isLoggedIn()) {
+                        $this->response->addHeader('Location', Vpfw_Router_Http::url('user', 'uploadedPictures'));
+                    } else {
+                        $this->response->addHeader('Location', Vpfw_Router_Http::url('show', 'index'));
+                    }
                 } catch (ImagickException $e) {
                     $form->addErrorForField('picture', $e->getMessage());
                     $pictureDao->notifyObserver();

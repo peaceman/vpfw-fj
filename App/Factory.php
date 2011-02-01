@@ -46,6 +46,9 @@ class App_Factory {
             case 'PictureComment':
                 return new App_DataMapper_PictureComment(Vpfw_Factory::getDatabase());
                 break;
+            case 'PictureComparison':
+                return new App_DataMapper_PictureComparison(Vpfw_Factory::getDatabase());
+                break;
             default:
                 throw new Vpfw_Exception_Logical('Die Abhängigkeiten des DataMappers mit dem Typ ' . $type . ' konnten nicht aufgelöst werden');
                 break;

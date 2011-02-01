@@ -42,4 +42,13 @@ class App_Validator_Picture {
             throw new Vpfw_Exception_Validation('Der Timestamp ' . $time . ' ist ungültig');
         }
     }
+
+    public function validateSiteHits($hits) {
+        if (false == is_numeric($hits)) {
+            throw new Vpfw_Exception_Validation('Die Angabe der Hits eines Bildes sollte numerisch sein');
+        }
+        if (0 > $hits) {
+            throw new Vpfw_Exception_Validation('Die Angabe der Hits eines Bildes kann nicht negativ sein');
+        }
+    }
 }

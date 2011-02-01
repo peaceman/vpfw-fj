@@ -29,7 +29,7 @@ class Vpfw_Database_MysqlStmt extends Vpfw_Abstract_Loggable {
     }
     
     public function __call($name, $arguments) {
-        return call_user_method_array($name, $this->stmt, $arguments);
+        return call_user_func_array(array($this->stmt, $name), $arguments);
     }
     
     /**
@@ -72,7 +72,7 @@ class Vpfw_Database_MysqlStmt extends Vpfw_Abstract_Loggable {
         array_unshift($args, $this->qry);
         // Allmighty sprintf macht den Rest
         $this->qry = call_user_func_array('sprintf', $args);
-        return call_user_method_array('bind_param', $this->stmt, func_get_args());
+        return call_user_func_array(array($this->stmt, 'bind_param'), func_get_args());
     }
     
     /**

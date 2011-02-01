@@ -7,7 +7,7 @@ class Vpfw_Form_Field_File extends Vpfw_Form_Field {
     }
 
     public function isFilled() {
-        if (true == empty($this->value['name'])) {
+        if (true == empty($this->value['name']) || true == empty($this->value['tmp_name'])) {
             return false;
         } else {
             return true;

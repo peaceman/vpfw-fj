@@ -98,4 +98,8 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
 
         $form->fillView();
     }
+
+    public function uploadedPicturesAction() {
+        $this->view->pictures = Vpfw_Factory::getDataMapper('Picture')->getEntriesByUserId($this->session->getSession()->getUserId());
+    }
 }

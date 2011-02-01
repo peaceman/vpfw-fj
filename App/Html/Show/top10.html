@@ -1,5 +1,5 @@
 <?php $picturePlace = 0; foreach ($this->pictures as $picture): $picturePlace++; ?>
-<img src="pic/<?php HE($picture->getMd5()) ?>" /><br />
+<img width="400" height="400" src="pics/<?php HE($picture->getMd5()) ?>.jpg" /><br />
 Platz Nr.: <?php HE($picturePlace); ?> mit einer Wertung von <?php HE($picture->getRating()) ?>
 <hr />
 <?php endforeach; ?>

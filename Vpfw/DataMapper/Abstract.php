@@ -147,12 +147,13 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
 
         foreach ($this->sqlQueries as $key => &$value) {
             if ('insert' == $key) {
-                $value = str_replace('{Columns}', $columnsWithoutId, $value);
+                $this->sqlQueries['filledInsert'] = str_replace('{Columns}', $columnsWithoutId, $value);
+                $this->sqlQueries['filledInsert'] = str_replace('{Values}', $values, $value);
             } else {
                 $value = str_replace('{Columns}', $columns, $value);
+                $value = str_replace('{Values}', $values, $value);
             }
-            $value = str_replace('{TableName}', $this->tableName, $value);
-            $value = str_replace('{Values}', $values, $value);
+            $value = str_replace('{TableName}', $this->tableName, $value);            
         }
     }
 
@@ -207,22 +208,48 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
     protected function insert(Vpfw_DataObject_Interface $dataObject) {
         $data = $dataObject->exportData(Vpfw_DataObject_Interface::WITHOUT_ID);
         // -1 wegen der id
-        if (count($data) != $dataObject->getCountOfRequiredColumns() - 1) {
+        if (count($data) < $dataObject->getCountOfRequiredColumns() - 1) {
             throw new Vpfw_Exception_Logical('Es wurden nicht alle Eigenschaften des DataObjects gefüllt');
         }
-        $stmt = $this->db->prepare($this->sqlQueries['insert']);
+
         $dataTypes = '';
         $values = array();
-        foreach ($this->dataColumns as $colName => $dataType) {
-            if ($colName != 'Id') {
-                $dataTypes .= $dataType;
-                if (true == array_key_exists($colName, $data)) {
-                    $values[] = $data[$colName];
-                } else {
-                    $values[] = null;
+        if (count($data) == count($this->dataColumns) - 1) {
+            $stmt = $this->db->prepare($this->sqlQueries['filledInsert']);
+            foreach ($this->dataColumns as $colName => $dataType) {
+                if ($colName != 'Id') {
+                    $dataTypes .= $dataType;
+                    if (true == array_key_exists($colName, $data)) {
+                        $values[] = $data[$colName];
+                    } else {
+                        $values[] = null;
+                    }
                 }
             }
+        } else {
+            // Da nicht alle Eigenschaften des DataObjects gefüllt wurden, müssen wir zuerst einen passenden Query erzeugen
+            $columnNames = '';
+            $columnValues = '';
+            $handledColumnCounter = 0;
+            $countData = count($data);
+            foreach ($data as $columnName => $columnValue) {
+                if (false == array_key_exists($columnName, $this->dataColumns)) {
+                    throw new Vpfw_Exception_Logical('Die exportData Methode liefert Spaltennamen die nicht bekannt sind');
+                }
+                $columnNames .= '`' . $columnName . '`';
+                $columnValues .= '?';
+                if ($handledColumnCounter != $countData - 1) {
+                    $columnNames .= ',' . PHP_EOL;
+                    $columnValues .= ',' . PHP_EOL;
+                }
+                $values[] = $columnValue;
+                $dataTypes .= $this->dataColumns[$columnName];
+                $handledColumnCounter++;
+            }
+            $stmt = $this->db->prepare(str_replace('{Values}', $columnValues, str_replace('{Columns}', $columnNames, $this->sqlQueries['insert'])));
         }
+
+
         array_unshift($values, $dataTypes);
         call_user_func_array(array($stmt, 'bind_param'), $values);
         $stmt->execute();

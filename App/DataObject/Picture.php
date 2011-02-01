@@ -63,6 +63,11 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
         return $this->comments;
     }
 
+    public function getNumberOfComments() {
+        return count($this->getComments());
+        //TODO Den DataMappern sollte ein getNumberOfFieldValue spendiert werden
+    }
+
     /**
      * @return string
      */
@@ -74,7 +79,13 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
      * @return int
      */
     public function getGender() {
-        return $this->getData('Gender');
+        $tmpGender = $this->getData('Gender');
+        if (0 === $tmpGender) {
+            return 'male';
+        } elseif (1 === $tmpGender) {
+            return 'female';
+        }
+        return null;
     }
 
     /**
@@ -163,7 +174,14 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
             if (true == $validation) {
                 $this->validator->validateGender($gender);
             }
-            $this->setData('Gender', $gender);
+            switch ($gender) {
+                case 'male':
+                    $this->setData('Gender', 0);
+                    break;
+                case 'female':
+                    $this->setData('Gender', 1);
+                    break;
+            }
         }
     }
 
@@ -217,6 +235,18 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
             }
             $this->setData('SiteHits', $hits);
         }
+    }
+
+    public function increaseSiteHits() {
+        $this->setSiteHits($this->getSiteHits() + 1);
+    }
+
+    public function increaseRating() {
+        $this->setPositiveRating($this->getPositiveRating() + 1);
+    }
+
+    public function decreaseRating() {
+        $this->setNegativeRating($this->getNegativeRating() + 1);
     }
 
     /**

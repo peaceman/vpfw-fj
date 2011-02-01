@@ -2,8 +2,8 @@
 <div class="image-container">
     <img width="300" height="350" src="pics/<?php HE($picture->getMd5()) ?>.jpg" />
     <div class="image-additions">
-        <img class="thumb-up" />
-        <img class="thumb-down" />
+        <a href="<?php HE(Vpfw_Router_Http::url('picture', 'rate', array('cId' => $this->comparisonId, 'pId' => $picture->getId(), 'rating' => 'positive'))); ?>"><img class="thumb-up" /></a>
+        <a href="<?php HE(Vpfw_Router_Http::url('picture', 'rate', array('cId' => $this->comparisonId, 'pId' => $picture->getId(), 'rating' => 'negative'))); ?>"><img class="thumb-down" /></a>
         <div class="image-comments">
             <?php foreach ($picture->getComments() as $comment): ?>
             <div class="image-comment">

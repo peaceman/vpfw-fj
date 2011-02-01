@@ -1,9 +1,9 @@
 # --------------------------------------------------------
-# Host:                         127.0.0.1
-# Server version:               5.1.37-community
-# Server OS:                    Win32
+# Host:                         localhost
+# Server version:               5.1.51-community
+# Server OS:                    Win64
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2011-01-27 17:00:31
+# Date/time:                    2011-02-01 14:51:31
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -11,29 +11,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-# Dumping structure for table fj.comparison_log
-DROP TABLE IF EXISTS `comparison_log`;
-CREATE TABLE IF NOT EXISTS `comparison_log` (
-  `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `PictureId1` int(10) unsigned NOT NULL,
-  `PictureId2` int(10) unsigned NOT NULL,
-  `Time` int(10) unsigned NOT NULL,
-  `SessionId` int(10) unsigned NOT NULL,
-  `Winner` tinyint(3) unsigned NOT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `PictureId1` (`PictureId1`),
-  KEY `PictureId2` (`PictureId2`),
-  KEY `SessionId` (`SessionId`),
-  CONSTRAINT `FK_picture` FOREIGN KEY (`PictureId1`) REFERENCES `picture` (`Id`),
-  CONSTRAINT `FK_picture_2` FOREIGN KEY (`PictureId2`) REFERENCES `picture` (`Id`),
-  CONSTRAINT `FK_session` FOREIGN KEY (`SessionId`) REFERENCES `session` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-# Data exporting was unselected.
-
-
 # Dumping structure for table fj.deletion
-DROP TABLE IF EXISTS `deletion`;
 CREATE TABLE IF NOT EXISTS `deletion` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `SessionId` int(10) unsigned NOT NULL COMMENT 'Wer hat gelöscht?',
@@ -44,11 +22,12 @@ CREATE TABLE IF NOT EXISTS `deletion` (
   CONSTRAINT `FK_deletion_session` FOREIGN KEY (`SessionId`) REFERENCES `session` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.deletion: ~0 rows (approximately)
+/*!40000 ALTER TABLE `deletion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `deletion` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.favorite_comparison
-DROP TABLE IF EXISTS `favorite_comparison`;
 CREATE TABLE IF NOT EXISTS `favorite_comparison` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `PictureId1` int(10) unsigned NOT NULL,
@@ -64,11 +43,12 @@ CREATE TABLE IF NOT EXISTS `favorite_comparison` (
   CONSTRAINT `FK_favorite_comparison_session` FOREIGN KEY (`SessionId`) REFERENCES `session` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.favorite_comparison: ~0 rows (approximately)
+/*!40000 ALTER TABLE `favorite_comparison` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favorite_comparison` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.picture
-DROP TABLE IF EXISTS `picture`;
 CREATE TABLE IF NOT EXISTS `picture` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Md5` char(32) NOT NULL COMMENT 'MD5 Hash des Bildes. Mit diesem Hash wird überprüft, ob sich das Bild bereits auf der Plattform existiert.',
@@ -87,11 +67,12 @@ CREATE TABLE IF NOT EXISTS `picture` (
   CONSTRAINT `FK_picture_deletion` FOREIGN KEY (`DeletionId`) REFERENCES `deletion` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.picture: ~0 rows (approximately)
+/*!40000 ALTER TABLE `picture` DISABLE KEYS */;
+/*!40000 ALTER TABLE `picture` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.picture_comment
-DROP TABLE IF EXISTS `picture_comment`;
 CREATE TABLE IF NOT EXISTS `picture_comment` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `SessionId` int(10) unsigned NOT NULL COMMENT 'In welcher Session wurde dieser Kommentar verfasst?',
@@ -108,11 +89,34 @@ CREATE TABLE IF NOT EXISTS `picture_comment` (
   CONSTRAINT `FK__session` FOREIGN KEY (`SessionId`) REFERENCES `session` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.picture_comment: ~0 rows (approximately)
+/*!40000 ALTER TABLE `picture_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `picture_comment` ENABLE KEYS */;
+
+
+# Dumping structure for table fj.picture_comparison
+CREATE TABLE IF NOT EXISTS `picture_comparison` (
+  `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `PictureId1` int(10) unsigned NOT NULL,
+  `PictureId2` int(10) unsigned NOT NULL,
+  `Time` int(10) unsigned NOT NULL,
+  `SessionId` int(10) unsigned NOT NULL,
+  `Winner` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `PictureId1` (`PictureId1`),
+  KEY `PictureId2` (`PictureId2`),
+  KEY `SessionId` (`SessionId`),
+  CONSTRAINT `FK_picture` FOREIGN KEY (`PictureId1`) REFERENCES `picture` (`Id`),
+  CONSTRAINT `FK_picture_2` FOREIGN KEY (`PictureId2`) REFERENCES `picture` (`Id`),
+  CONSTRAINT `FK_session` FOREIGN KEY (`SessionId`) REFERENCES `session` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Dumping data for table fj.picture_comparison: ~0 rows (approximately)
+/*!40000 ALTER TABLE `picture_comparison` DISABLE KEYS */;
+/*!40000 ALTER TABLE `picture_comparison` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.rbac_object
-DROP TABLE IF EXISTS `rbac_object`;
 CREATE TABLE IF NOT EXISTS `rbac_object` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Default` tinyint(3) unsigned NOT NULL,
@@ -121,11 +125,12 @@ CREATE TABLE IF NOT EXISTS `rbac_object` (
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.rbac_object: ~0 rows (approximately)
+/*!40000 ALTER TABLE `rbac_object` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rbac_object` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.rbac_permission
-DROP TABLE IF EXISTS `rbac_permission`;
 CREATE TABLE IF NOT EXISTS `rbac_permission` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `RoleId` int(10) unsigned NOT NULL,
@@ -138,11 +143,12 @@ CREATE TABLE IF NOT EXISTS `rbac_permission` (
   CONSTRAINT `FK_rbac_permission_rbac_object` FOREIGN KEY (`ObjectId`) REFERENCES `rbac_object` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.rbac_permission: ~0 rows (approximately)
+/*!40000 ALTER TABLE `rbac_permission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rbac_permission` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.rbac_role
-DROP TABLE IF EXISTS `rbac_role`;
 CREATE TABLE IF NOT EXISTS `rbac_role` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(32) NOT NULL,
@@ -150,11 +156,12 @@ CREATE TABLE IF NOT EXISTS `rbac_role` (
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.rbac_role: ~0 rows (approximately)
+/*!40000 ALTER TABLE `rbac_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rbac_role` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.rbac_user2role
-DROP TABLE IF EXISTS `rbac_user2role`;
 CREATE TABLE IF NOT EXISTS `rbac_user2role` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `RoleId` int(10) unsigned NOT NULL,
@@ -166,11 +173,12 @@ CREATE TABLE IF NOT EXISTS `rbac_user2role` (
   CONSTRAINT `FK_rbac_user2role_user` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.rbac_user2role: ~0 rows (approximately)
+/*!40000 ALTER TABLE `rbac_user2role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rbac_user2role` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.ruleviolation
-DROP TABLE IF EXISTS `ruleviolation`;
 CREATE TABLE IF NOT EXISTS `ruleviolation` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `PictureId` int(10) unsigned NOT NULL COMMENT 'Um welches Bild handelt es sich?',
@@ -185,11 +193,12 @@ CREATE TABLE IF NOT EXISTS `ruleviolation` (
   CONSTRAINT `FK_ruleviolation_session` FOREIGN KEY (`SessionId`) REFERENCES `session` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.ruleviolation: ~0 rows (approximately)
+/*!40000 ALTER TABLE `ruleviolation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ruleviolation` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.session
-DROP TABLE IF EXISTS `session`;
 CREATE TABLE IF NOT EXISTS `session` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserId` int(10) unsigned DEFAULT NULL COMMENT 'Optionales Feld',
@@ -203,11 +212,12 @@ CREATE TABLE IF NOT EXISTS `session` (
   CONSTRAINT `FK_session_user` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.session: ~19 rows (approximately)
+/*!40000 ALTER TABLE `session` DISABLE KEYS */;
+/*!40000 ALTER TABLE `session` ENABLE KEYS */;
 
 
 # Dumping structure for table fj.user
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `CreationTime` int(10) unsigned NOT NULL,
@@ -223,7 +233,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   CONSTRAINT `FK_user_deletion` FOREIGN KEY (`DeletionId`) REFERENCES `deletion` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-# Data exporting was unselected.
+# Dumping data for table fj.user: ~2 rows (approximately)
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

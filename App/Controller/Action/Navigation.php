@@ -3,6 +3,10 @@ class App_Controller_Action_Navigation extends Vpfw_Controller_Action_Abstract {
     public function indexAction() {
         $linksArray = array(
             array(
+                'url' => Vpfw_Router_Http::url('show'),
+                'name' => 'Rate',
+            ),
+            array(
                 'url' => Vpfw_Router_Http::url('show', 'top10', array('gender' => 'male')),
                 'name' => 'Top 10 male',
             ),
@@ -25,6 +29,10 @@ class App_Controller_Action_Navigation extends Vpfw_Controller_Action_Abstract {
                 'name' => 'Login',
             );
         } else {
+            $linksArray[] = array(
+                'url' => Vpfw_Router_Http::url('user', 'uploadedPictures'),
+                'name' => 'Show Pictures',
+            );
             $linksArray[] = array(
                 'url' => Vpfw_Router_Http::url('user', 'logout'),
                 'name' => 'Logout',

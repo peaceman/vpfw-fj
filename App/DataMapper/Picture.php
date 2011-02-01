@@ -36,6 +36,29 @@ class App_DataMapper_Picture extends Vpfw_DataMapper_Abstract {
                                             a.SessionId = b.Id
                                         WHERE
                                             a.Id = ?';
+        $this->sqlQueries['getByUserId'] = 'SELECT
+                                                a.Id,
+                                                a.Md5,
+                                                a.Gender,
+                                                a.SessionId,
+                                                a.UploadTime,
+                                                a.SiteHits,
+                                                a.PositiveRating,
+                                                a.NegativeRating,
+                                                a.DeletionId,
+                                                b.UserId AS SesUserId,
+                                                b.Ip AS SesIp,
+                                                b.StartTime AS SesStartTime,
+                                                b.LastRequest AS SesLastRequest,
+                                                b.Hits AS SesHits,
+                                                b.UserAgent AS SesUserAgent
+                                            FROM
+                                                {TableName} AS a
+                                            INNER JOIN
+                                                session AS b ON
+                                                a.SessionId = b.Id
+                                            WHERE
+                                                b.UserId = ?';
         $this->sqlQueries['getByFV'] = 'SELECT
                                             a.Id,
                                             a.Md5,
@@ -174,6 +197,31 @@ class App_DataMapper_Picture extends Vpfw_DataMapper_Abstract {
     public function getTop10ByGender($gender) {
         $stmt = $this->db->prepare($this->sqlQueries['getTop10ByGender']);
         $stmt->bind_param('i', $gender);
+        $stmt->execute();
+        $stmt->store_result();
+        $metaData = $stmt->result_metadata();
+        $params = array();
+        $row = array();
+        while ($field = $metaData->fetch_field()) {
+            $params[] = &$row[$field->name];
+        }
+        call_user_func_array(array($stmt, 'bind_result'), $params);
+
+        $toReturn = array();
+        while ($stmt->fetch()) {
+            if (false == isset($this->cache[$row['Id']])) {
+                $toReturn[] = $this->createEntry($row);
+            } else {
+                $toReturn[] = $this->cache[$row['Id']];
+            }
+        }
+        $stmt->close();
+        return $toReturn;
+    }
+
+    public function getEntriesByUserId($id) {
+        $stmt = $this->db->prepare($this->sqlQueries['getByUserId']);
+        $stmt->bind_param('i', $id);
         $stmt->execute();
         $stmt->store_result();
         $metaData = $stmt->result_metadata();
