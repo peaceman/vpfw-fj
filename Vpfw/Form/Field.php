@@ -12,7 +12,7 @@ class Vpfw_Form_Field {
     protected $name;
 
     /**
-     * Diese Variable gibt Informationen darÃ¼ber, ob dieses Feld
+     * Diese Variable gibt Informationen darüber, ob dieses Feld
      * optional ist oder nicht.
      *
      * @var bool
@@ -73,7 +73,7 @@ class Vpfw_Form_Field {
      */
     public function isFilled() {
         if (false == is_null($this->value)) {
-            if (true == empty($this->value)) {
+            if ('' == $this->value) {
                 return false;
             } else {
                 return true;
@@ -84,9 +84,9 @@ class Vpfw_Form_Field {
     }
 
     /**
-     * Mit dieser Methode hat man die MÃ¶glichkeit, die Validatoren
-     * fÃ¼r dieses Feld in einem Rutsch zu setzen. Sollten diesem Feld
-     * schon Validatoren zugewiesen worden sein, werden diese gelÃ¶scht.
+     * Mit dieser Methode hat man die Möglichkeit, die Validatoren
+     * für dieses Feld in einem Rutsch zu setzen. Sollten diesem Feld
+     * schon Validatoren zugewiesen worden sein, werden diese gelöscht.
      *
      * @param Vpfw_Form_Validator_Interface[] $validators
      * @return Vpfw_Form_Field
@@ -95,7 +95,7 @@ class Vpfw_Form_Field {
         foreach ($validators as $validator) {
             /* @var $validator Vpfw_Form_Validator_Interface */
             if (false == $validator instanceof Vpfw_Form_Validator_Interface) {
-                throw new Vpfw_Exception_InvalidArgument('Ein Element in dem Ã¼bergebenen Array ist kein FormValidator');
+                throw new Vpfw_Exception_InvalidArgument('Ein Element in dem übergebenen Array ist kein FormValidator');
             }
         }
         $this->validators = $validators;
@@ -104,7 +104,7 @@ class Vpfw_Form_Field {
 
     /**
      * Mit dieser Methode kann man einen Validator zu den Validatoren
-     * fÃ¼r dieses Feld hinzufÃ¼gen.
+     * für dieses Feld hinzufügen.
      *
      * @param Vpfw_Form_Validator_Interface $validator
      * @param int $position
@@ -123,9 +123,9 @@ class Vpfw_Form_Field {
     }
 
     /**
-     * Mit dieser Methode hat man die MÃ¶glichkeit, die Filter
-     * fÃ¼r dieses Feld in einem Rutsch zu setzen. Sollten diesem Feld
-     * schon Filter zugewiesen worden sein, werden diese gelÃ¶scht.
+     * Mit dieser Methode hat man die Möglichkeit, die Filter
+     * für dieses Feld in einem Rutsch zu setzen. Sollten diesem Feld
+     * schon Filter zugewiesen worden sein, werden diese gelöscht.
      *
      * @param Vpfw_Form_Filter_Interface[] $filters
      * @return Vpfw_Form_Field
@@ -134,7 +134,7 @@ class Vpfw_Form_Field {
         foreach ($filters as $filter) {
             /* @var $filter Vpfw_Form_Filter_Interface */
             if (false == $filter instanceof Vpfw_Form_Filter_Interface) {
-                throw new Vpfw_Exception_InvalidArgument('Ein Element in dem Ã¼bergebenen Array ist kein FormFilter');
+                throw new Vpfw_Exception_InvalidArgument('Ein Element in dem übergebenen Array ist kein FormFilter');
             }
         }
         $this->filters = $filters;
@@ -143,7 +143,7 @@ class Vpfw_Form_Field {
 
     /**
      * Mit dieser Methode kann man einen Filter zu den Filtern
-     * fÃ¼r dieses Feld hinzufÃ¼gen.
+     * für dieses Feld hinzufügen.
      *
      * @param Vpfw_Form_Filter_Interface $filter
      * @param int $position
@@ -178,13 +178,13 @@ class Vpfw_Form_Field {
     }
     
     /**
-     * FÃ¼hrt die definierten Validatoren aus
+     * Führt die definierten Validatoren aus
      *
      * @return mixed True wenn alle Validierungen ohne Fehler durchgelaufen sind oder ein Array aus Fehlermeldungen der Validatoren
      */
     public function executeValidators() {
         if (true == is_null($this->value)) {
-            throw new Vpfw_Exception_Logical('Die Validatoren sollten nicht ausgefÃ¼hrt werden, wenn das Value sowieso keinen Wert enthÃ¤lt');
+            throw new Vpfw_Exception_Logical('Die Validatoren sollten nicht ausgeführt werden, wenn das Value sowieso keinen Wert enthält');
         }
         $validationErrors = array();
         foreach ($this->validators as $validator) {
@@ -203,7 +203,7 @@ class Vpfw_Form_Field {
      */
     public function executeFilters() {
         if (true == is_null($this->value)) {
-            throw new Vpfw_Exception_Logical('Die Filter sollten nicht ausgefÃ¼hrt werden, wenn das Value sowieso keinen Wert enthÃ¤lt');
+            throw new Vpfw_Exception_Logical('Die Filter sollten nicht ausgeführt werden, wenn das Value sowieso keinen Wert enthält');
         }
         foreach ($this->filters as $filter) {
             $this->value = $filter->run($this->value);

@@ -19,13 +19,34 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
              ->setEnctype('multipart/form-data')
              ->handleRequest();
         
-//        if (true == $form->formWasSent()) {
-//            echo '<pre>';
-//            var_dump($_FILES);
-//            var_dump($form);
-//            var_dump($this->request);
-//            die();
-//        }
+        if (true == $form->formWasSent() && true == $form->isAllValid()) {
+            $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
+            $pictureDao = $pictureMapper->createEntry();
+            /* @var $pictureDao App_DataObject_Picture */
+            $validValues = $form->getValidValues();
+            $validValues['Md5'] = md5_file($validValues['picture']['tmp_name']);
+            $validValues['SessionId'] = $this->session->getSession()->getId();
+            $validValues['UploadTime'] = time();
+            $validValues['DeletionId'] = null;
+            unset($validValues['rights'], $validValues['picture']);
+            $validationResult = $pictureDao->publicate($validValues);
+            if (true === $validationResult) {
+                try {
+                    $im = new Imagick($_FILES['picture']['tmp_name']);
+                    $im->setImageFormat('jpg');
+                    $im->writeImage('pics/' . $validValues['Md5'] . '.jpg');
+                    //$this->response->addHeader('Location', Vpfw_Router_Http::url('show', 'index'));
+                } catch (ImagickException $e) {
+                    $form->addErrorForField('picture', $e->getMessage());
+                    $pictureDao->notifyObserver();
+                }
+            } else {
+                foreach ($validationResult as $error) {
+                    $form->addErrorForForm($error->getMessage());
+                }
+                $pictureDao->notifyObserver();
+            }
+        }
         
         $form->fillView();
     }

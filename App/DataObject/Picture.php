@@ -46,7 +46,10 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
         }
-        $this->data['DeletionId']['required'] = true;
+        $this->data['DeletionId']['required'] = false;
+        $this->data['SiteHits']['required'] = false;
+        $this->data['PositiveRating']['required'] = false;
+        $this->data['NegativeRating']['required'] = false;
         parent::__construct($properties);
     }
 
@@ -181,7 +184,7 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     /**
      * @param App_DataObject_Session
      */
-    public function setSession(App_DataObject_Session $session) {
+    public function setSession($session) {
         $this->session = $session;
         if (true == is_object($session)) {
             if ($this->getSessionId() != $session->getId()) {

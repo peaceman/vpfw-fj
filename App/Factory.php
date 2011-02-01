@@ -9,7 +9,7 @@ class App_Factory {
     public static function getValidator($type) {
         switch ($type) {
             case 'Picture':
-                return new App_Validator_Picture();
+                return new App_Validator_Picture(Vpfw_Factory::getDataMapper('Session'));
                 break;
             case 'Session':
                 return new App_Validator_Session();
@@ -18,7 +18,7 @@ class App_Factory {
                 return new App_Validator_PictureComment();
                 break;
             case 'User':
-                return new App_Validator_User(self::getDataMapper('User'));
+                return new App_Validator_User(Vpfw_Factory::getDataMapper('User'));
                 break;
             default:
                 throw new Vpfw_Exception_Logical('Die Abhängigkeiten des Validators mit dem Typ ' . $type . ' konnten nicht aufgelöst werden');
