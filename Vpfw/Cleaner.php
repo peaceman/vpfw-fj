@@ -16,7 +16,11 @@ class Vpfw_Cleaner {
             if ($actObject instanceof Vpfw_Log_Abstract && $objectCounter != 1) {
                 array_unshift(self::$toClean, $actObject);
             } else {
-                $actObject->clean();
+                try {
+                    $actObject->clean();
+                } catch (Vpfw_Exception_Critical $e) {
+                    echo $e->getMessage();
+                }
                 $objectCounter--;
             }
         }

@@ -165,7 +165,7 @@ class App_DataMapper_Picture extends Vpfw_DataMapper_Abstract {
                                                     a.DeletionId IS NULL AND
                                                     a.Gender = ?
                                                 ORDER BY
-                                                    a.PositiveRating - a.NegativeRating
+                                                    a.PositiveRating - a.NegativeRating DESC
                                                 LIMIT 10';
     }
 

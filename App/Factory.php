@@ -364,6 +364,77 @@ class App_Factory {
                 }
                 return $dataObject;
                 break;
+            case 'PictureComparison';
+                $picture1 = null;
+                $picture2 = null;
+                if (false == is_null($properties)) {
+                    if (true == isset($properties['Pic1Md5'])) {
+                        try {
+                            $picture1 = Vpfw_Factory::getDataMapper('Picture')->getEntryById($properties['PictureId1'], false);
+                        } catch (Vpfw_Exception_OutOfRange $e) {
+                            $picture1 = Vpfw_Factory::getDataMapper('Picture')->createEntry(
+                                    array(
+                                        'Id' => $properties['PictureId1'],
+                                        'Md5' => $properties['Pic1Md5'],
+                                        'Gender' => $properties['Pic1Gender'],
+                                        'SessionId' => $properties['Pic1SessionId'],
+                                        'UploadTime' => $properties['Pic1UploadTime'],
+                                        'SiteHits' => $properties['Pic1SiteHits'],
+                                        'PositiveRating' => $properties['Pic1PositiveRating'],
+                                        'NegativeRating' => $properties['Pic1NegativeRating'],
+                                        'DeletionId' => $properties['Pic1DeletionId'],
+                                    ));
+                        }
+                    }
+
+                    if (true == isset($properties['Pic2Md5'])) {
+                        try {
+                            $picture2 = Vpfw_Factory::getDataMapper('Picture')->getEntryById($properties['PictureId2'], false);
+                        } catch (Vpfw_Exception_OutOfRange $e) {
+                            $picture2 = Vpfw_Factory::getDataMapper('Picture')->createEntry(
+                                    array(
+                                        'Id' => $properties['PictureId2'],
+                                        'Md5' => $properties['Pic2Md5'],
+                                        'Gender' => $properties['Pic2Gender'],
+                                        'SessionId' => $properties['Pic2SessionId'],
+                                        'UploadTime' => $properties['Pic2UploadTime'],
+                                        'SiteHits' => $properties['Pic2SiteHits'],
+                                        'PositiveRating' => $properties['Pic2PositiveRating'],
+                                        'NegativeRating' => $properties['Pic2NegativeRating'],
+                                        'DeletionId' => $properties['Pic2DeletionId'],
+                                    ));
+                        }
+                    }
+
+                    $toUnset = array('Pic1Gender',
+                        'Pic1SessionId',
+                        'Pic1Md5',
+                        'Pic1Gender',
+                        'Pic1UploadTime',
+                        'Pic1SiteHits',
+                        'Pic1PositiveRating',
+                        'Pic1NegativeRating',
+                        'Pic1DeletionId',
+                        'Pic2SessionId',
+                        'Pic2Md5',
+                        'Pic2Gender',
+                        'Pic2UploadTime',
+                        'Pic2SiteHits',
+                        'Pic2PositiveRating',
+                        'Pic2NegativeRating',
+                        'Pic2DeletionId');
+                    foreach ($toUnset as $key) {
+                        unset($properties[$key]);
+                    }
+                }
+                $dataObject = new App_DataObject_PictureComparison(Vpfw_Factory::getDataMapper('Picture'), $properties);
+                if (false == is_null($picture1)) {
+                    $dataObject->setPicture1($picture1);
+                }
+                if (false == is_null($picture2)) {
+                    $dataObject->setPicture2($picture2);
+                }
+                return $dataObject;
             default:
                 throw new Vpfw_Exception_Logical('Die Abhängigkeiten des DataObjects mit dem Typ ' . $type . ' konnten nicht aufgelöst werden');
                 break;

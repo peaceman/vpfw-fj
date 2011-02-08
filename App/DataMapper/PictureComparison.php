@@ -1,18 +1,16 @@
 <?php
 class App_DataMapper_PictureComparison extends Vpfw_DataMapper_Abstract {
     public function fillDetailData() {
-        $this->dataColums = array(
+        $this->dataColumns = array(
             'Id' => 'i',
             'PictureId1' => 'i',
             'PictureId2' => 'i',
-            'Winner' => 'i',
         );
         $this->tableName = 'picture_comparison';
         $this->sqlQueries['getById'] = 'SELECT
                                             a.Id,
                                             a.PictureId1,
                                             a.PictureId2,
-                                            a.Winner,
                                             b.Md5 AS Pic1Md5,
                                             b.Gender AS Pic1Gender,
                                             b.SessionId AS Pic1SessionId,
@@ -38,12 +36,11 @@ class App_DataMapper_PictureComparison extends Vpfw_DataMapper_Abstract {
                                             picture AS c ON
                                             c.Id = a.PictureId2
                                         WHERE
-                                            Id = ?';
+                                            a.Id = ?';
         $this->sqlQueries['getAll'] = 'SELECT
                                             a.Id,
                                             a.PictureId1,
                                             a.PictureId2,
-                                            a.Winner,
                                             b.Md5 AS Pic1Md5,
                                             b.Gender AS Pic1Gender,
                                             b.SessionId AS Pic1SessionId,
@@ -69,6 +66,6 @@ class App_DataMapper_PictureComparison extends Vpfw_DataMapper_Abstract {
                                             picture AS c ON
                                             c.Id = a.PictureId2
                                         WHERE
-                                            Id = ?';
+                                            a.Id = ?';
     }
 }

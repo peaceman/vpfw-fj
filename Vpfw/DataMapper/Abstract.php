@@ -148,7 +148,7 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
         foreach ($this->sqlQueries as $key => &$value) {
             if ('insert' == $key) {
                 $this->sqlQueries['filledInsert'] = str_replace('{Columns}', $columnsWithoutId, $value);
-                $this->sqlQueries['filledInsert'] = str_replace('{Values}', $values, $value);
+                $this->sqlQueries['filledInsert'] = str_replace('{Values}', $values, $this->sqlQueries['filledInsert']);
             } else {
                 $value = str_replace('{Columns}', $columns, $value);
                 $value = str_replace('{Values}', $values, $value);

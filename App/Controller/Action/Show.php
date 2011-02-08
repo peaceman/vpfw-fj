@@ -3,9 +3,27 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
     public function indexAction() {
         $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
         $this->view->pictures = $pictureMapper->getTwoRandomPictures(mt_rand(0, 1));
+        $comparisonMapper = Vpfw_Factory::getDataMapper('PictureComparison');
+        $searchArray = array(
+            array(
+                'i|PictureId1|' . $this->view->pictures[0]->getId(),
+                'i|PictureId2|' . $this->view->pictures[1]->getId(),
+            ),
+            array(
+                'i|PictureId1|' . $this->view->pictures[1]->getId(),
+                'i|PictureId2|' . $this->view->pictures[0]->getId(),
+            )
+        );
+        $comparisonDao = $comparisonMapper->getEntriesByFieldValue($searchArray);
+        if (0 == count($comparisonDao)) {
+            $comparisonDao = $comparisonMapper->createEntry(array('PictureId1' => $this->view->pictures[0]->getId(), 'PictureId2' => $this->view->pictures[1]->getId()), true);
+        } else {
+            $comparisonDao = $comparisonDao[0];
+        }
         foreach ($this->view->pictures as $picture) {
             $picture->increaseSiteHits();
         }
+        $this->view->comparisonId = $comparisonDao->getId();
     }
 
     public function top10Action() {
@@ -29,35 +47,5 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
             $genderToShow = mt_rand(0, 1);
         }
         return $genderToShow;
-    }
-
-    public function rate() {
-        if (false == $this->request->issetParameter('cId') ||
-            false == $this->request->issetParameter('pId') ||
-            false == $this->request->issetParameter('rating')) {
-            $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
-        } else {
-            $rating = $this->request->getParameter('rating');
-            if ('positive' !== $rating && 'negative' !== $rating) {
-                $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
-            } else {
-                $comparisonMapper = Vpfw_Factory::getDataMapper('PictureComparison');
-                $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
-                $comparisonDao = null;
-                try {
-                    $comparisonDao = $comparisonMapper->getEntryById($this->request->getParameter('cId'));
-                } catch (Vpfw_Exception_OutOfRange $e) {
-                    $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
-                }
-                if (false == is_null($comparisonDao)) {
-                    if ('positive' == $rating) {
-                        $comparisonDao->setWinnerByPictureId($this->request->getParameter('pId'));
-                    } else {
-                        $comparisonDao->setLoserByPictureId($this->request->getParameter('pId'));
-                    }
-                    $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
-                }
-            }
-        }
     }
 }

@@ -25,8 +25,4 @@ try {
     
 }
 
-try {
-    Vpfw_Cleaner::work();
-} catch (Vpfw_Exception_Critical $e) {
-    echo $e->getMessage();
-}
+Vpfw_Cleaner::work();

@@ -18,7 +18,6 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
             'Id' => null,
             'PictureId1' => null,
             'PictureId2' => null,
-            'Winner' => null,
         );
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
@@ -28,7 +27,7 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
 
     public function getPictureId1() {
         if (true == is_object($this->pictureArray[1])) {
-            return $this->pictureArray[1];
+            return $this->pictureArray[1]->getId();
         } else {
             return $this->getData('PictureId1');
         }
@@ -43,7 +42,7 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
 
     public function getPictureId2() {
         if (true == is_object($this->pictureArray[2])) {
-            return $this->pictureArray[2];
+            return $this->pictureArray[2]->getId();
         } else {
             return $this->getData('PictureId2');
         }
@@ -56,10 +55,6 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
         return $this->pictureArray[2];
     }
 
-    public function getWinner() {
-        return $this->getData('Winner');
-    }
-
     public function setPictureId1($id, $validation = true) {
         if ($this->getPictureId1() != $id) {
             $this->setData('PictureId1', $id);
@@ -69,7 +64,7 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
     public function setPicture1($picture) {
         $this->pictureArray[1] = $picture;
         if (true == is_object($picture)) {
-            if ($this-getPictureId1() != $picture->getId()) {
+            if ($this->getPictureId1() != $picture->getId()) {
                 $this->setData('PictureId1', $picture->getId());
             }
         }
@@ -90,12 +85,6 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
         }
     }
 
-    public function setWinner($picNo, $validation = true) {
-        if ($this->getWinner() != $picNo) {
-            $this->setData('Winner', $picNo);
-        }
-    }
-
     public function setWinnerByPictureId($picId) {
         $winner = null;
         $loser = null;
@@ -105,6 +94,22 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
         } elseif ($picId == $this->getPictureId2()) {
             $winner = $this->getPicture2();
             $loser = $this->getPicture1();
+        } else {
+            return;
+        }
+        $winner->increaseRating();
+        $loser->decreaseRating();
+    }
+
+    public function setLoserByPictureId($picId) {
+        $winner = null;
+        $loser = null;
+        if ($picId == $this->getPictureId1()) {
+            $loser = $this->getPicture1();
+            $winner = $this->getPicture2();
+        } elseif ($picId == $this->getPictureId2()) {
+            $loser = $this->getPicture2();
+            $winner = $this->getPicture1();
         } else {
             return;
         }

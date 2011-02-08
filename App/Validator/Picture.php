@@ -51,4 +51,22 @@ class App_Validator_Picture {
             throw new Vpfw_Exception_Validation('Die Angabe der Hits eines Bildes kann nicht negativ sein');
         }
     }
+
+    public function validatePositiveRating($rating) {
+        if (false == is_numeric($rating)) {
+            throw new Vpfw_Exception_Validation('Das Rating muss numerisch sein');
+        }
+        if (0 > $rating) {
+            throw new Vpfw_Exception_Validation('Das Rating muss einen positiven Wert besitzen');
+        }
+    }
+
+    public function validateNegativeRating($rating) {
+        if (false == is_numeric($rating)) {
+            throw new Vpfw_Exception_Validation('Das Rating muss numerisch sein');
+        }
+        if (0 > $rating) {
+            throw new Vpfw_Exception_Validation('Das Rating muss einen positiven Wert besitzen');
+        }
+    }
 }
