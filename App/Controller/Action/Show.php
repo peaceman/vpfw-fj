@@ -3,27 +3,29 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
     public function indexAction() {
         $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
         $this->view->pictures = $pictureMapper->getTwoRandomPictures(mt_rand(0, 1));
-        $comparisonMapper = Vpfw_Factory::getDataMapper('PictureComparison');
-        $searchArray = array(
-            array(
-                'i|PictureId1|' . $this->view->pictures[0]->getId(),
-                'i|PictureId2|' . $this->view->pictures[1]->getId(),
-            ),
-            array(
-                'i|PictureId1|' . $this->view->pictures[1]->getId(),
-                'i|PictureId2|' . $this->view->pictures[0]->getId(),
-            )
-        );
-        $comparisonDao = $comparisonMapper->getEntriesByFieldValue($searchArray);
-        if (0 == count($comparisonDao)) {
-            $comparisonDao = $comparisonMapper->createEntry(array('PictureId1' => $this->view->pictures[0]->getId(), 'PictureId2' => $this->view->pictures[1]->getId()), true);
-        } else {
-            $comparisonDao = $comparisonDao[0];
+        if (2 == count($this->view->pictures)) {
+            $comparisonMapper = Vpfw_Factory::getDataMapper('PictureComparison');
+            $searchArray = array(
+                array(
+                    'i|PictureId1|' . $this->view->pictures[0]->getId(),
+                    'i|PictureId2|' . $this->view->pictures[1]->getId(),
+                ),
+                array(
+                    'i|PictureId1|' . $this->view->pictures[1]->getId(),
+                    'i|PictureId2|' . $this->view->pictures[0]->getId(),
+                )
+            );
+            $comparisonDao = $comparisonMapper->getEntriesByFieldValue($searchArray);
+            if (0 == count($comparisonDao)) {
+                $comparisonDao = $comparisonMapper->createEntry(array('PictureId1' => $this->view->pictures[0]->getId(), 'PictureId2' => $this->view->pictures[1]->getId()), true);
+            } else {
+                $comparisonDao = $comparisonDao[0];
+            }
+            foreach ($this->view->pictures as $picture) {
+                $picture->increaseSiteHits();
+            }
+            $this->view->comparisonId = $comparisonDao->getId();
         }
-        foreach ($this->view->pictures as $picture) {
-            $picture->increaseSiteHits();
-        }
-        $this->view->comparisonId = $comparisonDao->getId();
     }
 
     public function top10Action() {
