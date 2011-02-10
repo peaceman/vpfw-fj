@@ -1,6 +1,22 @@
 <?php
 class Vpfw_DataObject_Translation extends Vpfw_DataObject_Abstract {
-    public function __construct($properties = null) {
+    /**
+     * @var Vpfw_Validator_Translation
+     */
+    private $validator;
+    
+    /**
+     * @var Vpfw_DataObject_Language
+     */
+    private $language;
+
+    /**
+     *
+     * @param Vpfw_Validator_Translation $validator
+     * @param array $properties
+     */
+    public function __construct(Vpfw_Validator_Translation $validator, $properties = null) {
+        $this->validator = $validator;
         $this->data = array(
             'Id' => null,
             'LanguageId' => null,
@@ -13,7 +29,7 @@ class Vpfw_DataObject_Translation extends Vpfw_DataObject_Abstract {
         parent::__construct($properties);
     }
 
-    public function getLanguageId($id) {
+    public function getLanguageId() {
         if (is_object($this->language)) {
             return $this->language->getId();
         } else {
@@ -36,7 +52,7 @@ class Vpfw_DataObject_Translation extends Vpfw_DataObject_Abstract {
         return $this;
     }
 
-    public function setLanguage(Vpfw_DataObject_Language $language) {
+    public function setLanguage($language) {
         $this->language = $language;
         if (is_object($language)) {
             $this->setData('LanguageId', $language->getId());
@@ -68,5 +84,9 @@ class Vpfw_DataObject_Translation extends Vpfw_DataObject_Abstract {
 
     public function getText() {
         return $this->getData('Text');
+    }
+
+    public function __toString() {
+        return $this->getText();
     }
 }

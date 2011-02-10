@@ -11,10 +11,18 @@ class Vpfw_DataObject_Language extends Vpfw_DataObject_Abstract {
     private $translations;
 
     /**
-     * @param Vpfw_DataMapper_Translation $translationMapper
+     * @var Vpfw_Validator_Language
      */
-    public function __construct(Vpfw_DataMapper_Translation $translationMapper, $properties = null) {
+    private $validator;
+
+    /**
+     * @param Vpwf_Validator_Language $validator
+     * @param Vpfw_DataMapper_Translation $translationMapper
+     * @param array $properties
+     */
+    public function __construct(Vpfw_Validator_Language $validator, Vpfw_DataMapper_Translation $translationMapper, $properties = null) {
         $this->translationMapper = $translationMapper;
+        $this->validator = $validator;
         $this->data = array(
             'Id' => null,
             'ShortName' => null,
@@ -86,7 +94,7 @@ class Vpfw_DataObject_Language extends Vpfw_DataObject_Abstract {
         if (array_key_exists($languageVariable, $this->translations['byLanguageVariable'])) {
             return $this->translations['byLanguageVariable'][$languageVariable];
         } else {
-            false;
+            return false;
         }
     }
 
@@ -99,7 +107,7 @@ class Vpfw_DataObject_Language extends Vpfw_DataObject_Abstract {
         $this->lazyLoadTranslations();
         $translationDao = null;
         if (array_key_exists($languageVariable, $this->translations['byLanguageVariable'])) {
-            $translationDao = $this->translations['byLanguageVariable'];
+            $translationDao = $this->translations['byLanguageVariable'][$languageVariable];
         } else {
             $translationDao = $this->translationMapper->createEntry();
             $translationDao->setLanguageId($this->getId());
@@ -114,7 +122,7 @@ class Vpfw_DataObject_Language extends Vpfw_DataObject_Abstract {
             $translations = $this->translationMapper->getByLanguageId($this->getId());
             foreach ($translations as $translation) {
                 $this->translations['byId'][$translation->getId()] = $translation;
-                $this->translations['byLanguageVariable'][$translation->getName()] = $translation;
+                $this->translations['byLanguageVariable'][$translation->getLanguageVariable()] = $translation;
             }
             $this->lazyLoadState['Translations'] = true;
         }

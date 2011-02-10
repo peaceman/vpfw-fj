@@ -79,6 +79,13 @@ class Vpfw_Factory {
                 break;
             case 'RbacPermission':
                 return self::$objectCache[$classNameIntern] = new Vpfw_Validator_RbacPermission();
+                break;
+            case 'Language':
+                return self::$objectCache[$classNameIntern] = new Vpfw_Validator_Language(self::getDataMapper('Language'));
+                break;
+            case 'Translation':
+                return self::$objectCache[$classNameIntern] = new Vpfw_Validator_Translation(self::getDataMapper('Translation'), self::getDataMapper('Language'));
+                break;
             default:
                 return self::$objectCache[$classNameExtern] = App_Factory::getValidator($type);
         }
@@ -112,6 +119,12 @@ class Vpfw_Factory {
             case 'RbacRole':
                 return self::$objectCache[$classNameIntern] = new Vpfw_DataMapper_RbacRole(self::getDatabase());
                 break;
+            case 'Language':
+                return self::$objectCache[$classNameIntern] = new Vpfw_DataMapper_Language(self::getDatabase());
+                break;
+            case 'Translation':
+                return self::$objectCache[$classNameIntern] = new Vpfw_DataMapper_Translation(self::getDatabase());
+                break;
             default:
                 return self::$objectCache[$classNameExtern] = App_Factory::getDataMapper($type);
         }
@@ -131,6 +144,12 @@ class Vpfw_Factory {
             throw new Vpfw_Exception_Logical('Ein DataObject des Typs ' . $type . ' existiert nicht');
         }
         switch ($type) {
+            case 'Language':
+                return new Vpfw_DataObject_Language(self::getValidator('Language'), self::getDataMapper('Translation'), $properties);
+                break;
+            case 'Translation':
+                return new Vpfw_DataObject_Translation(self::getValidator('Translation'), $properties);
+                break;
             case 'RbacObject':
                 return new Vpfw_DataObject_RbacObject(self::getValidator('RbacObject'), $properties);
                 break;

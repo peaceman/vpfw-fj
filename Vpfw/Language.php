@@ -13,9 +13,8 @@ class Vpfw_Language {
     /**
      * @param Vpfw_Language_Storage_Interface $languageStorage
      */
-    public function __construct(Vpfw_Language_Storage_Interface $languageStorage, $languageToUse) {
+    public function __construct(Vpfw_Language_Storage_Interface $languageStorage) {
         $this->languageStorage = $languageStorage;
-        $this->setLanguageToUse($languageToUse);
     }
 
     /**
@@ -34,9 +33,9 @@ class Vpfw_Language {
      * @param string $language
      * @return Vpfw_Language
      */
-    public function createLanguageAndUseIt($language) {
-        $this->languageStorage->createLanguage($language);
-        $this->languageToUse = $language;
+    public function createLanguageAndUseIt($shortName, $name) {
+        $this->languageStorage->createLanguage($shortName, $name);
+        $this->languageToUse = $shortName;
         return $this;
     }
 
