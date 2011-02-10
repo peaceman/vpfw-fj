@@ -80,7 +80,7 @@ class Vpfw_Factory {
             case 'RbacPermission':
                 return self::$objectCache[$classNameIntern] = new Vpfw_Validator_RbacPermission();
             default:
-               return self::$objectCache[$classNameExtern] = App_Factory::getValidator($type);
+                return self::$objectCache[$classNameExtern] = App_Factory::getValidator($type);
         }
     }
 

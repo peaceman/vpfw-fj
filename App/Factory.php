@@ -6,6 +6,7 @@ class App_Factory {
                                      Vpfw_Factory::getDataMapper('Session'),
                                      $request);
     }
+    
     public static function getValidator($type) {
         switch ($type) {
             case 'Picture':
