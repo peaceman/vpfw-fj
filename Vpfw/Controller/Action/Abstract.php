@@ -37,6 +37,12 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
 
     protected $isExecuted = false;
 
+    protected $renderView = true;
+
+    public function disableViewRendering() {
+        $this->renderView = false;
+    }
+
     /**
      *
      * @param string $name Name der Aktion ohne den Zusatz 'Action'
@@ -51,6 +57,44 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
 
     public function getActionName() {
         return str_replace('Action', '', $this->actionToExecute);
+    }
+
+    /**
+     * Zu beachten ist, dass die ChildController dieses ActionControllers auch
+     * die speziellen Objekte von ihm bekommen werden.
+     *
+     * @param array $environment
+     */
+    public function __construct($environment = null) {
+        if (!is_null($environment)) {
+            if (!is_array($environment)) {
+                throw new Vpfw_Exception_Logical('The environment variable for ActionController has to be null or an array');
+            }
+            foreach ($environment as $envName => $envValue) {
+                switch ($envName) {
+                    case 'request':
+                        if ($envValue instanceof Vpfw_Request_Interface)
+                            $this->request = $envValue;
+                        else
+                            throw new Vpfw_Exception_Logical('The environment variable "request" for an ActionController must be an object that implements Vpfw_Request_Interface');
+                        break;
+                    case 'response':
+                        if ($envValue instanceof Vpfw_Response_Interface)
+                            $this->response = $envValue;
+                        else
+                            throw new Vpfw_Exception_Logical('The environment variable "response" for an ActionController must be an object that implements Vpfw_Response_Interface');
+                        break;
+                    case 'session':
+                        if ($envValue instanceof Vpfw_Auth_Session)
+                            $this->session = $envValue;
+                        else
+                            throw new Vpfw_Exception_Logical('The environment variable "session" for an ActionController must be an object from type Vpfw_Auth_Session');
+                        break;
+                    default:
+                        //TODO implement logging if an unknown variable arises
+                }
+            }
+        }
     }
 
     /**
@@ -80,9 +124,9 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
         if (true == $this->isExecuted) {
             return;
         }
-        $this->request = $request;
-        $this->response = $response;
-        $this->session = $session;
+        $this->request = is_null($this->request) ? $request : $this->request;
+        $this->response = is_null($this->response) ? $response : $this->response;
+        $this->session = is_null($this->session) ? $session : $this->session;
         $this->{$this->actionToExecute}();
         foreach ($this->childControllers as $placeHolderName => &$controller) {
             if (true == is_array($controller)) {
@@ -99,13 +143,17 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
      * @return string
      */
     public function renderView() {
-        foreach ($this->childControllers as $placeHolderName => $controller) {
-            if (false == is_object($controller)) {
-                throw new Vpfw_Exception_Logical('Da die renderView Methode erst nach der execute Methode aufgerufen werden darf, sind eigentlich schon alle ActionController-Informationen dazu genutzt worden, die Objekte zu erzeugen.');
+        if ($this->renderView) {
+            foreach ($this->childControllers as $placeHolderName => $controller) {
+                if (false == is_object($controller)) {
+                    throw new Vpfw_Exception_Logical('Da die renderView Methode erst nach der execute Methode aufgerufen werden darf, sind eigentlich schon alle ActionController-Informationen dazu genutzt worden, die Objekte zu erzeugen.');
+                }
+                $this->view->setVar($placeHolderName, $controller->renderView());
             }
-            $this->view->setVar($placeHolderName, $controller->renderView());
+            return $this->getView()->render();
+        } else {
+            return;
         }
-        return $this->getView()->render();
     }
 
     /**

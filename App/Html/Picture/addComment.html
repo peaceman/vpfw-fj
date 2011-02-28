@@ -1,0 +1,15 @@
+<div class="comment-form">
+    <form name="piccomment" action="<?php HE($this->piccomment['action']) ?>" method="<?php HE($this->piccomment['method']) ?>" enctype="<?php HE($this->piccomment['enctype']) ?>">
+    <?php foreach($this->piccomment['errors'] as $error): ?>
+        <h5>
+        <?php HE($error); ?>
+    </h5>
+    <?php endforeach; ?>
+        Text<br /><textarea name="text"></textarea><br />
+        <input type="hidden" name="form-piccomment" value="lol" /><br />
+        <?php foreach ($this->piccomment['text-errors'] as $error): ?>
+        <?php HE($error); ?><br />
+        <?php endforeach; ?>
+        <input type="submit" />
+    </form>
+</div>

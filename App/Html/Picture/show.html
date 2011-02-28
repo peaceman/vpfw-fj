@@ -1,0 +1,13 @@
+<div class="image-container">
+    <img width="300" height="350" src="pics/<?php HE($this->picture->getMd5()) ?>.jpg" />
+    <div class="image-additions">
+        <div class="image-comments">
+            <?php $this->{'commentForm'}(); ?>
+            <?php foreach ($this->picture->getComments() as $comment): ?>
+            <div class="image-comment">
+                <?php HE($comment->getTime() . ' | ' . $comment->getText()) ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>

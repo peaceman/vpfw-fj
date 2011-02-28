@@ -126,9 +126,9 @@ class App_DataObject_PictureComment extends Vpfw_DataObject_Abstract {
     /**
      * @param App_DataObject_Session $session
      */
-    public function setSession(App_DataObject_Session $session) {
+    public function setSession($session) {
         $this->session = $session;
-        if (true == is_object($session)) {
+        if ($session instanceof App_DataObject_Session) {
             if ($this->getSessionId() != $session->getId()) {
                 $this->setData('SessionId', $session->getId());
             }
@@ -152,9 +152,9 @@ class App_DataObject_PictureComment extends Vpfw_DataObject_Abstract {
     /**
      * @param App_DataObject_Picture $picture
      */
-    public function setPicture(App_DataObject_Picture $picture) {
+    public function setPicture($picture) {
         $this->picture = $picture;
-        if (true == is_object($picture)) {
+        if ($picture instanceof App_DataObject_Picture) {
             if ($this->getPictureId() != $picture->getId()) {
                 $this->setData('PictureId', $picture->getId());
             }

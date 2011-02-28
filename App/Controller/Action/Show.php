@@ -21,8 +21,16 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
             } else {
                 $comparisonDao = $comparisonDao[0];
             }
+            $i = 1;
             foreach ($this->view->pictures as $picture) {
                 $picture->increaseSiteHits();
+                /* @var $request Vpfw_Request_Interface */
+                $request = clone $this->request;
+                $request->setParameter('pId', $picture->getId());
+                $request->setParameter('cId', $comparisonDao->getId());
+                $actionController = Vpfw_Factory::getActionController('picture', 'addComment', null, array('request' => $request));
+                $this->addChildController('commentForm' . $i, $actionController);
+                $i++;
             }
             $this->view->comparisonId = $comparisonDao->getId();
         }

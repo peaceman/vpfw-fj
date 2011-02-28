@@ -295,14 +295,15 @@ class Vpfw_Factory {
      * @param string $name
      * @param string $action
      * @param Vpfw_View_Interface $view
+     * @param array $environment Hier können z.B. spezielle Request, Response, Session Objekte gesetzt werden
      * @return Vpfw_Controller_Action_Interface
      */
-    public static function getActionController($name, $action, Vpfw_View_Interface $view = null) {
+    public static function getActionController($name, $action, Vpfw_View_Interface $view = null, $environment = null) {
         $className = 'App_Controller_Action_' . $name;
         if (false == class_exists($className)) {
             throw new Vpfw_Exception_Logical('Ein ActionController mit dem Namen ' . $name . ' existiert nicht');
         }
-        $aC = new $className();
+        $aC = new $className($environment);
         $aC->setActionName($action);
         if (false == is_null($view)) {
             $aC->setView($view);
