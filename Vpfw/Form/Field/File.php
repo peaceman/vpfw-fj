@@ -1,6 +1,6 @@
 <?php
 class Vpfw_Form_Field_File extends Vpfw_Form_Field {
-    private $fileValidators;
+    private $fileValidator;
 
     public function setValue($value) {
         if (true == array_key_exists($this->getName(), $_FILES)) {

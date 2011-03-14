@@ -14,13 +14,13 @@ class Vpfw_Form_Validator_IsNumeric implements Vpfw_Form_Validator_Interface {
         }
         if (false == is_null($this->min)) {
             if ($this->min > $value) {
-                return 'Muss mindestens ' . $this->min . ' Zeichen lang sein';
+                return 'Muss mindestens den Wert ' . $this->min . ' besitzen';
             }
         }
 
         if (false == is_null($this->max)) {
             if ($this->max < $value) {
-                return 'Darf maximal ' . $this->max . ' Zeichen lang sein';
+                return 'Darf maximal den Wert ' . $this->max . ' besitzen';
             }
         }
         return true;

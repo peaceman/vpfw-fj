@@ -30,6 +30,15 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
     protected $session;
 
     /**
+     * In diesem Array werden die DataMapper gecached, die vom
+     * ActionController benötigt werden. Dabei wird der vollständige
+     * Klassenname des DataMappers als Index für das Array benutzt.
+     *
+     * @var Vpfw_DataMapper_Abstract[]
+     */
+    protected $dataMappers = array();
+
+    /**
      * Die Schlüssel dieses Arrays sind die Platzhalter im Template
      * @var array Array aus Namen der ActionController
      */
@@ -41,6 +50,25 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
 
     public function disableViewRendering() {
         $this->renderView = false;
+    }
+
+    protected function needDataMapper($shortMapperName) {
+        $lowerCaseShortMapperName = strtolower($shortMapperName);
+        if (!array_key_exists($lowerCaseShortMapperName, $this->dataMappers)) {
+            $this->dataMappers[$lowerCaseShortMapperName] = Vpfw_Factory::getDataMapper($shortMapperName);
+        }
+    }
+
+    public function __get($variableName) {
+        $regexMatches = array();
+        $nrOfFoundMatches = preg_match('#(.+)Mapper#', $variableName, &$regexMatches);
+        if ($nrOfFoundMatches === 0)
+            return null;
+        list($fullResult, $shortMapperName) = $regexMatches;
+        if (!array_key_exists(strtolower($shortMapperName), $this->dataMappers)) {
+            throw new Vpfw_Exception_Logical('You have to call the needDataMapper method before accessing a DataMapper in an ActionController');
+        }
+        return $this->dataMappers[strtolower($shortMapperName)];
     }
 
     /**

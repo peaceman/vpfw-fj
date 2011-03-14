@@ -30,7 +30,8 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
         $comment->addFilter($whitespaceFilter);
         $comment->setValidators(array($notEmptyValidator, $lengthValidator));
         $form = new Vpfw_Form($this->request, 'piccomment', array($comment), $this->view);
-        $form->setAction(Vpfw_Router_Http::url('picture', 'addComment', array('pId' => $pictureId)))
+        $formAction = Vpfw_Router_Http::url('show', 'index', array('commentedPictureId' => $pictureId, 'comparisonId' => $comparisonId));
+        $form->setAction($formAction)
              ->setMethod('post')
              ->handleRequest();
 

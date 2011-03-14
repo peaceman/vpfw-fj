@@ -1,10 +1,29 @@
 <?php
 class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
+    private function getTwoPictures() {
+        $pictures = array();
+        if ($this->request->issetParameter('comparisonId')) {
+            try {
+                $this->comparisonMapper->getEntryById($this->request->getParameter('comparisonId'));
+            } catch (Vpfw_Exception_OutOfRange $e) {
+                $this->view->addErrorMessage('Ein Bildvergleich mit der Id ' . $this->request->getParameter('comparisonId') . ' existiert nicht.');
+            }
+        }
+        try {
+            if ($this->request->issetParameter('comparisonId')) {
+                $this->comparisonMapper->getEntryById($this->request->getParameter('comparisonId'));
+            }
+        } catch (Vpfw_Exception_OutOfRange $e) {
+
+        }
+    }
+
     public function indexAction() {
-        $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
-        $this->view->pictures = $pictureMapper->getTwoRandomPictures(mt_rand(0, 1));
+        $this->needDataMapper('Picture');
+        $this->needDataMapper('Comparison');
+        $this->view->pictures = $this->getTwoPictures();
+        $this->view->pictures = $this->pictureMapper->getTwoRandomPictures(mt_rand(0, 1));
         if (2 == count($this->view->pictures)) {
-            $comparisonMapper = Vpfw_Factory::getDataMapper('PictureComparison');
             $searchArray = array(
                 array(
                     'i|PictureId1|' . $this->view->pictures[0]->getId(),
@@ -15,9 +34,9 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
                     'i|PictureId2|' . $this->view->pictures[0]->getId(),
                 )
             );
-            $comparisonDao = $comparisonMapper->getEntriesByFieldValue($searchArray);
+            $comparisonDao = $this->comparisonMapper->getEntriesByFieldValue($searchArray);
             if (0 == count($comparisonDao)) {
-                $comparisonDao = $comparisonMapper->createEntry(array('PictureId1' => $this->view->pictures[0]->getId(), 'PictureId2' => $this->view->pictures[1]->getId()), true);
+                $comparisonDao = $this->comparisonMapper->createEntry(array('PictureId1' => $this->view->pictures[0]->getId(), 'PictureId2' => $this->view->pictures[1]->getId()), true);
             } else {
                 $comparisonDao = $comparisonDao[0];
             }
@@ -37,8 +56,8 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
     }
 
     public function top10Action() {
-        $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
-        $this->view->pictures = $pictureMapper->getTop10ByGender($this->getGenderToShow());
+        $this->needDataMapper('Picture');
+        $this->view->pictures = $this->pictureMapper->getTop10ByGender($this->getGenderToShow());
     }
 
     private function getGenderToShow() {
