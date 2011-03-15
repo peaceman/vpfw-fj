@@ -1,5 +1,5 @@
-<form name="picupload" action="<?php HE($this->picupload['action']) ?>" method="<?php HE($this->picupload['method']) ?>" enctype="<?php HE($this->picupload['enctype']) ?>">
-    <?php foreach($this->picupload['errors'] as $error): ?>
+<form name="<?php HE($this->form->getName()) ?>" action="<?php HE($this->form->getAction()) ?>" method="<?php HE($this->form->getMethod()) ?>" enctype="<?php HE($this->form->getEnctype()) ?>">
+    <?php foreach ($this->form->getFormErrors() as $error): ?>
     <h5>
         <?php HE($error); ?>
     </h5>
@@ -10,11 +10,11 @@
                 Geschlecht
             </td>
             <td>
-                <input type="radio" name="gender" value="male" <?php HE($this->picupload['gender-value-male']) ?> /> Männlich<br />
-                <input type="radio" name="gender" value="female" <?php HE($this->picupload['gender-value-female']) ?> /> Weiblich
+                <input type="radio" name="gender" value="male" <?php HE($this->form->getOptionStateForRadioField('gender', 'male')) ?> /> Männlich<br />
+                <input type="radio" name="gender" value="female" <?php HE($this->form->getOptionStateForRadioField('gender', 'female')) ?> /> Weiblich
             </td>
             <td>
-                <?php foreach ($this->picupload['gender-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('gender') as $error): ?>
                 <?php HE($error); ?>
                 <?php endforeach; ?>
             </td>
@@ -27,7 +27,7 @@
                 <input type="checkbox" name="rights" value="accepted" /> Ich akzeptiere die Bedingungen
             </td>
             <td>
-                <?php foreach ($this->picupload['rights-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('rights') as $error): ?>
                 <?php HE($error); ?>
                 <?php endforeach; ?>
             </td>
@@ -40,12 +40,12 @@
                 <input type="file" name="picture" value="meca" />
             </td>
             <td>
-                <?php foreach ($this->picupload['picture-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('picture') as $error): ?>
                 <?php HE($error); ?>
                 <?php endforeach; ?>
             </td>
         </tr>
     </table>
-    <input type="hidden" name="form-picupload" value="lol" />
+    <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol" />
     <input type="submit" />
 </form>

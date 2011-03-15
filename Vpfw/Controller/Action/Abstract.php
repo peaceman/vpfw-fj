@@ -61,7 +61,7 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
 
     public function __get($variableName) {
         $regexMatches = array();
-        $nrOfFoundMatches = preg_match('#(.+)Mapper#', $variableName, &$regexMatches);
+        $nrOfFoundMatches = preg_match('#(.+)Mapper#', $variableName, $regexMatches);
         if ($nrOfFoundMatches === 0)
             return null;
         list($fullResult, $shortMapperName) = $regexMatches;

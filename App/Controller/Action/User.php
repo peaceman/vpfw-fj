@@ -23,7 +23,8 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
         $form->setAction(Vpfw_Router_Http::url('user', 'login'));
         $form->setMethod('POST');
         $form->handleRequest();
-
+        $this->view->form = $form;
+        
         if (true == $form->formWasSent() && true == $form->isAllValid()) {
             $validValues = $form->getValidValues();
             $loginState = $this->session->login($validValues['username'], $validValues['password']);
@@ -33,8 +34,6 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
                 $form->addErrorForForm('Login fehlgeschlagen');
             }
         }
-
-        $form->fillView();
     }
 
     public function logoutAction() {
@@ -73,6 +72,7 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
         $form->setAction(Vpfw_Router_Http::url('user', 'register'));
         $form->setMethod('POST');
         $form->handleRequest();
+        $this->view->form = $form;
 
         if (true == $form->formWasSent() && true == $form->isAllValid()) {
             $userMapper = Vpfw_Factory::getDataMapper('User');
@@ -95,8 +95,6 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
                 $userDao->notifyObserver();
             }
         }
-
-        $form->fillView();
     }
 
     public function uploadedPicturesAction() {

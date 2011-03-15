@@ -28,15 +28,20 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
 
     private function getRandomComparison() {
         $pictures = $this->pictureMapper->getTwoRandomPictures(mt_rand(0, 1));
+        if (count($pictures) !=  2) {
+            $this->view->setContent('Es konnten keine 2 Bilder ermittelt werden, wahrscheinlich existieren noch nicht genügend Bilder in der Datenbank');
+            throw new Vpfw_Exception_Interrupt();
+        }
         $comparison = $this->picturecomparisonMapper->getComparisonByPictureIds($pictures[0]->getId(), $pictures[1]->getId());
         return $comparison;
     }
 
     public function indexAction() {
         $comparison = $this->getComparison();
-        $this->view->pictures = $comparison->getPictures();
+        $pictures = $comparison->getPictures();
+        $this->view->pictures = $pictures;
         $i = 1;
-        foreach ($this->view->pictures as $picture) {
+        foreach ($pictures as $picture) {
             $picture->increaseSiteHits();
             /* @var $request Vpfw_Request_Interface */
             $request = clone $this->request;

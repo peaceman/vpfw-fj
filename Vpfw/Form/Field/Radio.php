@@ -9,12 +9,12 @@ class Vpfw_Form_Field_Radio extends Vpfw_Form_Field {
         parent::__construct($name, $required);
     }
 
-    public function fillView() {
-        $viewArray = array();
-        foreach ($this->options as $key => $value) {
-            $viewArray[$this->getName() . '-value-' . $key] = true == $value ? 'checked="checked"' : '';
+    public function getRadioValueForOption($option) {
+        if (array_key_exists($option, $this->options) && $this->options[$option] === true) {
+            return 'checked="checked"';
+        } else {
+            return null;
         }
-        return $viewArray;
     }
 
     public function setValue($value) {

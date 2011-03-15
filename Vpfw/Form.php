@@ -93,6 +93,14 @@ class Vpfw_Form {
             return $this->fields[$fieldName]->getValue();
     }
 
+    public function getOptionStateForRadioField($fieldName, $option) {
+        if ($this->getValueForField($fieldName) == $option) {
+            return 'checked="checked"';
+        } else {
+            return null;
+        }
+    }
+
     /**
      * @return bool
      */
@@ -157,23 +165,6 @@ class Vpfw_Form {
             }
         }
     }
-
-//    public function fillView() {
-//        $viewArray = array();
-//        foreach ($this->fields as $field) {
-//            $fieldViewArray = $field->fillView();
-//            $viewArray = array_merge($viewArray, $fieldViewArray);
-//            $viewArray[$field->getName() . '-errors'] = array();
-//        }
-//        foreach ($this->errorMessages['field'] as $fieldName => $errors) {
-//            $viewArray[$fieldName . '-errors'] = $errors;
-//        }
-//        $viewArray['errors'] = $this->errorMessages['form'];
-//        $viewArray['method'] = $this->method;
-//        $viewArray['action'] = $this->action;
-//        $viewArray['enctype'] = $this->enctype;
-//        $this->view->setVar($this->name, $viewArray);
-//    }
 
     /**
      *

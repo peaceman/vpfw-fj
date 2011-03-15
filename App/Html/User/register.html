@@ -1,5 +1,5 @@
-<form name="register" action="<?php HE($this->register['action']) ?>" method="<?php HE($this->register['method']) ?>">
-    <?php foreach($this->register['errors'] as $error): ?>
+<form name="<?php HE($this->form->getName()) ?>" action="<?php HE($this->form->getAction()) ?>" method="<?php HE($this->form->getMethod()) ?>">
+    <?php foreach($this->form->getFormErrors() as $error): ?>
     <h5>
         <?php HE($error); ?>
     </h5>
@@ -7,41 +7,41 @@
     <table>
         <tr>
             <td>Username</td>
-            <td><input type="text" name="username" value="<?php HE($this->register['username-value']) ?>" /></td>
+            <td><input type="text" name="username" value="<?php HE($this->form->getValueForField('username')) ?>" /></td>
             <td>
-                <?php foreach ($this->register['username-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('username') as $error): ?>
                 <?php HE($error); ?><br />
                 <?php endforeach; ?>
             </td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password" value="<?php HE($this->register['password-value']) ?>" /></td>
+            <td><input type="password" name="password" value="<?php HE($this->form->getValueForField('password')) ?>" /></td>
             <td>
-                <?php foreach ($this->register['password-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('password') as $error): ?>
                 <?php HE($error); ?><br />
                 <?php endforeach; ?>
             </td>
         </tr>
         <tr>
             <td>Password Wdh.:</td>
-            <td><input type="password" name="password2" value="<?php HE($this->register['password2-value']) ?>" /></td>
+            <td><input type="password" name="password2" value="<?php HE($this->form->getValueForField('password2')) ?>" /></td>
             <td>
-                <?php foreach ($this->register['password2-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('password2') as $error): ?>
                 <?php HE($error); ?><br />
                 <?php endforeach; ?>
             </td>
         </tr>
         <tr>
             <td>Email</td>
-            <td><input type="text" name="email" value="<?php HE($this->register['email-value']) ?>" /></td>
+            <td><input type="text" name="email" value="<?php HE($this->form->getValueForField('email')) ?>" /></td>
             <td>
-                <?php foreach ($this->register['email-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('email') as $error): ?>
                 <?php HE($error); ?><br />
                 <?php endforeach; ?>
             </td>
         </tr>
     </table>
-    <input type="hidden" name="form-register" value="sdf"/>
+    <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="sdf"/>
     <input type="submit" />
 </form>

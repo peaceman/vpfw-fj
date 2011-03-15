@@ -1,6 +1,6 @@
 <?php
 class Vpfw_ObserverArray implements ArrayAccess, Iterator, Countable, Vpfw_Interface_Observer {
-    private $storage = array();
+    protected $storage = array();
 
     // Methoden aus dem ArrayAccess Interface
     public function offsetExists($offset) {

@@ -1,5 +1,5 @@
-<form name="login" action="<?php HE($this->login['action']) ?>" method="<?php HE($this->login['method']) ?>" >
-    <?php foreach($this->login['errors'] as $error): ?>
+<form name="<?php HE($this->form->getName()) ?>" action="<?php HE($this->form->getAction()) ?>" method="<?php HE($this->form->getMethod()) ?>" >
+    <?php foreach($this->form->getFormErrors() as $error): ?>
     <h5>
         <?php HE($error); ?>
     </h5>
@@ -10,10 +10,10 @@
                 Username
             </td>
             <td>
-                <input type="text" name="username" value="<?php HE($this->login['username-value']) ?>" />
+                <input type="text" name="username" value="<?php HE($this->form->getValueForField('username')) ?>" />
             </td>
             <td>
-                <?php foreach ($this->login['username-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('username') as $error): ?>
                 <?php HE($error); ?><br />
                 <?php endforeach; ?>
             </td>
@@ -23,15 +23,15 @@
                 Password
             </td>
             <td>
-                <input type="password" name="password" value="<?php HE($this->login['password-value']) ?>" />
+                <input type="password" name="password" value="<?php HE($this->form->getValueForField('password')) ?>" />
             </td>
             <td>
-                <?php foreach ($this->login['password-errors'] as $error): ?>
+                <?php foreach ($this->form->getErrorsForField('password') as $error): ?>
                 <?php HE($error); ?><br />
                 <?php endforeach; ?>
             </td>
         </tr>
     </table>
-    <input type="hidden" name="form-login" value="lol" />
+    <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol" />
     <input type="submit" />
 </form>

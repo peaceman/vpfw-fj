@@ -89,53 +89,6 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
         }
     }
 
-//    public function addCommentAction() {
-//        $pictureId = (int)$this->request->getParameter('commentedPictureId');
-//        $comparisonId = (int)$this->request->getParameter('comparisonId');
-//        $whitespaceFilter = new Vpfw_Form_Filter_TrimSpaces();
-//        $notEmptyValidator = new Vpfw_Form_Validator_NotEmpty();
-//        $lengthValidator = new Vpfw_Form_Validator_Length(3, 255);
-//        $comment = new Vpfw_Form_Field('text');
-//        $comment->addFilter($whitespaceFilter);
-//        $comment->setValidators(array($notEmptyValidator, $lengthValidator));
-//        $form = new Vpfw_Form($this->request, 'piccomment', array($comment), $this->view);
-//        $formAction = Vpfw_Router_Http::url('picture', 'addComment', array('commentedPictureId' => $pictureId, 'comparisonId' => $comparisonId));
-//        $form->setAction($formAction)
-//             ->setMethod('post')
-//             ->handleRequest();
-//
-//        if ($form->formWasSent() && $form->isAllValid()) {
-//            /* @var $pictureMapper Vpfw_DataMapper_Picture */
-//            $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
-//            /* @var $pictureCommentMapper Vpfw_DataMapper_PictureComment */
-//            $pictureCommentMapper = Vpfw_Factory::getDataMapper('PictureComment');
-//            try {
-//                /* @var $picture App_DataObject_Picture */
-//                $picture = $pictureMapper->getEntryById($pictureId);
-//                /* @var $pictureComment App_DataObject_PictureComment */
-//                $pictureComment = $pictureCommentMapper->createEntry();
-//
-//                $validValues = $form->getValidValues();
-//                $validValues['SessionId'] = $this->session->getSession()->getId();
-//                $validValues['Time'] = time();
-//                $validValues['PictureId'] = $picture->getId();
-//
-//                $validationResult = $pictureComment->publicate($validValues);
-//                if (true === $validationResult) {
-//                    $this->response->addHeader('Location', Vpfw_Router_Http::url('picture', 'show', array('pId' => $picture->getId())));
-//                } else {
-//                    foreach ($validationResult as $error) {
-//                        $form->addErrorForForm($error->getMessage());
-//                    }
-//                    $pictureComment->notifyObserver();
-//                }
-//            } catch (Vpfw_Exception_OutOfRange $e) {
-//                $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
-//            }
-//        }
-//        $form->fillView();
-//    }
-
     public function uploadAction() {
         $genderField = new Vpfw_Form_Field_Radio('gender', array('male', 'female'));
         $rightsField = new Vpfw_Form_Field('rights');
@@ -150,6 +103,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
              ->setMethod('POST')
              ->setEnctype('multipart/form-data')
              ->handleRequest();
+        $this->view->form = $form;
         
         if (true == $form->formWasSent() && true == $form->isAllValid()) {
             $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
@@ -183,8 +137,6 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                 $pictureDao->notifyObserver();
             }
         }
-        
-        $form->fillView();
     }
 
     public function rateAction() {

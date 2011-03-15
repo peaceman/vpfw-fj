@@ -207,12 +207,6 @@ class Vpfw_Form_Field {
         return $this;
     }
 
-    public function fillView() {
-        $viewArray = array();
-        $viewArray[$this->getName() . '-value'] = $this->getValue();
-        return $viewArray;
-    }
-
     protected function checkIfValueIsNull() {
         if (true == is_null($this->value)) {
             throw new Vpfw_Exception_Logical('Die Filter/Validatoren sollten nicht ausgeführt werden, wenn das Value sowieso keinen Wert enthält');
