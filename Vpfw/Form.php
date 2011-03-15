@@ -14,11 +14,6 @@ class Vpfw_Form {
     private $request;
 
     /**
-     * @var Vpfw_View_Interface
-     */
-    private $view;
-
-    /**
      * @var array
      */
     private $errorMessages;
@@ -55,9 +50,8 @@ class Vpfw_Form {
      * @param array $fields
      * @param Vpfw_View_Interface $view
      */
-    public function __construct(Vpfw_Request_Interface $request, $name, array $fields, Vpfw_View_Interface $view) {
+    public function __construct(Vpfw_Request_Interface $request, $name, array $fields) {
         $this->request = $request;
-        $this->view = $view;
         $this->name = $name;
         $this->method = 'GET';
         $this->enctype = 'application/x-www-form-urlencoded';
@@ -79,6 +73,24 @@ class Vpfw_Form {
 
     public function addErrorForForm($message) {
         $this->errorMessages['form'][] = $message;
+    }
+
+    public function getFormErrors() {
+        return $this->errorMessages['form'];
+    }
+
+    public function getErrorsForField($fieldName) {
+        if (!array_key_exists($fieldName, $this->errorMessages['field']))
+            return array();
+        else
+            return $this->errorMessages['field'][$fieldName];
+    }
+
+    public function getValueForField($fieldName) {
+        if (!array_key_exists($fieldName, $this->fields))
+            return null;
+        else
+            return $this->fields[$fieldName]->getValue();
     }
 
     /**
@@ -146,22 +158,22 @@ class Vpfw_Form {
         }
     }
 
-    public function fillView() {
-        $viewArray = array();
-        foreach ($this->fields as $field) {
-            $fieldViewArray = $field->fillView();
-            $viewArray = array_merge($viewArray, $fieldViewArray);
-            $viewArray[$field->getName() . '-errors'] = array();
-        }
-        foreach ($this->errorMessages['field'] as $fieldName => $errors) {
-            $viewArray[$fieldName . '-errors'] = $errors;
-        }
-        $viewArray['errors'] = $this->errorMessages['form'];
-        $viewArray['method'] = $this->method;
-        $viewArray['action'] = $this->action;
-        $viewArray['enctype'] = $this->enctype;
-        $this->view->setVar($this->name, $viewArray);
-    }
+//    public function fillView() {
+//        $viewArray = array();
+//        foreach ($this->fields as $field) {
+//            $fieldViewArray = $field->fillView();
+//            $viewArray = array_merge($viewArray, $fieldViewArray);
+//            $viewArray[$field->getName() . '-errors'] = array();
+//        }
+//        foreach ($this->errorMessages['field'] as $fieldName => $errors) {
+//            $viewArray[$fieldName . '-errors'] = $errors;
+//        }
+//        $viewArray['errors'] = $this->errorMessages['form'];
+//        $viewArray['method'] = $this->method;
+//        $viewArray['action'] = $this->action;
+//        $viewArray['enctype'] = $this->enctype;
+//        $this->view->setVar($this->name, $viewArray);
+//    }
 
     /**
      *
@@ -211,5 +223,9 @@ class Vpfw_Form {
 
     public function getEnctype() {
         return $this->enctype;
+    }
+
+    public function getName() {
+        return $this->name;
     }
 }

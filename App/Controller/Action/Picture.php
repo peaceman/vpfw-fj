@@ -1,5 +1,12 @@
 <?php
 class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
+    public function __construct($environment = null) {
+        parent::__construct($environment);
+        $this->needDataMapper('PictureComparison');
+        $this->needDataMapper('PictureComment');
+        $this->needDataMapper('Picture');
+    }
+
     public function indexAction() {
 
     }
@@ -19,53 +26,115 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
             }
         }
     }
+    
+    private function getPictureFromRequestData() {
+        $pictureId = (int)$this->request->getParameter('commentedPictureId');
+        $picture = null;
+        try {
+            $picture = $this->pictureMapper->getEntryById($pictureId);
+        } catch (Vpfw_Exception_OutOfRange $e) {
+            $this->view->setContent('Ein Bild mit der Id ' . HE($pictureId, false) . ' existiert nicht');
+            throw new Vpfw_Exception_Interrupt();
+        }
+        return $picture;
+    }
+    
+    private function getComparisonFromRequestData() {
+        $comparisonId = (int)$this->request->getParameter('comparisonId');
+        $comparison = null;
+        try {
+            $comparison = $this->picturecomparisonMapper->getEntryById($comparisonId);
+        } catch (Vpfw_Exception_OutOfRange $e) {
+            $this->view->setContent('Ein Bildvergleich mit der Id ' . HE($comparisonId, false) . ' existiert nicht');
+            throw new Vpfw_Exception_Interrupt();
+        }
+        return $comparison;
+    }
 
     public function addCommentAction() {
-        $pictureId = (int)$this->request->getParameter('pId');
-        $comparisonId = (int)$this->request->getParameter('cId');
-        $whitespaceFilter = new Vpfw_Form_Filter_TrimSpaces();
-        $notEmptyValidator = new Vpfw_Form_Validator_NotEmpty();
-        $lengthValidator = new Vpfw_Form_Validator_Length(3, 255);
-        $comment = new Vpfw_Form_Field('text');
-        $comment->addFilter($whitespaceFilter);
-        $comment->setValidators(array($notEmptyValidator, $lengthValidator));
-        $form = new Vpfw_Form($this->request, 'piccomment', array($comment), $this->view);
-        $formAction = Vpfw_Router_Http::url('show', 'index', array('commentedPictureId' => $pictureId, 'comparisonId' => $comparisonId));
-        $form->setAction($formAction)
-             ->setMethod('post')
-             ->handleRequest();
+        $picture = $this->getPictureFromRequestData();
+        $comparison = $this->getComparisonFromRequestData();
 
+        $commentField = new Vpfw_Form_Field('text');
+        $commentField->addFilter(new Vpfw_Form_Filter_TrimSpaces())
+                ->addValidator(new Vpfw_Form_Validator_NotEmpty())
+                ->addValidator(new Vpfw_Form_Validator_Length(3, 255));
+
+        $formAction = Vpfw_Router_Http::url('picture', 'addComment', array(
+            'commentedPictureId' => $picture->getId(),
+            'comparisonId' => $comparison->getId())
+        );
+        $form = new Vpfw_Form($this->request, 'piccomment' . $picture->getId(), array($commentField));
+        $form->setAction($formAction)->setMethod('post')->handleRequest();
+        $this->view->setVar('form', $form);
         if ($form->formWasSent() && $form->isAllValid()) {
-            /* @var $pictureMapper Vpfw_DataMapper_Picture */
-            $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
-            /* @var $pictureCommentMapper Vpfw_DataMapper_PictureComment */
-            $pictureCommentMapper = Vpfw_Factory::getDataMapper('PictureComment');
-            try {
-                /* @var $picture App_DataObject_Picture */
-                $picture = $pictureMapper->getEntryById($pictureId);
-                /* @var $pictureComment App_DataObject_PictureComment */
-                $pictureComment = $pictureCommentMapper->createEntry();
+            $pictureComment = $this->picturecommentMapper->createEntry();
 
-                $validValues = $form->getValidValues();
-                $validValues['SessionId'] = $this->session->getSession()->getId();
-                $validValues['Time'] = time();
-                $validValues['PictureId'] = $picture->getId();
+            $validValues = $form->getValidValues();
+            $validValues['SessionId'] = $this->session->getSession()->getId();
+            $validValues['Time'] = time();
+            $validValues['PictureId'] = $picture->getId();
 
-                $validationResult = $pictureComment->publicate($validValues);
-                if (true === $validationResult) {
-                    $this->response->addHeader('Location', Vpfw_Router_Http::url('picture', 'show', array('pId' => $picture->getId())));
-                } else {
-                    foreach ($validationResult as $error) {
-                        $form->addErrorForForm($error->getMessage());
-                    }
-                    $pictureComment->notifyObserver();
-                }
-            } catch (Vpfw_Exception_OutOfRange $e) {
-                $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
+            $validationResult = $pictureComment->publicate($validValues);
+            if (true === $validationResult) {
+                $nextLocation = Vpfw_Router_Http::url('picture', 'show', array('pictureId' => $picture->getId()));
+                $this->response->addHeader('Location', $nextLocation);
+            } else {
+                $pictureComment->notifyObserver();
+                $this->request->setParameter('commentFormErrors', array('commentedPictureId' => $picture->getId(), 'errors' => $validationResult));
+                $this->request->addActionControllerInfo(array('ControllerName' => 'show'));
             }
+        } elseif ($form->formWasSent()) {
+            $this->request->addActionControllerInfo(array('ControllerName' => 'show'));
         }
-        $form->fillView();
     }
+
+//    public function addCommentAction() {
+//        $pictureId = (int)$this->request->getParameter('commentedPictureId');
+//        $comparisonId = (int)$this->request->getParameter('comparisonId');
+//        $whitespaceFilter = new Vpfw_Form_Filter_TrimSpaces();
+//        $notEmptyValidator = new Vpfw_Form_Validator_NotEmpty();
+//        $lengthValidator = new Vpfw_Form_Validator_Length(3, 255);
+//        $comment = new Vpfw_Form_Field('text');
+//        $comment->addFilter($whitespaceFilter);
+//        $comment->setValidators(array($notEmptyValidator, $lengthValidator));
+//        $form = new Vpfw_Form($this->request, 'piccomment', array($comment), $this->view);
+//        $formAction = Vpfw_Router_Http::url('picture', 'addComment', array('commentedPictureId' => $pictureId, 'comparisonId' => $comparisonId));
+//        $form->setAction($formAction)
+//             ->setMethod('post')
+//             ->handleRequest();
+//
+//        if ($form->formWasSent() && $form->isAllValid()) {
+//            /* @var $pictureMapper Vpfw_DataMapper_Picture */
+//            $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
+//            /* @var $pictureCommentMapper Vpfw_DataMapper_PictureComment */
+//            $pictureCommentMapper = Vpfw_Factory::getDataMapper('PictureComment');
+//            try {
+//                /* @var $picture App_DataObject_Picture */
+//                $picture = $pictureMapper->getEntryById($pictureId);
+//                /* @var $pictureComment App_DataObject_PictureComment */
+//                $pictureComment = $pictureCommentMapper->createEntry();
+//
+//                $validValues = $form->getValidValues();
+//                $validValues['SessionId'] = $this->session->getSession()->getId();
+//                $validValues['Time'] = time();
+//                $validValues['PictureId'] = $picture->getId();
+//
+//                $validationResult = $pictureComment->publicate($validValues);
+//                if (true === $validationResult) {
+//                    $this->response->addHeader('Location', Vpfw_Router_Http::url('picture', 'show', array('pId' => $picture->getId())));
+//                } else {
+//                    foreach ($validationResult as $error) {
+//                        $form->addErrorForForm($error->getMessage());
+//                    }
+//                    $pictureComment->notifyObserver();
+//                }
+//            } catch (Vpfw_Exception_OutOfRange $e) {
+//                $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
+//            }
+//        }
+//        $form->fillView();
+//    }
 
     public function uploadAction() {
         $genderField = new Vpfw_Form_Field_Radio('gender', array('male', 'female'));

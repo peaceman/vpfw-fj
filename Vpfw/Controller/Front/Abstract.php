@@ -30,7 +30,11 @@ class Vpfw_Controller_Front_Abstract implements Vpfw_Controller_Front_Interface 
         while (false == $request->isDispatched()) {
             $info = $request->getNextActionControllerInfo();
             $contentActionController = Vpfw_Factory::getActionController($info['ControllerName'], $info['MethodName']);
-            $contentActionController->execute($request, $response, $session);
+            try {
+                $contentActionController->execute($request, $response, $session);
+            } catch (Vpfw_Exception_Interrupt $e) {
+
+            }
         }
         
         $this->layout->addChildController('content', $contentActionController);

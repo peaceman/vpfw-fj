@@ -116,4 +116,8 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
         $winner->increaseRating();
         $loser->decreaseRating();
     }
+
+    public function getPictures() {
+        return array($this->getPicture1(), $this->getPicture2());
+    }
 }

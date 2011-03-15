@@ -66,7 +66,7 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
             return null;
         list($fullResult, $shortMapperName) = $regexMatches;
         if (!array_key_exists(strtolower($shortMapperName), $this->dataMappers)) {
-            throw new Vpfw_Exception_Logical('You have to call the needDataMapper method before accessing a DataMapper in an ActionController');
+            throw new Vpfw_Exception_Logical('You have to call the needDataMapper method before accessing a DataMapper like ' . $shortMapperName . ' in an ActionController');
         }
         return $this->dataMappers[strtolower($shortMapperName)];
     }
@@ -161,7 +161,11 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
                 list($controllerName, $actionName) = $controller;
                 $controller = Vpfw_Factory::getActionController($controllerName, $actionName);
             }
-            $controller->execute($request, $response, $session);
+            try {
+                $controller->execute($request, $response, $session);
+            } catch (Vpfw_Exception_Interrupt $e) {
+                //TODO log exceptions
+            }
         }
         $this->isExecuted = true;
     }

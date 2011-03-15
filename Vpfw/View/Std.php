@@ -3,6 +3,7 @@ class Vpfw_View_Std implements Vpfw_View_Interface {
     private $vars = array();
     private $template;
     public $errors;
+    private $content;
 
     public function __construct($pathToTemplate) {
         $this->template = $pathToTemplate;
@@ -12,9 +13,16 @@ class Vpfw_View_Std implements Vpfw_View_Interface {
         $this->vars[$name] = $value;
     }
 
+    public function setContent($value) {
+        $this->content = $value;
+    }
+
     public function render() {
         ob_start();
-        include $this->template;
+        if (is_null($this->content))
+            include $this->template;
+        else
+            echo $this->content;
         $content = ob_get_contents();
         ob_end_clean();
         return $content;
@@ -38,5 +46,7 @@ class Vpfw_View_Std implements Vpfw_View_Interface {
         $this->setVar($name, $value);
     }
 
-
+    public function addErrorMessage($msg) {
+        $this->errors[] = $msg;
+    }
 }

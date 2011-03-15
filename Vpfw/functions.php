@@ -62,8 +62,12 @@ function singleValueToArray($value) {
     return $value;
 }
 
-function HE($string) {
-    echo htmlentities($string, ENT_COMPAT, 'UTF-8');
+function HE($string, $echo = true) {
+    $escapedValue = htmlentities($string, ENT_COMPAT, 'UTF-8');
+    if ($echo)
+        echo $escapedValue;
+    else
+        return $escapedValue;
 }
 
 // Substring without losing word meaning and

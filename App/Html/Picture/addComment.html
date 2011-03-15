@@ -1,13 +1,13 @@
 <div class="comment-form">
-    <form name="piccomment" action="<?php HE($this->piccomment['action']) ?>" method="<?php HE($this->piccomment['method']) ?>" enctype="<?php HE($this->piccomment['enctype']) ?>">
-    <?php foreach($this->piccomment['errors'] as $error): ?>
+    <form name="<?php HE($this->form->getName()) ?>" action="<?php HE($this->form->getAction()) ?>" method="<?php HE($this->form->getMethod()) ?>" enctype="<?php HE($this->form->getEnctype()) ?>">
+    <?php foreach($this->form->getFormErrors() as $error): ?>
         <h5>
         <?php HE($error); ?>
-    </h5>
+        </h5>
     <?php endforeach; ?>
         Dein Kommentar:<br /><textarea name="text"></textarea><br />
-        <input type="hidden" name="form-piccomment" value="lol" /><br />
-        <?php foreach ($this->piccomment['text-errors'] as $error): ?>
+        <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol" /><br />
+        <?php foreach ($this->form->getErrorsForField('text') as $error): ?>
         <?php HE($error); ?><br />
         <?php endforeach; ?>
         <input type="submit" />

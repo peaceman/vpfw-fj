@@ -68,4 +68,24 @@ class App_DataMapper_PictureComparison extends Vpfw_DataMapper_Abstract {
                                         WHERE
                                             a.Id = ?';
     }
+
+    public function getComparisonByPictureIds($pictureId1, $pictureId2) {
+        $searchArray = array(
+            array(
+                'i|PictureId1|' . $pictureId1,
+                'i|PictureId2|' . $pictureId2,
+            ),
+            array(
+                'i|PictureId1|' . $pictureId2,
+                'i|PictureId2|' . $pictureId1,
+            )
+        );
+        $comparison = $this->getEntriesByFieldValue($searchArray);
+        if (0 == count($comparison)) {
+            $comparison = $this->createEntry(array('PictureId1' => $pictureId1, 'PictureId2' => $pictureId2), true);
+        } else {
+            $comparison = $comparison[0];
+        }
+        return $comparison;
+    }
 }
