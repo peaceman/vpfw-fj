@@ -185,11 +185,15 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
                 $this->cache[$dataObject->getId()] = $dataObject;
             }
         } else {
-            $dataObject = Vpfw_Factory::getDataObject($doName, $parameters);
-            if (true == is_null($parameters)) {
-                $this->toInsert[] = $dataObject;
+            if (isset($this->cache[$parameters['Id']])) {
+                $dataObject = $this->cache[$parameters['Id']];
             } else {
-                $this->cache[$dataObject->getId()] = $dataObject;
+                $dataObject = Vpfw_Factory::getDataObject($doName, $parameters);
+                if (true == is_null($parameters)) {
+                    $this->toInsert[] = $dataObject;
+                } else {
+                    $this->cache[$dataObject->getId()] = $dataObject;
+                }
             }
         }
         return $dataObject;
