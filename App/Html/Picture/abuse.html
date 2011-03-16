@@ -1,0 +1,12 @@
+<?php foreach ($this->form->getFormErrors() as $error): ?>
+<?php HE($error); ?>
+<?php endforeach; ?>
+<form action="<?php HE($this->form->getAction()) ?>" method="<?php HE($this->form->getMethod()) ?>">
+    Beschwerdegrund
+    <textarea name="reason"></textarea>
+    <?php foreach ($this->form->getErrorsForField('reason') as $error): ?>
+    <?php HE($error); ?>
+    <?php endforeach; ?>
+    <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol" />
+    <input type="submit" />
+</form>

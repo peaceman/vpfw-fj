@@ -5,6 +5,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
         $this->needDataMapper('PictureComparison');
         $this->needDataMapper('PictureComment');
         $this->needDataMapper('Picture');
+        $this->needDataMapper('RuleViolation');
     }
 
     public function indexAction() {
@@ -160,6 +161,42 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                     $form->addErrorForForm($error->getMessage());
                 }
                 $pictureDao->notifyObserver();
+            }
+        }
+    }
+
+    public function abuseAction() {
+        $picture = $this->getPictureFromRequestData();
+
+        $reasonField = new Vpfw_Form_Field('reason');
+        $whitespaceFilter = new Vpfw_Form_Filter_TrimSpaces();
+        $notEmptyValidator = new Vpfw_Form_Validator_NotEmpty();
+
+        $reasonField->addValidator($notEmptyValidator)
+                ->addFilter($whitespaceFilter);
+
+        $form = new Vpfw_Form($this->request, 'abuse', array($reasonField));
+        $form->setAction(Vpfw_Router_Http::url('picture', 'abuse', array('commentedPictureId' => $picture->getId())))
+                ->setMethod('post')
+                ->handleRequest();
+
+        $this->view->form = $form;
+        if ($form->formWasSent() && $form->isAllValid()) {
+            $validValues = $form->getValidValues();
+            $ruleViolation = $this->ruleviolationMapper->createEntry();
+
+            $validValues['PictureId'] = $picture->getId();
+            $validValues['SessionId'] = $this->session->getSession()->getId();
+            $validValues['Time'] = time();
+
+            $validationResult = $ruleViolation->publicate($validValues);
+            if (true === $validationResult) {
+                $this->response->addHeader('Location', Vpfw_Router_Http::url('picture', 'show', array('pictureId' => $picture->getId())));
+            } else {
+                foreach ($validationResult as $error) {
+                    $form->addErrorForForm($error->getMessage());
+                }
+                $ruleViolation->notifyObserver();
             }
         }
     }
