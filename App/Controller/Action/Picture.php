@@ -12,17 +12,17 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
     }
 
     public function showAction() {
-        if (!$this->request->issetParameter('pId')) {
+        if (!$this->request->issetParameter('pictureId')) {
             $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
         } else {
             try {
                 $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
-                $picture = $pictureMapper->getEntryById($this->request->getParameter('pId'));
+                $picture = $pictureMapper->getEntryById($this->request->getParameter('pictureId'));
                 $this->view->picture = $picture;
             } catch (Vpfw_Exception_OutOfRange $e) {
+                $this->view->setContent('Ein Bild mit der Id ' . HE($this->request->getParameter('pictureId'), false) . ' konnte nicht gefunden werden');
                 $this->response->setStatus('404');
-                $this->response->setBody('404 Not Found');
-                $this->disableViewRendering();
+                $this->interruptExecution();
             }
         }
     }
@@ -34,7 +34,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
             $picture = $this->pictureMapper->getEntryById($pictureId);
         } catch (Vpfw_Exception_OutOfRange $e) {
             $this->view->setContent('Ein Bild mit der Id ' . HE($pictureId, false) . ' existiert nicht');
-            throw new Vpfw_Exception_Interrupt();
+            $this->interruptExecution();
         }
         return $picture;
     }
@@ -46,7 +46,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
             $comparison = $this->picturecomparisonMapper->getEntryById($comparisonId);
         } catch (Vpfw_Exception_OutOfRange $e) {
             $this->view->setContent('Ein Bildvergleich mit der Id ' . HE($comparisonId, false) . ' existiert nicht');
-            throw new Vpfw_Exception_Interrupt();
+            $this->interruptExecution();
         }
         return $comparison;
     }

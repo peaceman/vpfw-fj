@@ -48,6 +48,11 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
 
     protected $renderView = true;
 
+    public function interruptExecution() {
+        $this->isExecuted = true;
+        throw new Vpfw_Exception_Interrupt();
+    }
+
     public function disableViewRendering() {
         $this->renderView = false;
     }
