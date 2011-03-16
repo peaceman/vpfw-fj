@@ -170,6 +170,16 @@ class App_DataMapper_Picture extends Vpfw_DataMapper_Abstract {
     }
 
     public function getTwoRandomPictures($gender) {
+        if (is_string($gender)) {
+            switch ($gender) {
+                case 'male':
+                    $gender = 0;
+                    break;
+                case 'female':
+                    $gender = 1;
+                    break;
+            }
+        }
         $stmt = $this->db->prepare($this->sqlQueries['get2RndByGender']);
         $stmt->bind_param('i', $gender);
         $stmt->execute();

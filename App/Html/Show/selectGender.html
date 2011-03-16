@@ -1,0 +1,12 @@
+<div class="gender-select">
+    <form name="<?php HE($this->form->getName()) ?>" action="<?php HE($this->form->getAction()) ?>" method="<?php HE($this->form->getMethod()) ?>">
+        Welches Geschlecht möchtest du bewerten?
+        <select name="gender">
+            <option value="random" <?php echo $this->form->getOptionStateForSelectField('gender', 'random') ?>>Zufällig</option>
+            <option value="female" <?php echo $this->form->getOptionStateForSelectField('gender', 'female') ?>>Weiblich</option>
+            <option value="male" <?php echo $this->form->getOptionStateForSelectField('gender', 'male') ?>>Männlich</option>
+        </select>
+        <input type="submit" />
+        <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol"/>
+    </form>
+</div>

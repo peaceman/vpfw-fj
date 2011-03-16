@@ -101,6 +101,14 @@ class Vpfw_Form {
         }
     }
 
+    public function getOptionStateForSelectField($fieldName, $option) {
+        if ($this->getValueForField($fieldName) == $option) {
+            return 'selected="selected"';
+        } else {
+            return null;
+        }
+    }
+
     /**
      * @return bool
      */

@@ -144,4 +144,12 @@ class Vpfw_Auth_Session {
     public function logout() {
         $this->createNewSession();
     }
+
+    public function set($name, $value) {
+        $this->storage->set($name, $value);
+    }
+
+    public function get($name) {
+        return $this->storage->get($name);
+    }
 }

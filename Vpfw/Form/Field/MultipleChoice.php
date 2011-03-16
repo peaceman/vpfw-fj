@@ -1,5 +1,5 @@
 <?php
-class Vpfw_Form_Field_Radio extends Vpfw_Form_Field {
+class Vpfw_Form_Field_MultipleChoice extends Vpfw_Form_Field {
     private $options;
 
     public function __construct($name, array $options, $required = true) {
@@ -7,14 +7,6 @@ class Vpfw_Form_Field_Radio extends Vpfw_Form_Field {
             $this->options[$option] = false;
         }
         parent::__construct($name, $required);
-    }
-
-    public function getRadioValueForOption($option) {
-        if (array_key_exists($option, $this->options) && $this->options[$option] === true) {
-            return 'checked="checked"';
-        } else {
-            return null;
-        }
     }
 
     public function setValue($value) {

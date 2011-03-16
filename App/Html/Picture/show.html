@@ -5,7 +5,7 @@
             <?php $this->{'commentForm'}(); ?>
             <?php foreach ($this->picture->getComments() as $comment): ?>
             <div class="image-comment">
-                <?php HE($comment->getTime() . ' | ' . $comment->getText()) ?>
+                <?php HE(date('D M j G:i:s T Y', $comment->getTime()) . ' | ' . $comment->getText()) ?>
             </div>
             <?php endforeach; ?>
         </div>

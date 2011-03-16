@@ -1,5 +1,8 @@
 <table>
-    <?php foreach ($this->pictures as $picture): ?>
+    <?php 
+    foreach ($this->pictures as $picture):
+        $urlToComments = Vpfw_Router_Http::Url('picture', 'show', array('pictureId' => $picture->getId()));
+    ?>
     <tr>
         <td>
             <img src="pics/<?php HE($picture->getMd5()); ?>.jpg" width="100" height="100" />
@@ -16,7 +19,7 @@
                     <?php HE($picture->getNegativeRating()); ?> Negative Bewertungen
                 </li>
                 <li>
-                    <?php HE($picture->getNumberOfComments()); ?> Kommentare
+                    <a href="<?php HE($urlToComments) ?>" ><?php HE($picture->getNumberOfComments()); ?> Kommentare</a>
                 </li>
             </ul>
         </td>

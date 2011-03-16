@@ -19,6 +19,11 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                 $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
                 $picture = $pictureMapper->getEntryById($this->request->getParameter('pictureId'));
                 $this->view->picture = $picture;
+
+                $request = clone $this->request;
+                $request->setParameter('commentedPictureId', $picture->getId());
+                $actionController = Vpfw_Factory::getActionController('picture', 'addComment', null, array('request' => $request));
+                $this->addChildController('commentForm', $actionController);
             } catch (Vpfw_Exception_OutOfRange $e) {
                 $this->view->setContent('Ein Bild mit der Id ' . HE($this->request->getParameter('pictureId'), false) . ' konnte nicht gefunden werden');
                 $this->response->setStatus('404');
@@ -40,13 +45,15 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
     }
     
     private function getComparisonFromRequestData() {
-        $comparisonId = (int)$this->request->getParameter('comparisonId');
         $comparison = null;
-        try {
-            $comparison = $this->picturecomparisonMapper->getEntryById($comparisonId);
-        } catch (Vpfw_Exception_OutOfRange $e) {
-            $this->view->setContent('Ein Bildvergleich mit der Id ' . HE($comparisonId, false) . ' existiert nicht');
-            $this->interruptExecution();
+        if ($this->request->issetParameter('comparisonId')) {
+            $comparisonId = (int)$this->request->getParameter('comparisonId');
+            try {
+                $comparison = $this->picturecomparisonMapper->getEntryById($comparisonId);
+            } catch (Vpfw_Exception_OutOfRange $e) {
+                $this->view->setContent('Ein Bildvergleich mit der Id ' . HE($comparisonId, false) . ' existiert nicht');
+                $this->interruptExecution();
+            }
         }
         return $comparison;
     }
@@ -60,10 +67,17 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                 ->addValidator(new Vpfw_Form_Validator_NotEmpty())
                 ->addValidator(new Vpfw_Form_Validator_Length(3, 255));
 
-        $formAction = Vpfw_Router_Http::url('picture', 'addComment', array(
-            'commentedPictureId' => $picture->getId(),
-            'comparisonId' => $comparison->getId())
-        );
+        if (!is_null($comparison)) {
+            $formAction = Vpfw_Router_Http::url('picture', 'addComment', array(
+                'commentedPictureId' => $picture->getId(),
+                'comparisonId' => $comparison->getId()
+            ));
+        } else {
+            $formAction = Vpfw_Router_Http::url('picture', 'addComment', array(
+                'commentedPictureId' => $picture->getId(),
+            ));
+        }
+        
         $form = new Vpfw_Form($this->request, 'piccomment' . $picture->getId(), array($commentField));
         $form->setAction($formAction)->setMethod('post')->handleRequest();
         $this->view->setVar('form', $form);
@@ -81,16 +95,27 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                 $this->response->addHeader('Location', $nextLocation);
             } else {
                 $pictureComment->notifyObserver();
-                $this->request->setParameter('commentFormErrors', array('commentedPictureId' => $picture->getId(), 'errors' => $validationResult));
-                $this->request->addActionControllerInfo(array('ControllerName' => 'show'));
+                    $this->request->setParameter('commentFormErrors', array('commentedPictureId' => $picture->getId(), 'errors' => $validationResult));
+                if (!is_null($comparison)) {
+                    $this->request->addActionControllerInfo(array('ControllerName' => 'show'));
+                } else {
+                    $this->request->setParameter('pictureId', $picture->getId());
+                    $this->request->addActionControllerInfo(array('ControllerName' => 'picture', 'MethodName' => 'show'));
+                }
+                
             }
         } elseif ($form->formWasSent()) {
-            $this->request->addActionControllerInfo(array('ControllerName' => 'show'));
+            if (!is_null($comparison)) {
+                $this->request->addActionControllerInfo(array('ControllerName' => 'show'));
+            } else {
+                $this->request->setParameter('pictureId', $picture->getId());
+                $this->request->addActionControllerInfo(array('ControllerName' => 'picture', 'MethodName' => 'show'));
+            }
         }
     }
 
     public function uploadAction() {
-        $genderField = new Vpfw_Form_Field_Radio('gender', array('male', 'female'));
+        $genderField = new Vpfw_Form_Field_MultipleChoice('gender', array('male', 'female'));
         $rightsField = new Vpfw_Form_Field('rights');
         $pictureField = new Vpfw_Form_Field_File('picture');
 
