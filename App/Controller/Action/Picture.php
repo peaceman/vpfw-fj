@@ -188,6 +188,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
             $validValues['PictureId'] = $picture->getId();
             $validValues['SessionId'] = $this->session->getSession()->getId();
             $validValues['Time'] = time();
+            $validValues['Handled'] = 0;
 
             $validationResult = $ruleViolation->publicate($validValues);
             if (true === $validationResult) {

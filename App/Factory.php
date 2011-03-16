@@ -21,6 +21,9 @@ class App_Factory {
             case 'User':
                 return new App_Validator_User(Vpfw_Factory::getDataMapper('User'));
                 break;
+            case 'RuleViolation':
+                return new App_Validator_RuleViolation(Vpfw_Factory::getDataMapper('Picture'), Vpfw_Factory::getDataMapper('Session'));
+                break;
             default:
                 throw new Vpfw_Exception_Logical('Die Abhängigkeiten des Validators mit dem Typ ' . $type . ' konnten nicht aufgelöst werden');
         }

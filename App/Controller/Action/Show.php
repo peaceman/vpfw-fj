@@ -33,6 +33,8 @@ class App_Controller_Action_Show extends Vpfw_Controller_Action_Abstract {
         $pictures = $this->pictureMapper->getTwoRandomPictures($gender);
         if (count($pictures) !=  2) {
             $this->view->setContent('Es konnten keine 2 Bilder ermittelt werden, wahrscheinlich existieren noch nicht genügend Bilder in der Datenbank');
+            if ($this->session->get('genderToRate') != 'random')
+                    $this->session->set('genderToRate', 'random');
             $this->interruptExecution();
         }
         $comparison = $this->picturecomparisonMapper->getComparisonByPictureIds($pictures[0]->getId(), $pictures[1]->getId());

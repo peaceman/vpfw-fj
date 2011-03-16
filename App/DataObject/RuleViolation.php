@@ -25,6 +25,7 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
             'Id' => null,
             'PictureId' => null,
             'SessionId' => null,
+            'Time' => null,
             'Handled' => null,
             'Reason' => null,
         );
@@ -63,6 +64,10 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
         }
     }
 
+    public function getTime() {
+        return $this->getData('Time');
+    }
+
     /**
      * @return App_DataObject_Session
      */
@@ -74,7 +79,7 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
      * @return bool
      */
     public function getHandled() {
-        return (bool)$this->getData('Handled');
+        return $this->getData('Handled');
     }
 
     /**
@@ -101,7 +106,7 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
     /**
      * @param App_DataObject_Picture
      */
-    public function setPicture(App_DataObject_Picture $picture) {
+    public function setPicture($picture) {
         $this->picture = $picture;
         if (true == is_object($picture)) {
             $this->setData('PictureId', $picture);
@@ -125,7 +130,7 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
     /**
      * @param App_DataObject_Session
      */
-    public function setSession(App_DataObject_Session $session) {
+    public function setSession($session) {
         $this->session = $session;
         if (true == is_object($session)) {
             $this->setData('SessionId', $session->getId());
@@ -137,11 +142,20 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
      * @param bool $validation
      */
     public function setHandled($handled, $validation = true) {
-        if ($this->getHandled() != $handled) {
+        if ($this->getHandled() !== $handled) {
             if (true == $validation) {
                 $this->validator->validateHandled($handled);
             }
             $this->setData('Handled', $handled);
+        }
+    }
+
+    public function setTime($time, $validation = true) {
+        if ($this->getTime() != $time) {
+            if (true == $validation) {
+                $this->validator->validateTime($time);
+            }
+            $this->setData('Time', $time);
         }
     }
 
