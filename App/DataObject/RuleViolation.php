@@ -16,11 +16,24 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
     private $session;
 
     /**
+     * @var App_DataMapper_Session
+     */
+    private $sessionMapper;
+
+    /**
+     * @var App_DataMapper_Picture
+     */
+    private $pictureMapper;
+
+    /**
      * @param App_Validator_RuleViolation $validator
      * @param array $properties
      */
-    public function __construct(App_Validator_RuleViolation $validator, $properties = null) {
+    public function __construct(App_DataMapper_Session $sessionMapper, App_DataMapper_Picture $pictureMapper, App_Validator_RuleViolation $validator, $properties = null) {
         $this->validator = $validator;
+        $this->sessionMapper = $sessionMapper;
+        $this->pictureMapper = $pictureMapper;
+        
         $this->data = array(
             'Id' => null,
             'PictureId' => null,
@@ -28,6 +41,10 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
             'Time' => null,
             'Handled' => null,
             'Reason' => null,
+        );
+        $this->lazyLoadState = array(
+            'Session' => false,
+            'Picture' => false,
         );
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
@@ -50,7 +67,17 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
      * @return App_DataObject_Picture
      */
     public function getPicture() {
+        if (true == is_null($this->picture)) {
+            $this->lazyLoadPicture();
+        }
         return $this->picture;
+    }
+
+    public function lazyLoadPicture() {
+        if (false === $this->lazyLoadState['Picture']) {
+            $this->picture = $this->pictureMapper->getEntryById($this->getPictureId());
+            $this->lazyLoadState['Picture'] = true;
+        }
     }
 
     /**
@@ -64,15 +91,25 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
         }
     }
 
-    public function getTime() {
-        return $this->getData('Time');
-    }
-
     /**
      * @return App_DataObject_Session
      */
     public function getSession() {
+        if (true == is_null($this->session)) {
+            $this->lazyLoadSession();
+        }
         return $this->session;
+    }
+
+    public function lazyLoadSession() {
+        if (false === $this->lazyLoadState['Session']) {
+            $this->session = $this->sessionMapper->getEntryById($this->getSessionId());
+            $this->lazyLoadState['Session'] = true;
+        }
+    }
+
+    public function getTime() {
+        return $this->getData('Time');
     }
 
     /**
@@ -109,7 +146,8 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
     public function setPicture($picture) {
         $this->picture = $picture;
         if (true == is_object($picture)) {
-            $this->setData('PictureId', $picture);
+            if ($this->getPictureId() != $picture->getId())
+                $this->setData('PictureId', $picture->getId());
         }
     }
 
@@ -133,7 +171,8 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
     public function setSession($session) {
         $this->session = $session;
         if (true == is_object($session)) {
-            $this->setData('SessionId', $session->getId());
+            if ($this->getSessionId() != $session->getId())
+                $this->setData('SessionId', $session->getId());
         }
     }
 

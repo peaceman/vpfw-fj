@@ -86,7 +86,7 @@ abstract class Vpfw_Request_Abstract implements Vpfw_Request_Interface {
         if (false == isset($this->parameters[$name])) {
             return false;
         }
-        if (true == empty($this->parameters[$name])) {
+        if ('' === $this->parameters[$name]) {
             return false;
         }
         return true;

@@ -32,7 +32,7 @@ class App_Validator_RuleViolation {
     }
 
     public function validateHandled($handled) {
-        if ($handled !== 0 && $handled !== 1) {
+        if ($handled != 0 && $handled != 1) {
             throw new Vpfw_Exception_Validation('Der Wert Handled der RuleViolation muss entweder den Wert 0 oder den Wert 1 besitzen');
         }
     }

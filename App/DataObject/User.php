@@ -9,6 +9,11 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @var App_DataObject_Deletion
      */
     private $deletion;
+
+    /**
+     * @var App_DataMapper_Deletion
+     */
+    private $deletionMapper;
     
     /**
      * Befüllen von $this->data und weitergeben der Objekteigenschaften
@@ -16,7 +21,8 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @param App_Validator_User $validator
      * @param array $properties optional 
      */
-    public function __construct(App_Validator_User $validator, $properties = null) {
+    public function __construct(App_DataMapper_Deletion $deletionMapper, App_Validator_User $validator, $properties = null) {
+        $this->deletionMapper = $deletionMapper;
         $this->validator = $validator;
         $this->data = array(
             'Id' => null,
@@ -89,7 +95,17 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @return App_DataObject_Deletion
      */
     public function getDeletion() {
+        if (true == is_null($this->deletion)) {
+            $this->lazyLoadDeletion();
+        }
         return $this->deletion;
+    }
+
+    private function lazyLoadDeletion() {
+        if (false === $this->lazyLoadState['Deletion']) {
+            $this->deletion = $this->deletionMapper->getEntryById($this->getDeletionId());
+            $this->lazyLoadState['Deletion'] = true;
+        }
     }
     
     /**

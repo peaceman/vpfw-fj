@@ -308,7 +308,7 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
         call_user_func_array(array($stmt, 'bind_param'), $values);
         $stmt->execute();
         if (0 == $stmt->affected_rows) {
-            throw new Vpfw_Exception_Critical('Nach einem Update in der Datenbank liegt die Anzahl der veränderten Zeilen bei 0');
+            throw new Vpfw_Exception_Critical('Nach dem Update eines ' . get_class($dataObject) . ' in der Datenbank liegt die Anzahl der veränderten Zeilen bei 0');
         }
         $dataObject->setSomethingChanged(false);
     }

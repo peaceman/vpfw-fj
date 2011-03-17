@@ -1,9 +1,6 @@
 <?php
-$foo = null;
-$foo = is_null($foo) ? 'bar' : $foo;
-$bar = 'foo';
-$bar = is_null($bar) ? 'bar' : $bar;
-echo 'Expected bar: ';
-var_dump($foo);
-echo 'Expected foo: ';
-var_dump($bar);
+$lol = '0';
+echo 'expected true - ';
+var_dump(isset($lol));
+echo 'expected false - ';
+var_dump(empty($lol));

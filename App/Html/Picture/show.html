@@ -1,6 +1,7 @@
 <div class="image-container">
     <img width="300" height="350" src="pics/<?php HE($this->picture->getMd5()) ?>.jpg" />
     <div class="image-additions">
+        <a href="<?php HE(Vpfw_Router_Http::url('picture', 'abuse', array('commentedPictureId' => $this->picture->getId()))) ?>" >Regelverstoß</a>
         <div class="image-comments">
             <?php $this->{'commentForm'}(); ?>
             <?php foreach ($this->picture->getComments() as $comment): ?>

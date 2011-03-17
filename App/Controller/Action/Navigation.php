@@ -37,6 +37,10 @@ class App_Controller_Action_Navigation extends Vpfw_Controller_Action_Abstract {
                 'url' => Vpfw_Router_Http::url('user', 'logout'),
                 'name' => 'Logout',
             );
+            $linksArray[] = array(
+                'url' => Vpfw_Router_Http::url('admin'),
+                'name' => 'Administration',
+            );
         }
         $this->view->links = $linksArray;
     }

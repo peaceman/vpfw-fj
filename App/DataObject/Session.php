@@ -11,12 +11,18 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
     private $user;
 
     /**
+     * @var App_DataMapper_User
+     */
+    private $userMapper;
+
+    /**
      * @param App_Validator_Session $validator
      * @param array $properties
      * @return void
      */
-    public function __construct(App_Validator_Session $validator, $properties = null) {
+    public function __construct(App_DataMapper_User $userMapper, App_Validator_Session $validator, $properties = null) {
         $this->validator = $validator;
+        $this->userMapper = $userMapper;
         $this->data = array(
             'Id' => null,
             'UserId' => null,
@@ -25,6 +31,9 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
             'LastRequest' => null,
             'Hits' => null,
             'UserAgent' => null,
+        );
+        $this->lazyLoadState = array(
+            'User' => false,
         );
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
@@ -48,7 +57,17 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
      * @return App_DataObject_User
      */
     public function getUser() {
+        if (true == is_null($this->user)) {
+            $this->lazyLoadUser();
+        }
         return $this->user;
+    }
+
+    private function lazyLoadUser() {
+        if (false === $this->lazyLoadState['User']) {
+            $this->user = $this->userMapper->getEntryById($this->getUserId());
+            $this->lazyLoadState['User'] = true;
+        }
     }
 
     /**
@@ -113,7 +132,8 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
     public function setUser(App_DataObject_User $user) {
         $this->user = $user;
         if (true == is_object($user)) {
-            $this->setData('UserId', $user->getId());
+            if ($this->getUserId() != $user->getId())
+                $this->setData('UserId', $user->getId());
         }
     }
 

@@ -11,9 +11,19 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     private $session;
 
     /**
+     * @var App_DataMapper_Session
+     */
+    private $sessionMapper;
+
+    /**
      * @var App_DataObject_Deletion
      */
     private $deletion;
+
+    /**
+     * @var App_DataMapper_Deletion
+     */
+    private $deletionMapper;
 
     /**
      * @var App_DataMapper_PictureComment
@@ -29,7 +39,9 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
      * @param App_Validator_Picture $validator
      * @param array $properties
      */
-    public function __construct(App_Validator_Picture $validator, App_DataMapper_PictureComment $commentMapper, $properties = null) {
+    public function __construct(App_DataMapper_Session $sessionMapper, App_DataMapper_Deletion $deletionMapper, App_Validator_Picture $validator, App_DataMapper_PictureComment $commentMapper, $properties = null) {
+        $this->sessionMapper = $sessionMapper;
+        $this->deletionMapper = $deletionMapper;
         $this->validator = $validator;
         $this->commentMapper = $commentMapper;
         $this->data = array(
@@ -42,6 +54,10 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
             'PositiveRating' => null,
             'NegativeRating' => null,
             'DeletionId' => null,
+        );
+        $this->lazyLoadState = array(
+            'Session' => false,
+            'Deletion' => false,
         );
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
@@ -103,7 +119,17 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
      * @return App_DataObject_Session
      */
     public function getSession() {
+        if (true == is_null($this->session)) {
+            $this->lazyLoadSession();
+        }
         return $this->session;
+    }
+
+    private function lazyLoadSession() {
+        if (false === $this->lazyLoadState['Session']) {
+            $this->session = $this->sessionMapper->getEntryById($this->getSessionId());
+            $this->lazyLoadState['Session'] = true;
+        }
     }
 
     /**
@@ -149,7 +175,17 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
      * @return App_DataObject_Deletion
      */
     public function getDeletion() {
+        if (true == is_null($this->deletion)) {
+            $this->lazyLoadDeletion();
+        }
         return $this->deletion;
+    }
+
+    private function lazyLoadDeletion() {
+        if (false === $this->lazyLoadState['Deletion']) {
+            $this->deletion = $this->deletionMapper->getEntryById($this->getDeletionId());
+            $this->lazyLoadState['Deletion'] = true;
+        }
     }
 
     /**

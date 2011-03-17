@@ -1,0 +1,72 @@
+<h3>Neue Regelverstöße</h3>
+<table>
+    <tr>
+        <th>Bild</th>
+        <th>Meldender User</th>
+        <th>Uhrzeit</th>
+        <th>Grund</th>
+        <th>Aktionen</th>
+    </tr>
+    <?php $i = 0; foreach ($this->unhandledRuleViolations as $rV): $p = $rV->getPicture(); $u = $rV->getSession()->getUser(); $i++; ?>
+    <tr>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'picture', array('pictureId' => $p->getId())) ?>">
+               <img height="100px" width="100px" src="pics/<?php echo $p->getMd5() ?>.jpg" />
+            </a>
+        </td>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'user', array('userId' => $u->getId())) ?>" >
+                <?php HE($u->getUsername()) ?>
+            </a>
+        </td>
+        <td>
+            <?php HE($rV->getTime()) ?>
+        </td>
+        <td>
+            <?php HE($rV->getReason()) ?>
+        </td>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'ruleViolation', array('ruleViolationId' => $rV->getId(), 'handledState' => 1)) ?>" >Als erledigt markieren</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+    <tr>
+        <td colspan="5">Keine Einträge vorhanden</td>
+    </tr>
+    <?php endif; ?>
+</table>
+<h3>Erledigte Regelverstöße</h3>
+<table>
+    <tr>
+        <th>Bild</th>
+        <th>Meldender User</th>
+        <th>Uhrzeit</th>
+        <th>Grund</th>
+    </tr>
+    <?php $i = 0; foreach ($this->handledRuleViolations as $rV): $p = $rV->getPicture(); $u = $rV->getSession()->getUser(); $i++; ?>
+    <tr>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'picture', array('pictureId' => $p->getId())) ?>">
+               <img height="100px" width="100px" src="pics/<?php echo $p->getMd5() ?>.jpg" />
+            </a>
+        </td>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'user', array('userId' => $u->getId())) ?>" >
+                <?php HE($u->getUsername()) ?>
+            </a>
+        </td>
+        <td>
+            <?php HE($rV->getTime()) ?>
+        </td>
+        <td>
+            <?php HE($rV->getReason()) ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+    <tr>
+        <td colspan="4">Keine Einträge vorhanden</td>
+    </tr>
+    <?php endif; ?>
+</table>

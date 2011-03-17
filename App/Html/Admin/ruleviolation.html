@@ -1,0 +1,6 @@
+<?php if ($this->handledState == 1): ?>
+Der Regelverstoß wurde als erledigt markiert. <a href="<?php echo $this->undoUrl; ?>">Rückgängig machen</a>
+<?php else: ?>
+Der Regelverstoß wurde als nicht erledigt markiert. <a href="<?php echo $this->undoUrl; ?>">Rückgängig machen</a>
+<?php endif; ?>
+<p><a href="<?php echo Vpfw_Router_Http::url('admin', 'ruleviolations') ?>">Zurück zur Übersicht</a></p>

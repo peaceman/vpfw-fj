@@ -11,18 +11,28 @@ class App_DataObject_Deletion extends Vpfw_DataObject_Abstract {
     private $session;
 
     /**
+     * @var App_DataMapper_Session
+     */
+    private $sessionMapper;
+
+    /**
      * Befüllen von $this->data und weitergeben der Objekteigenschaften an den
      * Parentkonstruktor
      * @param App_Validator_Deletion $validator
      * @param array $properties optional
      */
-    public function __construct(App_Validator_Deletion $validator, $properties = null) {
+    public function __construct(App_DataMapper_Session $sessionMapper, App_Validator_Deletion $validator, $properties = null) {
         $this->validator = $validator;
+        $this->sessionMapper = $sessionMapper;
+        
         $this->data = array(
             'Id' => null,
             'SessionId' => null,
             'Time' => null,
             'Reason' => null
+        );
+        $this->lazyLoadState = array(
+            'Session' => false,
         );
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
@@ -46,7 +56,17 @@ class App_DataObject_Deletion extends Vpfw_DataObject_Abstract {
      * @return App_DataObject_Session
      */
     public function getSession() {
+        if (true == is_null($this->session)) {
+            $this->lazyLoadSession();
+        }
         return $this->session;
+    }
+
+    private function lazyLoadSession() {
+        if (false === $this->lazyLoadState['Session']) {
+            $this->session = $this->sessionMapper->getEntryById($this->getSessionId());
+            $this->lazyLoadState['Session'] = true;
+        }
     }
 
     /**
