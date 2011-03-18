@@ -150,7 +150,7 @@ class App_DataMapper_RuleViolation extends Vpfw_DataMapper_Abstract {
         while ($field = $metaData->fetch_field()) {
             $params[] = &$row[$field->name];
         }
-        call_user_func(array($stmt, 'bind_result'), $params);
+        call_user_func_array(array($stmt, 'bind_result'), $params);
 
         $toReturn = array();
         while ($stmt->fetch()) {

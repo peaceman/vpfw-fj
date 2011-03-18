@@ -92,7 +92,7 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getGender() {
         $tmpGender = $this->getData('Gender');

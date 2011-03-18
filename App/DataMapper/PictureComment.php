@@ -112,4 +112,44 @@ class App_DataMapper_PictureComment extends Vpfw_DataMapper_Abstract {
                                              DeletionId IS NULL AND
                                              {WhereClause}';
     }
+
+    public function getCommentsFromUserId($userId) {
+        $sql = 'SELECT
+                    a.Id,
+                    a.SessionId,
+                    a.PictureId,
+                    a.DeletionId,
+                    a.Time,
+                    a.Text
+                FROM
+                    picture_comment AS a
+                INNER JOIN
+                    session AS b ON
+                    a.SessionId = b.Id
+                INNER JOIN
+                    user AS c ON
+                    b.UserId = c.Id
+                WHERE
+                    c.Id = ?';
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('i', $userId);
+        $stmt->execute();
+        $stmt->store_result();
+
+        $params = array();
+        $row = array();
+        $metaData = $stmt->result_metadata();
+        while ($field = $metaData->fetch_field()) {
+            $params[] = &$row[$field->name];
+        }
+        call_user_func_array(array($stmt, 'bind_result'), $params);
+
+        $toReturn = array();
+        while ($stmt->fetch()) {
+            $toReturn[] = $this->createEntry($row);
+        }
+        $stmt->close();
+        return $toReturn;
+    }
 }

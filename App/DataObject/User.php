@@ -14,6 +14,26 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @var App_DataMapper_Deletion
      */
     private $deletionMapper;
+
+    /**
+     * @var App_DataMapper_Picture
+     */
+    private $pictureMapper;
+
+    /**
+     * @var App_DataObject_Picture[]
+     */
+    private $pictures = array();
+
+    /**
+     * @var App_DataMapper_PictureComment
+     */
+    private $pictureCommentMapper;
+
+    /**
+     * @var App_DataObject_PictureComment[]
+     */
+    private $pictureComments = array();
     
     /**
      * Befüllen von $this->data und weitergeben der Objekteigenschaften
@@ -21,8 +41,10 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @param App_Validator_User $validator
      * @param array $properties optional 
      */
-    public function __construct(App_DataMapper_Deletion $deletionMapper, App_Validator_User $validator, $properties = null) {
+    public function __construct(App_DataMapper_PictureComment $pictureCommentMapper, App_DataMapper_Picture $pictureMapper, App_DataMapper_Deletion $deletionMapper, App_Validator_User $validator, $properties = null) {
+        $this->pictureMapper = $pictureMapper;
         $this->deletionMapper = $deletionMapper;
+        $this->pictureCommentMapper = $pictureCommentMapper;
         $this->validator = $validator;
         $this->data = array(
             'Id' => null,
@@ -33,11 +55,48 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
             'Passhash' => null,
             'Email' => null,
         );
+        $this->lazyLoadState = array(
+            'Deletion' => false,
+            'Pictures' => false,
+            'PictureComments' => false,
+        );
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
         }
         $this->data['DeletionId']['required'] = false;
         parent::__construct($properties);
+    }
+
+    public function getPictures() {
+        if (true == empty($this->pictures)) {
+            $this->lazyLoadPictures();
+        }
+        return $this->pictures;
+    }
+
+    public function getPictureCount() {
+        return count($this->getPictures());
+    }
+
+    public function getPictureComments() {
+        if (true == empty($this->pictureComments)) {
+            $this->lazyLoadPictureComments();
+        }
+        return $this->pictureComments;
+    }
+
+    private function lazyLoadPictureComments() {
+        if (false === $this->lazyLoadState['PictureComments']) {
+            $this->pictureComments = $this->pictureCommentMapper->getCommentsFromUserId($this->getId());
+            $this->lazyLoadState['PictureComments'] = true;
+        }
+    }
+
+    private function lazyLoadPictures() {
+        if (false === $this->lazyLoadState['Pictures']) {
+            $this->pictures = $this->pictureMapper->getEntriesByUserId($this->getId());
+            $this->lazyLoadState['Pictures'] = true;
+        }
     }
     
     /**
@@ -55,7 +114,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      */
     public function getCreationIp() {
         $netIp = $this->getData('CreationIp');
-        return is_null($netIp) ? null : inet_ntop($netIp);
+        return is_null($netIp) ? null : long2ip($netIp);
     }
     
     /**
@@ -130,7 +189,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validateCreationIp($ip);
             }
-            $this->setData('CreationIp', inet_pton($ip));
+            $this->setData('CreationIp', ip2long($ip));
         }
     }
     

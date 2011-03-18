@@ -96,14 +96,14 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                 $this->response->addHeader('Location', $nextLocation);
             } else {
                 $pictureComment->notifyObserver();
-                    $this->request->setParameter('commentFormErrors', array('commentedPictureId' => $picture->getId(), 'errors' => $validationResult));
+                $this->request->setParameter('commentFormErrors', array('commentedPictureId' => $picture->getId(), 'errors' => $validationResult));
+                
                 if (!is_null($comparison)) {
                     $this->request->addActionControllerInfo(array('ControllerName' => 'show'));
                 } else {
                     $this->request->setParameter('pictureId', $picture->getId());
                     $this->request->addActionControllerInfo(array('ControllerName' => 'picture', 'MethodName' => 'show'));
-                }
-                
+                }                
             }
         } elseif ($form->formWasSent()) {
             if (!is_null($comparison)) {

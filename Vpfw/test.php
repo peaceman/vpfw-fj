@@ -1,6 +1,2 @@
 <?php
-$lol = '0';
-echo 'expected true - ';
-var_dump(isset($lol));
-echo 'expected false - ';
-var_dump(empty($lol));
+var_dump(ip2long('127.0.0.1'));

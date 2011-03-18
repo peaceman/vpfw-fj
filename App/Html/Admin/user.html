@@ -1,0 +1,93 @@
+<h3>Benutzerinformationen</h3>
+<table>
+    <tr>
+        <td>Benutzername</td>
+        <td><?php HE($this->user->getUsername()) ?></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td><?php HE($this->user->getEmail()) ?></td>
+    </tr>
+    <tr>
+        <td>Registriert seit</td>
+        <td><?php HE($this->user->getCreationTime()) ?></td>
+    </tr>
+    <tr>
+        <td>Ip bei der Registration</td>
+        <td><?php HE($this->user->getCreationIp()) ?></td>
+    </tr>
+    <tr>
+        <td>Gelöscht?</td>
+        <td><?php echo is_null($this->user->getDeletionId()) ? 'Nein' : 'Ja' ?></td>
+    </tr>
+</table>
+<h3>Bilder des Benutzers</h3>
+<table>
+    <tr>
+        <th>Bild</th>
+        <th>Geschlecht</th>
+        <th>Hochgeladen am</th>
+        <th>Kommentare</th>
+        <th>Hits</th>
+        <th>Rating</th>
+    </tr>
+    <?php $i = 0; foreach ($this->pictures as $p): $i++; ?>
+    <tr>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'picture', array('pictureId' => $p->getId())) ?>">
+               <img height="100px" width="100px" src="pics/<?php echo $p->getMd5() ?>.jpg" />
+            </a>
+        </td>
+        <td>
+            <?php HE($p->getGender()) ?>
+        </td>
+        <td>
+            <?php HE($p->getUploadTime()) ?>
+        </td>
+        <td>
+            <?php HE($p->getNumberOfComments()) ?>
+        </td>
+        <td>
+            <?php HE($p->getSiteHits()) ?>
+        </td>
+        <td>
+            +<?php HE($p->getPositiveRating()) ?> -<?php HE($p->getNegativeRating()) ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+    <tr>
+        <td colspan="6">
+            Dieser Benutzer hat bisher noch keine Bilder hochgeladen
+        </td>
+    </tr>
+    <?php endif; ?>
+</table>
+<h3>Kommentare des Benutzers</h3>
+<table>
+    <tr>
+        <th>Bild</th>
+        <th>Datum</th>
+        <th>Inhalt</th>
+    </tr>
+    <?php $i = 0; foreach ($this->comments as $c): $i++; $p = $c->getPicture(); ?>
+    <tr>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'picture', array('pictureId' => $p->getId())) ?>">
+               <img height="100px" width="100px" src="pics/<?php echo $p->getMd5() ?>.jpg" />
+            </a>
+        </td>
+        <td>
+            <?php HE($c->getTime()); ?>
+        </td>
+        <td>
+            <?php HE($c->getText()); ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+    <tr>
+        <td colspan="3" >Dieser Benutzer hat noch keine Kommentare verfasst</td>
+    </tr>
+    <?php endif; ?>
+</table>

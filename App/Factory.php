@@ -78,7 +78,7 @@ class App_Factory {
                 unset($properties['DelReason']);
             }
         }
-        $dataObject = new App_DataObject_User(Vpfw_Factory::getDataMapper('Deletion'), Vpfw_Factory::getValidator('User'), $properties);
+        $dataObject = new App_DataObject_User(Vpfw_Factory::getDataMapper('PictureComment'), Vpfw_Factory::getDataMapper('Picture'), Vpfw_Factory::getDataMapper('Deletion'), Vpfw_Factory::getValidator('User'), $properties);
         if (false == is_null($deletion)) {
             $dataObject->setDeletion($deletion);
         }

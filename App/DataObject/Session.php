@@ -65,7 +65,11 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
 
     private function lazyLoadUser() {
         if (false === $this->lazyLoadState['User']) {
-            $this->user = $this->userMapper->getEntryById($this->getUserId());
+            try {
+                $this->user = $this->userMapper->getEntryById($this->getUserId());
+            } catch (Vpfw_Exception_OutOfRange $e) {
+                $this->user = null;
+            }
             $this->lazyLoadState['User'] = true;
         }
     }
@@ -130,11 +134,11 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
      * @return void
      */
     public function setUser(App_DataObject_User $user) {
-        $this->user = $user;
         if (true == is_object($user)) {
             if ($this->getUserId() != $user->getId())
                 $this->setData('UserId', $user->getId());
         }
+        $this->user = $user;
     }
 
     /**

@@ -1,0 +1,28 @@
+<table>
+    <tr>
+        <th>Benutzername</th>
+        <th>Registrationsdatum</th>
+        <th>Bilder</th>
+        <th>Aktionen</th>
+    </tr>
+    <?php foreach ($this->users as $user): ?>
+    <tr>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'user', array('userId' => $user->getId())) ?>" >
+                <?php HE($user->getUsername()); ?>
+            </a>
+        </td>
+        <td>
+            <?php HE($user->getCreationTime()); ?>
+        </td>
+        <td>
+            <?php HE($user->getPictureCount()); ?>
+        </td>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'userDel', array('userId' => $user->getId())) ?>" >
+                Löschen
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
