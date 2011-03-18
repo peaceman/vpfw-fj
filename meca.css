@@ -17,6 +17,7 @@ body {
 	height: 105px;
 	background-image: url("img/NavigationBackground.png");
 	background-repeat: repeat-x;
+	position: relative;
 }
 
 #Holder {
@@ -34,6 +35,29 @@ body {
 }
 
 #Logo {
-	bottom: 5px;
+	bottom: 0px;
 	position: absolute;
+}
+
+#TopNavigation {
+	position: absolute;
+	left: 143px;
+	width: 660px;
+	bottom: 5px;
+}
+
+.NavigationTab {
+	float: left;
+	width: 105px;
+	margin-left: 5px;
+	background-image: url("img/NavigationTab.png");
+	height: 38px;
+	top: 5px;
+	position: relative;
+}
+
+.NavigationTabActive {
+	height: 43px;
+	background-image: url("img/NavigationTabActive.png");
+	top: 0px;
 }
