@@ -1,0 +1,51 @@
+<table>
+    <tr>
+        <th>Bild</th>
+        <th>Hochgeladen am</th>
+        <th>Hochgeladen von</th>
+        <th>Anzahl der Kommentare</th>
+        <th>Rating</th>
+        <th>Hits</th>
+        <th>Aktionen</th>
+    </tr>
+    <?php $i = 0; foreach ($this->pictures as $p): $i++; $u = $p->getSession()->getUser(); ?>
+    <tr>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'picture', array('pictureId' => $p->getId())) ?>">
+               <img height="100px" width="100px" src="pics/<?php echo $p->getMd5() ?>.jpg" />
+            </a>
+        </td>
+        <td>
+            <?php HE($p->getUploadTime()) ?>
+        </td>
+        <td>
+            <?php if (is_null($u)): ?>
+                Gast
+            <?php else: ?>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'user', array('userId' => $u->getId())) ?>" >
+                <?php HE($u->getUsername()) ?>
+            </a>
+            <?php endif; ?>
+        </td>
+        <td>
+            <?php HE($p->getNumberOfComments()) ?>
+        </td>
+        <td>
+            +<?php HE($p->getPositiveRating()) ?> -<?php HE($p->getNegativeRating()) ?>
+        </td>
+        <td>
+            <?php HE($p->getSiteHits()) ?>
+        </td>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'pictureDel', array('pictureId' => $p->getId())); ?>" >
+                Löschen
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+    <tr>
+        <td colspan="7" >Es wurde bisher keine Bilder hochgeladen</td>
+    </tr>
+    <?php endif; ?>
+</table>

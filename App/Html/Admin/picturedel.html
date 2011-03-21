@@ -1,0 +1,8 @@
+<img src="pics/<?php HE($this->picture->getMd5()) ?>.jpg" />
+Wollen sie das Bild wirklich löschen?
+<form action="<?php HE($this->form->getAction()) ?>" method="<?php HE($this->form->getMethod()) ?>">
+    Begründung: (optional)
+    <input type="text" name="reason" value="<?php HE($this->form->getValueForField('reason')) ?>" />
+    <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol" />
+    <input type="submit" value="Löschen" />
+</form>

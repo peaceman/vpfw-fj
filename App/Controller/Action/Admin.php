@@ -4,6 +4,9 @@ class App_Controller_Action_Admin extends Vpfw_Controller_Action_Abstract {
         parent::__construct($environment);
         $this->needDataMapper('RuleViolation');
         $this->needDataMapper('User');
+        $this->needDataMapper('Deletion');
+        $this->needDataMapper('Picture');
+        $this->needDataMapper('PictureComment');
     }
 
     public function indexAction() {
@@ -27,7 +30,7 @@ class App_Controller_Action_Admin extends Vpfw_Controller_Action_Abstract {
     public function pictureAction() {
         $picture = $this->getPictureFromRequestData();
         $this->view->picture = $picture;
-        $this->view->user = $picture->getUser();
+        $this->view->user = $picture->getSession()->getUser();
     }
 
     private function getPictureFromRequestData() {
@@ -95,16 +98,19 @@ class App_Controller_Action_Admin extends Vpfw_Controller_Action_Abstract {
     public function userDelAction() {
         $user = $this->getUserFromRequestData();
 
-        $reasonField = new Vpfw_Form_Field('Reason', false);
+        $reasonField = new Vpfw_Form_Field('reason', false);
         $whitespaceFilter = new Vpfw_Form_Filter_TrimSpaces();
         $notEmptyValidator = new Vpfw_Form_Validator_NotEmpty();
         $reasonField->addValidator($notEmptyValidator)
                 ->addFilter($whitespaceFilter);
 
-        $form = new Vpfw_Form($this->request, 'delUserProof', $reasonField);
+        $form = new Vpfw_Form($this->request, 'delUserProof', array($reasonField));
         $form->setAction(Vpfw_Router_Http::url('admin', 'userDel', array('userId' => $user->getId())))
                 ->setMethod('post')
                 ->handleRequest();
+
+        $this->view->user = $user;
+        $this->view->form = $form;
 
         if ($form->formWasSent() && $form->isAllValid()) {
             $validValues = $form->getValidValues();
@@ -112,12 +118,13 @@ class App_Controller_Action_Admin extends Vpfw_Controller_Action_Abstract {
                 'SessionId' => $this->session->getSession()->getId(),
                 'Time' => time(),
             );
-            if (array_key_exists('Reason', $validValues)) {
-                $parameters['Reason'] = $validValues['Reason'];
+            if (array_key_exists('reason', $validValues)) {
+                $parameters['reason'] = $validValues['reason'];
             }
             $deletion = $this->deletionMapper->createEntry($parameters, true);
 
             $user->setDeletion($deletion);
+            $this->response->addHeader('Location', Vpfw_Router_Http::url('admin', 'users'));
         }
     }
 
@@ -133,7 +140,81 @@ class App_Controller_Action_Admin extends Vpfw_Controller_Action_Abstract {
         return $user;
     }
 
-    public function picturesAction() {
+    private function getPictureCommentFromRequestData() {
+        $pictureCommentId= (int)$this->request->getParameter('pictureCommentId');
+        $pictureComment = null;
+        try {
+            $pictureComment = $this->pictureCommentMapper->getEntryById($pictureCommentId);
+        } catch (Vpfw_Exception_OutOfRange $e) {
+            $this->view->setContent('Ein Bildkommentar mit der Id ' . HE($pictureCommentId, false) . ' existiert nicht');
+            $this->interruptExecution();
+        }
+        return $pictureComment;
+    }
 
+    public function picturesAction() {
+        $this->view->pictures = $this->pictureMapper->getAllEntries();
+    }
+
+    public function pictureDelAction() {
+        $picture = $this->getPictureFromRequestData();
+
+        $reasonField = new Vpfw_Form_Field('reason', false);
+        $reasonField->addValidator(new Vpfw_Form_Validator_NotEmpty())
+                ->addFilter(new Vpfw_Form_Filter_TrimSpaces());
+
+        $form = new Vpfw_Form($this->request, 'deletePicture', array($reasonField));
+        $form->setAction(Vpfw_Router_Http::url('admin', 'pictureDel', array('pictureId' => $picture->getId())))
+                ->setMethod('post')
+                ->handleRequest();
+
+        $this->view->form = $form;
+        $this->view->picture = $picture;
+
+        if ($form->formWasSent() && $form->isAllValid()) {
+            $validValues = $form->getValidValues();
+            $parameters = array(
+                'SessionId' => $this->session->getSession()->getId(),
+                'Time' => time(),
+            );
+            if (array_key_exists('reason', $validValues)) {
+                $parameters['reason'] = $validValues['reason'];
+            }
+            $deletion = $this->deletionMapper->createEntry($parameters, true);
+
+            $picture->setDeletion($deletion);
+            $this->response->addHeader('Location', Vpfw_Router_Http::url('admin', 'pictures'));
+        }
+    }
+
+    public function pictureCommentDelAction() {
+        $pictureComment = $this->getPictureCommentFromRequestData();
+
+        $reasonField = new Vpfw_Form_Field('reason', false);
+        $reasonField->addValidator(new Vpfw_Form_Validator_NotEmpty())
+                ->addFilter(new Vpfw_Form_Filter_TrimSpaces());
+
+        $form = new Vpfw_Form($this->request, 'deletePictureComment', array($reasonField));
+        $form->setAction(Vpfw_Router_Http::url('admin', 'pictureCommentDel', array('pictureCommentId' => $pictureComment->getId())))
+                ->setMethod('post')
+                ->handleRequest();
+
+        $this->view->form = $form;
+        $this->view->pictureComment = $pictureComment;
+
+        if ($form->formWasSent() && $form->isAllValid()) {
+            $validValues = $form->getValidValues();
+            $parameters = array(
+                'SessionId' => $this->session->getSession()->getId(),
+                'Time' => time(),
+            );
+            if (array_key_exists('reason', $validValues)) {
+                $parameters['reason'] = $validValues['reason'];
+            }
+            $deletion = $this->deletionMapper->createEntry($parameters, true);
+
+            $pictureComment->setDeletion($deletion);
+            $this->response->addHeader('Location', Vpfw_Router_Http::url('admin', 'picture', array('pictureId' => $pictureComment->getPictureId())));
+        }
     }
 }

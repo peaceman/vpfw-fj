@@ -55,7 +55,6 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
         return $this->getData('Name');
     }
 
-
     /**
      * Setzt den Namen für die RbacRole
      *

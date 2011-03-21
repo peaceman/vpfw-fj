@@ -1,0 +1,99 @@
+<h3>Bildinformationen</h3>
+<table>
+    <tr>
+        <td>
+            Hochgeladen am
+        </td>
+        <td>
+            <?php HE($this->picture->getUploadTime()) ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Hochgeladen von
+        </td>
+        <td>
+            <?php if (is_null($this->user)): ?>
+                Gast
+            <?php else: ?>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'user', array('userId' => $this->user->getId())) ?>" >
+                <?php HE($this->user->getUsername()) ?>
+            </a>
+            <?php endif; ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Rating
+        </td>
+        <td>
+            +<?php HE($this->picture->getPositiveRating()) ?> -<?php HE($this->picture->getNegativeRating()) ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Hits
+        </td>
+        <td>
+            <?php HE($this->picture->getSiteHits()) ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Anzahl der Kommentare
+        </td>
+        <td>
+            <?php HE($this->picture->getNumberOfComments()) ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Gelöscht?
+        </td>
+        <td>
+            <?php echo is_null($this->picture->getDeletionId()) ? 'Nein' : 'Ja' ?>
+        </td>
+    </tr>
+</table>
+<h3>
+    Kommentare zu diesem Bild
+</h3>
+<table>
+    <tr>
+        <th>Autor</th>
+        <th>Datum</th>
+        <th>Text</th>
+        <th>Aktionen</th>
+    </tr>
+    <?php $i = 0; foreach ($this->picture->getComments() as $c): $i++; $u = $c->getSession()->getUser(); ?>
+    <tr>
+        <td>
+            <?php if (is_null($u)): ?>
+                Gast
+            <?php else: ?>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'user', array('userId' => $u->getId())) ?>" >
+                <?php HE($u->getUsername()) ?>
+            </a>
+            <?php endif; ?>
+        </td>
+        <td>
+            <?php HE($c->getTime()) ?>
+        </td>
+        <td>
+            <?php HE($c->getText()) ?>
+        </td>
+        <td>
+            <a href="<?php echo Vpfw_Router_Http::url('admin', 'pictureCommentDel', array('pictureCommentId' => $c->getId())) ?>" >
+                Löschen
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+    <tr>
+        <td colspan="4" >
+            Zu diesem Bild wurden bisher keine Kommentare abgegeben
+        </td>
+    </tr>
+    <?php endif; ?>
+</table>

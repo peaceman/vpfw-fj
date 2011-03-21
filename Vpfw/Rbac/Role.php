@@ -92,11 +92,11 @@ class Vpfw_Rbac_Role {
      * besteht wird diese mit einem force insert erstellt und der Rolle direkt
      * zugewiesen.
      * 
-     * @param int $objectId
+     * @param Vpfw_DataObject_RbacObject $rbacObject
      * @param bool $state
      */
-    private function addPermission($objectId, $state) {
-        $permissionDao = $this->roleDao->getPermission($objectName);
+    private function addPermission($rbacObject, $state) {
+        $permissionDao = $this->roleDao->getPermission($rbacObject->getName());
         // Es existiert keine Rollenspezifische Permission
         if (false == is_null($permissionDao)) {
             $dataArray = array(
@@ -108,7 +108,7 @@ class Vpfw_Rbac_Role {
             $permissionDao = $this->permissionMapper->createEntry($dataArray, true);
             $this->roleDao->addPermission($permissionDao);
         } else {
-            $permissionDao->setState(false);
+            $permissionDao->setState($state);
         }
     }
 }

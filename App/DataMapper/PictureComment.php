@@ -129,7 +129,11 @@ class App_DataMapper_PictureComment extends Vpfw_DataMapper_Abstract {
                 INNER JOIN
                     user AS c ON
                     b.UserId = c.Id
+                INNER JOIN
+                    picture AS d ON
+                    a.PictureId = d.Id
                 WHERE
+                    d.DeletionId IS NULL AND
                     c.Id = ?';
 
         $stmt = $this->db->prepare($sql);

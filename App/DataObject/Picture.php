@@ -328,12 +328,12 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     /**
      * @param App_DataObject_Deletion $deletion
      */
-    public function setDeletion(App_DataObject_Deletion $deletion) {
-        $this->deletion = $deletion;
+    public function setDeletion($deletion) {
         if (true == is_object($deletion)) {
             if ($this->getDeletionId() != $deletion->getId()) {
                 $this->setData('DeletionId', $deletion->getId());
             }
+            $this->deletion = $deletion;
         }
     }
 

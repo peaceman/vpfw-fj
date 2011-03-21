@@ -100,7 +100,7 @@ class App_DataObject_Deletion extends Vpfw_DataObject_Abstract {
     /**
      * @param App_DataObject_Session
      */
-    public function setSession(App_DataObject_Session $session) {
+    public function setSession($session) {
         $this->session = $session;
         if (true == is_object($session)) {
             $this->setData('SessionId', $session->getId());

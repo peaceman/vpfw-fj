@@ -18,7 +18,7 @@ class App_DataMapper_Deletion extends Vpfw_DataMapper_Abstract {
                                             a.Id,
                                             a.SessionId,
                                             a.Time,
-                                            a.Reason
+                                            a.Reason,
                                             b.UserId,
                                             b.Ip,
                                             b.StartTime,

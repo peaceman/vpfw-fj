@@ -58,6 +58,7 @@ class App_DataMapper_Picture extends Vpfw_DataMapper_Abstract {
                                                 session AS b ON
                                                 a.SessionId = b.Id
                                             WHERE
+                                                a.DeletionId IS NULL AND
                                                 b.UserId = ?';
         $this->sqlQueries['getByFV'] = 'SELECT
                                             a.Id,

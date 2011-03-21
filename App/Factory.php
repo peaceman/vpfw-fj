@@ -24,6 +24,9 @@ class App_Factory {
             case 'RuleViolation':
                 return new App_Validator_RuleViolation(Vpfw_Factory::getDataMapper('Picture'), Vpfw_Factory::getDataMapper('Session'));
                 break;
+            case 'Deletion':
+                return new App_Validator_Deletion();
+                break;
             default:
                 throw new Vpfw_Exception_Logical('Die Abhängigkeiten des Validators mit dem Typ ' . $type . ' konnten nicht aufgelöst werden');
         }
@@ -78,6 +81,9 @@ class App_Factory {
                 unset($properties['DelReason']);
             }
         }
+        unset($properties['DelSessionId'],
+                $properties['DelTime'],
+                $properties['DelReason']);
         $dataObject = new App_DataObject_User(Vpfw_Factory::getDataMapper('PictureComment'), Vpfw_Factory::getDataMapper('Picture'), Vpfw_Factory::getDataMapper('Deletion'), Vpfw_Factory::getValidator('User'), $properties);
         if (false == is_null($deletion)) {
             $dataObject->setDeletion($deletion);
@@ -102,12 +108,12 @@ class App_Factory {
                               'UserAgent' => $properties['UserAgent'])
                     );
                 }
-                unset($properties['Ip'],
-                      $properties['StartTime'],
-                      $properties['LastRequest'],
-                      $properties['Hits'],
-                      $properties['UserAgent']);
             }
+            unset($properties['Ip'],
+                  $properties['StartTime'],
+                  $properties['LastRequest'],
+                  $properties['Hits'],
+                  $properties['UserAgent']);
         }
         $dataObject = new App_DataObject_Deletion(Vpfw_Factory::getDataMapper('Session'), Vpfw_Factory::getValidator('Deletion'), $properties);
         if (false == is_null($session)) {
@@ -174,17 +180,17 @@ class App_Factory {
                         )
                     );
                 }
-                /*
-                 * Löschen der Sessionbezogenen Daten aus dem Eigenschaften-
-                 * array des Bildes
-                 */
-                unset($properties['SesUserId'],
-                      $properties['SesIp'],
-                      $properties['SesStartTime'],
-                      $properties['SesLastRequest'],
-                      $properties['SesHits'],
-                      $properties['SesUserAgent']);
             }
+            /*
+             * Löschen der Sessionbezogenen Daten aus dem Eigenschaften-
+             * array des Bildes
+             */
+            unset($properties['SesUserId'],
+                  $properties['SesIp'],
+                  $properties['SesStartTime'],
+                  $properties['SesLastRequest'],
+                  $properties['SesHits'],
+                  $properties['SesUserAgent']);
             /*
              * Wenn wir Informationen über die Löschung bekommen haben,
              * wird daraus ein DataObject erzeugt.
@@ -202,14 +208,15 @@ class App_Factory {
                         )
                     );
                 }
-                /*
-                 * Löschen der Löschungsbezogenen Daten aus dem Eigenschaften-
-                 * array des Bildes
-                 */
-                unset($properties['DelSessionId'],
-                      $properties['DelTime'],
-                      $properties['DelReason']);
+
             }
+            /*
+             * Löschen der Löschungsbezogenen Daten aus dem Eigenschaften-
+             * array des Bildes
+             */           
+            unset($properties['DelSessionId'],
+                  $properties['DelTime'],
+                  $properties['DelReason']);
         }
         $dataObject = new App_DataObject_Picture(Vpfw_Factory::getDataMapper('Session'), Vpfw_Factory::getDataMapper('Deletion'), Vpfw_Factory::getValidator('Picture'), Vpfw_Factory::getDataMapper('PictureComment'), $properties);
         if (false == is_null($session)) {
@@ -243,15 +250,15 @@ class App_Factory {
                         )
                     );
                 }
-                unset($properties['PicMd5'],
-                      $properties['PicGender'],
-                      $properties['PicSessionId'],
-                      $properties['PicUploadTime'],
-                      $properties['PicSiteHits'],
-                      $properties['PicPositiveRating'],
-                      $properties['PicNegativeRating'],
-                      $properties['PicDeletionId']);
             }
+            unset($properties['PicMd5'],
+                  $properties['PicGender'],
+                  $properties['PicSessionId'],
+                  $properties['PicUploadTime'],
+                  $properties['PicSiteHits'],
+                  $properties['PicPositiveRating'],
+                  $properties['PicNegativeRating'],
+                  $properties['PicDeletionId']);
             if (true == isset($properties['SesUserId'])) {
                 try {
                     $session = Vpfw_Factory::getDataMapper('Session')->getEntryById($properties['SessionId'], false);
@@ -268,13 +275,14 @@ class App_Factory {
                         )
                     );
                 }
-                unset($properties['SesUserId'],
-                      $properties['SesIp'],
-                      $properties['SesStartTime'],
-                      $properties['SesLastRequest'],
-                      $properties['SesHits'],
-                      $properties['SesUserAgent']);
+
             }
+            unset($properties['SesUserId'],
+                  $properties['SesIp'],
+                  $properties['SesStartTime'],
+                  $properties['SesLastRequest'],
+                  $properties['SesHits'],
+                  $properties['SesUserAgent']);
         }
         $dataObject = new App_DataObject_RuleViolation(Vpfw_Factory::getDataMapper('Session'), Vpfw_Factory::getDataMapper('Picture'), Vpfw_Factory::getValidator('RuleViolation'), $properties);
         if (false == is_null($picture)) {
@@ -307,13 +315,13 @@ class App_Factory {
                         )
                     );
                 }
-                unset($properties['SesUserId'],
-                      $properties['SesIp'],
-                      $properties['SesStartTime'],
-                      $properties['SesLastRequest'],
-                      $properties['SesHits'],
-                      $properties['SesUserAgent']);
             }
+            unset($properties['SesUserId'],
+                  $properties['SesIp'],
+                  $properties['SesStartTime'],
+                  $properties['SesLastRequest'],
+                  $properties['SesHits'],
+                  $properties['SesUserAgent']);
             if (true == isset($properties['PicMd5'])) {
                 try {
                     $picture = Vpfw_Factory::getDataMapper('Picture')->getEntryById($properties['PictureId'], false);
@@ -332,15 +340,15 @@ class App_Factory {
                         )
                     );
                 }
-                unset($properties['PicMd5'],
-                      $properties['PicGender'],
-                      $properties['PicSessionId'],
-                      $properties['PicUploadTime'],
-                      $properties['PicSiteHits'],
-                      $properties['PicPositiveRating'],
-                      $properties['PicNegativeRating'],
-                      $properties['PicDeletionId']);
             }
+            unset($properties['PicMd5'],
+                  $properties['PicGender'],
+                  $properties['PicSessionId'],
+                  $properties['PicUploadTime'],
+                  $properties['PicSiteHits'],
+                  $properties['PicPositiveRating'],
+                  $properties['PicNegativeRating'],
+                  $properties['PicDeletionId']);
             if (true == isset($properties['DelSessionId'])) {
                 try {
                     $deletion = Vpfw_Factory::getDataMapper('Deletion')->getEntryById($properties['DeletionId'], false);
@@ -354,10 +362,10 @@ class App_Factory {
                         )
                     );
                 }
-                unset($properties['DelSessionId'],
-                      $properties['DelTime'],
-                      $properties['DelReason']);
             }
+            unset($properties['DelSessionId'],
+                  $properties['DelTime'],
+                  $properties['DelReason']);
         }
         $dataObject = new App_DataObject_PictureComment(Vpfw_Factory::getDataMapper('Session'), Vpfw_Factory::getDataMapper('Picture'), Vpfw_Factory::getDataMapper('Deletion'), Vpfw_Factory::getValidator('PictureComment'), $properties);
         if (false == is_null($deletion)) {

@@ -149,10 +149,10 @@ class Vpfw_Form {
 
     private function checkExistanceOfAllRequiredFields() {
         foreach ($this->fields as $field) {
-            /* @var $field Vpfw_Form_Field */
-            if (true == $field->isRequired()) {
-                $field->setValue($this->request->getParameter($field->getName()));
-                if (false == $field->isFilled()) {
+            /* @var $field Vpfw_Form_Field */            
+            $field->setValue($this->request->getParameter($field->getName()));
+            if (false == $field->isFilled()) {
+                if (true == $field->isRequired()) {
                     $this->errorMessages['form'][] = 'Das Feld ' . $field->getName() . ' muss zwingend ausgefüllt werden';
                     $this->allIsValid = false;
                 }

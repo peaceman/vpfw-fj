@@ -15,9 +15,13 @@
             </a>
         </td>
         <td>
+            <?php if (is_null($u)): ?>
+            Gast
+            <?php else: ?>
             <a href="<?php echo Vpfw_Router_Http::url('admin', 'user', array('userId' => $u->getId())) ?>" >
                 <?php HE($u->getUsername()) ?>
             </a>
+            <?php endif; ?>
         </td>
         <td>
             <?php HE($rV->getTime()) ?>
@@ -52,9 +56,13 @@
             </a>
         </td>
         <td>
+            <?php if (is_null($u)): ?>
+            Gast
+            <?php else: ?>
             <a href="<?php echo Vpfw_Router_Http::url('admin', 'user', array('userId' => $u->getId())) ?>" >
                 <?php HE($u->getUsername()) ?>
             </a>
+            <?php endif; ?>
         </td>
         <td>
             <?php HE($rV->getTime()) ?>

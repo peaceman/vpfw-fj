@@ -1,2 +1,9 @@
 <?php
-var_dump(ip2long('127.0.0.1'));
+$var = null;
+$arr['var'] = null;
+echo '<pre>';
+echo 'expected true ';
+var_dump(isset($var));
+echo 'expected true ';
+var_dump(isset($arr['var']));
+unset($arr['lol']);
