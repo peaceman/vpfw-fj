@@ -16,10 +16,10 @@ class Vpfw_Rbac_User {
      *
      * @param App_DataObject_User $user
      */
-    public function __construct(Vpfw_DataMapper_RbacObject $objectMapper, App_DataObject_User $user = null) {
+    public function __construct(Vpfw_DataMapper_RbacObject $objectMapper, Vpfw_Rbac_UserInterface $user = null) {
         $this->objectMapper = $objectMapper;
         if (false == is_null($user)) {
-            foreach ($user->getRoles() as $role) {
+            foreach ($user->getRbacRoles() as $role) {
                 /* @var $role Vpfw_DataObject_RbacRole */
                 $this->roles[] = Vpfw_Factory::getRbacRole($role);
             }

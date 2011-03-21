@@ -1,5 +1,5 @@
 <?php
-class App_DataObject_User extends Vpfw_DataObject_Abstract {
+class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_UserInterface {
     /**
      * @var App_Validator_User
      */
@@ -34,6 +34,16 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @var App_DataObject_PictureComment[]
      */
     private $pictureComments = array();
+
+    /**
+     * @var Vpfw_DataMapper_RbacRole
+     */
+    private $rbacRoleMapper;
+
+    /**
+     * @var Vpfw_DataObject_RbacRole[]
+     */
+    private $rbacRoles = array();
     
     /**
      * Befüllen von $this->data und weitergeben der Objekteigenschaften
@@ -41,7 +51,8 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
      * @param App_Validator_User $validator
      * @param array $properties optional 
      */
-    public function __construct(App_DataMapper_PictureComment $pictureCommentMapper, App_DataMapper_Picture $pictureMapper, App_DataMapper_Deletion $deletionMapper, App_Validator_User $validator, $properties = null) {
+    public function __construct(Vpfw_DataMapper_RbacRole $rbacRoleMapper, App_DataMapper_PictureComment $pictureCommentMapper, App_DataMapper_Picture $pictureMapper, App_DataMapper_Deletion $deletionMapper, App_Validator_User $validator, $properties = null) {
+        $this->rbacRoleMapper = $rbacRoleMapper;
         $this->pictureMapper = $pictureMapper;
         $this->deletionMapper = $deletionMapper;
         $this->pictureCommentMapper = $pictureCommentMapper;
@@ -59,6 +70,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
             'Deletion' => false,
             'Pictures' => false,
             'PictureComments' => false,
+            'RbacRoles' => false,
         );
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
@@ -67,6 +79,26 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
         parent::__construct($properties);
     }
 
+    /**
+     * @return Vpfw_DataObject_RbacRole[]
+     */
+    public function getRoles() {
+        if (empty($this->rbacRoles)) {
+            $this->lazyLoadRbacRoles();
+        }
+        return $this->rbacRoles;
+    }
+
+    private function lazyLoadRbacRoles() {
+        if (false === $this->lazyLoadState['RbacRoles']) {
+            $this->rbacRoles = $this->rbacRoleMapper->getEntriesByUserId($this->getId());
+            $this->lazyLoadState['RbacRoles'] = true;
+        }
+    }
+
+    /**
+     * @return App_DataObject_Pictures[]
+     */
     public function getPictures() {
         if (true == empty($this->pictures)) {
             $this->lazyLoadPictures();
@@ -74,10 +106,19 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract {
         return $this->pictures;
     }
 
+    /**
+     * @todo Aktuell werden wenn man die Anzahl der Bilder ermitteln möchte,
+     * alle Bilder aus der Datenbank geladen und in DataObjects verpackt, wobei
+     * man eigentlich nur die Anzahl wissen möchte.
+     * @return int
+     */
     public function getPictureCount() {
         return count($this->getPictures());
     }
 
+    /**
+     * @return App_DataObject_PictureComment[]
+     */
     public function getPictureComments() {
         if (true == empty($this->pictureComments)) {
             $this->lazyLoadPictureComments();
