@@ -41,7 +41,7 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
             $observer->observableUpdate($this);
         }
     }
-    
+
     /**
      * @return bool
      */
@@ -55,13 +55,13 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
     public function setSomethingChanged($state) {
         $this->sthChanged = $state;
     }
-    
+
     public function __construct($properties) {
         if (true == is_array($properties)) {
             $this->initialFill($properties);
         }
     }
-    
+
     /**
      * @throws Vpfw_Exception_Logical
      * @param int $which
@@ -156,9 +156,9 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
     /**
      * Befüllt das Objekt mit den übergebenen Daten, welche jedoch nicht
      * validiert werden. Wird im Konstruktor des Objektes aufgerufen.
-     * 
+     *
      * @throws Vpfw_Exception_Logical
-     * @param array $properties 
+     * @param array $properties
      */
     private function initialFill(array $properties) {
         foreach ($properties as $propName => $propValue) {
@@ -169,7 +169,7 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
     /**
      * Diese Methode ist dafür vorgesehen, die übergebenen Werte zu validieren
      * und sie als Eigenschaften des Objektes zu setzen.
-     * 
+     *
      * @throws Vpfw_Exception_Logical
      * @param array $properties Enthält die zu setzenden Werte z.B. array('Id' => 5, 'Name' => 'rolf')
      * @param bool $validate Sollen die Werte aus $properties validiert werden oder nicht
@@ -213,5 +213,18 @@ abstract class Vpfw_DataObject_Abstract implements Vpfw_DataObject_Interface, Vp
             }
         }
         return $count;
+    }
+
+    /**
+     * @throws Vpfw_Exception_Logical
+     * @param string $expectedObjectType
+     * @param object $object
+     * @param string $methodName
+     * @return void
+     */
+    protected function proofObjectType($expectedObjectType, $object, $methodName) {
+        if (!$object instanceof $expectedObjectType) {
+            throw new Vpfw_Exception_Logical('Expected an object from type ' . $expectedObjectType . ' in ' . get_called_class() . '::' . $methodName . ', but got an object from type ' . get_class($object));
+        }
     }
 }

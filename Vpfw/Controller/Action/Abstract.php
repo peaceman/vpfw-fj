@@ -5,13 +5,13 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
      * @var string
      */
     protected $actionToExecute;
-    
+
     /**
      *
      * @var Vpfw_Request_Interface
      */
     protected $request;
-    
+
     /**
      *
      * @var Vpfw_Response_Interface
@@ -196,7 +196,7 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
     /**
      * Speichert die ActionController unter dem $placeHolderName in einem Array
      * @param string $placeHolderName Mit diesem Platzhalter kann die Position dieses ActionControllers im Layout bestimmt werden
-     * @param Vpfw_Controller_Action_Interface $ctrlInfo
+     * @param mixed $ctrlInfo
      */
     public function addChildController($placeHolderName, $ctrlInfo) {
         if (true == is_array($ctrlInfo)) {
@@ -213,6 +213,6 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
             throw new Vpfw_Exception_Logical('Die addChildController Methode benötigt entweder den ActionController als Objekt oder ein Array, welches den Namen und die Action des ActionControllers beinhaltet');
         }
     }
-    
+
     abstract protected function indexAction();
 }

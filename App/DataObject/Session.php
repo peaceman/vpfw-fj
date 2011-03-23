@@ -133,10 +133,12 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
      * @param App_DataObject_User $user
      * @return void
      */
-    public function setUser(App_DataObject_User $user) {
-        if (true == is_object($user)) {
-            if ($this->getUserId() != $user->getId())
+    public function setUser($user) {
+        if (is_object($user)) {
+            $this->proofObjectType('App_DataObject_User', $user, __FUNCTION__);
+            if ($this->getUserId() != $user->getId()) {
                 $this->setData('UserId', $user->getId());
+            }
         }
         $this->user = $user;
     }
@@ -211,4 +213,4 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
         }
     }
 }
- 
+

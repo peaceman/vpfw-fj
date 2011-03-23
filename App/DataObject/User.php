@@ -4,7 +4,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
      * @var App_Validator_User
      */
     private $validator;
-    
+
     /**
      * @var App_DataObject_Deletion
      */
@@ -44,12 +44,12 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
      * @var Vpfw_DataObject_RbacRole[]
      */
     private $rbacRoles = array();
-    
+
     /**
      * Befüllen von $this->data und weitergeben der Objekteigenschaften
      * an den Parentkonstruktor
      * @param App_Validator_User $validator
-     * @param array $properties optional 
+     * @param array $properties optional
      */
     public function __construct(Vpfw_DataMapper_RbacRole $rbacRoleMapper, App_DataMapper_PictureComment $pictureCommentMapper, App_DataMapper_Picture $pictureMapper, App_DataMapper_Deletion $deletionMapper, App_Validator_User $validator, $properties = null) {
         $this->rbacRoleMapper = $rbacRoleMapper;
@@ -139,27 +139,27 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
             $this->lazyLoadState['Pictures'] = true;
         }
     }
-    
+
     /**
      * Gibt den Zeitpunkt der Erstellung des Users als Timestamp zurück
-     * @return int 
+     * @return int
      */
     public function getCreationTime() {
         return $this->getData('CreationTime');
     }
-    
+
     /**
      * Gibt die IP, die bei der Erstellung des Users verwendet wurde als
      * String zurück
-     * @return string 
+     * @return string
      */
     public function getCreationIp() {
         $netIp = $this->getData('CreationIp');
         return is_null($netIp) ? null : long2ip($netIp);
     }
-    
+
     /**
-     * @return int 
+     * @return int
      */
     public function getDeletionId() {
         if (true == is_object($this->deletion)) {
@@ -168,29 +168,29 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
             return $this->getData('DeletionId');
         }
     }
-    
+
     /**
-     * @return string 
+     * @return string
      */
     public function getUsername() {
         return $this->getData('Username');
     }
-    
+
     /**
      * Gibt den MD5-Hash des Passwortes als Hexstring zurück
-     * @return string 
+     * @return string
      */
     public function getPasshash() {
         return $this->getData('Passhash');
     }
-    
+
     /**
-     * @return string 
+     * @return string
      */
     public function getEmail() {
         return $this->getData('Email');
     }
-    
+
     /**
      * @return App_DataObject_Deletion
      */
@@ -207,10 +207,10 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
             $this->lazyLoadState['Deletion'] = true;
         }
     }
-    
+
     /**
      * @param int $time
-     * @param bool $validate 
+     * @param bool $validate
      */
     public function setCreationTime($time, $validate = true) {
         if ($this->getCreationTime() != $time) {
@@ -220,10 +220,10 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
             $this->setData('CreationTime', $time);
         }
     }
-    
+
     /**
      * @param int $ip
-     * @param bool $validate 
+     * @param bool $validate
      */
     public function setCreationIp($ip, $validate = true) {
         if ($this->getCreationIp() != $ip) {
@@ -233,10 +233,10 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
             $this->setData('CreationIp', ip2long($ip));
         }
     }
-    
+
     /**
      * @param int $id
-     * @param bool $validate 
+     * @param bool $validate
      */
     public function setDeletionId($id, $validate = true) {
         if ($this->getDeletionId() != $id) {
@@ -249,18 +249,22 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
     }
 
     /**
-     * @param App_DataObject_Deletion
+     * @param App_DataObject_Deletion $deletion
+     * @return void
      */
-    public function setDeletion(App_DataObject_Deletion $deletion) {
-        $this->deletion = $deletion;
-        if (true == is_object($deletion)) {
-            $this->setData('DeletionId', $deletion->getId());
+    public function setDeletion($deletion) {
+        if (is_object($deletion)) {
+            $this->proofObjectType('App_DataObject_Deletion', $deletion, __FUNCTION__);
+            if ($this->getDeletionId() != $deletion->getId()) {
+                $this->setData('DeletionId', $deletion->getId());
+            }
         }
+        $this->deletion = $deletion;
     }
-    
+
     /**
      * @param string $name
-     * @param bool $validate 
+     * @param bool $validate
      */
     public function setUsername($name, $validate = true) {
         if ($this->getUsername() != $name) {
@@ -270,7 +274,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
             $this->setData('Username', $name);
         }
     }
-    
+
     /**
      * @param string $passhash
      * @param bool $validate
@@ -283,7 +287,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
             $this->setData('Passhash', $passhash);
         }
     }
-    
+
     /**
      * @param string $email
      * @param bool $validate

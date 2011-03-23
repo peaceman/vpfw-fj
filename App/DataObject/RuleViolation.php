@@ -33,7 +33,7 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
         $this->validator = $validator;
         $this->sessionMapper = $sessionMapper;
         $this->pictureMapper = $pictureMapper;
-        
+
         $this->data = array(
             'Id' => null,
             'PictureId' => null,
@@ -141,14 +141,17 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
     }
 
     /**
-     * @param App_DataObject_Picture
+     * @param App_DataObject_Picture $picture
+     * @return void
      */
     public function setPicture($picture) {
-        $this->picture = $picture;
-        if (true == is_object($picture)) {
-            if ($this->getPictureId() != $picture->getId())
+        if (is_object($picture)) {
+            $this->proofObjectType('App_DataObject_Picture', $picture, __FUNCTION__);
+            if ($this->getPictureId() != $picture->getId()) {
                 $this->setData('PictureId', $picture->getId());
+            }
         }
+        $this->picture = $picture;
     }
 
     /**
@@ -166,14 +169,17 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
     }
 
     /**
-     * @param App_DataObject_Session
+     * @param App_DataObject_Session $session
+     * @return void
      */
     public function setSession($session) {
-        $this->session = $session;
-        if (true == is_object($session)) {
-            if ($this->getSessionId() != $session->getId())
+        if (is_object($session)) {
+            $this->proofObjectType('App_DataObject_Session', $session, __FUNCTION__);
+            if ($this->getSessionId() != $session->getId()) {
                 $this->setData('SessionId', $session->getId());
+            }
         }
+        $this->session = $session;
     }
 
     /**
@@ -211,4 +217,4 @@ class App_DataObject_RuleViolation extends Vpfw_DataObject_Abstract {
         }
     }
 }
- 
+

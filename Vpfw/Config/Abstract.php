@@ -11,7 +11,7 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
         $this->logGroup = 'config';
         $this->parseFile();
     }
-    
+
     /**
      * Wirft eine Vpfw_Exception_InvalidArgument Exception, wenn das
      * angeforderte Element nicht existiert.
@@ -64,7 +64,7 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
 
     /**
      * Prüft die Konfigurationsdatei auf Verfügbarkeit
-     * 
+     *
      */
     protected function parseFile() {
         // Wenn hier Fehler auftreten sollten, wird die Ausführung des Skriptes gestoppt,
@@ -79,11 +79,11 @@ abstract class Vpfw_Config_Abstract extends Vpfw_Abstract_Loggable implements Vp
 
     /**
      * Prüft die Datei auf verfügbarkeit, lockt sie und löscht ihren Inhalt anschließend
-     * @todo Die Methode der Kindklassen sollte so angepasst werden, dass sie 
+     * @todo Die Methode der Kindklassen sollte so angepasst werden, dass sie
      * nur die nötigen Konfigurationswerte ändern und nicht die komplette Datei
-     * neu schreiben. Bringt den Vorteil, dass Kommentare in der Konfiguration 
+     * neu schreiben. Bringt den Vorteil, dass Kommentare in der Konfiguration
      * erhalten bleiben.
-     * @return filehandle
+     * @return resource
      */
     protected function writeBack() {
         if (false == is_writable($this->fileName)) {

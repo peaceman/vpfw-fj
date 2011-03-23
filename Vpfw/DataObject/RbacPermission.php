@@ -58,12 +58,13 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
         }
     }
 
-    public function setRole(Vpfw_DataObject_RbacRole $role) {
-        $this->roleDao = $role;
+    public function setRole($role) {
         if (true == is_object($role)) {
+            $this->proofObjectType('Vpfw_DataObject_Role', $role, __FUNCTION__);
             self::checkDataObjectForId($role);
             $this->setData('RoleId', $role->getId());
         }
+        $this->roleDao = $role;
     }
 
     public function setObjectId($id, $validate = true) {
@@ -73,9 +74,10 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
         }
     }
 
-    public function setObject(Vpfw_DataObject_RbacObject $object) {
+    public function setObject($object) {
         $this->objectDao = $object;
         if (true == is_object($object)) {
+            $this->proofObjectType('Vpfw_DataObject_Object', $object, __FUNCTION__);
             self::checkDataObjectForId($object);
             $this->setData('ObjectId', $object->getId());
         }

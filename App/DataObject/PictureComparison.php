@@ -19,6 +19,10 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
             'PictureId1' => null,
             'PictureId2' => null,
         );
+        $this->lazyLoadState = array(
+            'Picture1' => false,
+            'Picture2' => false,
+        );
         foreach ($this->data as &$val) {
             $val = array('val' => null, 'changed' => false, 'required' => true);
         }
@@ -34,10 +38,17 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
     }
 
     public function getPicture1() {
-        if (true == is_null($this->pictureArray[1])) {
-            $this->pictureArray[1] = $this->pictureMapper->getEntryById($this->getPictureId1());
+        if (is_null($this->pictureArray[1])) {
+            $this->lazyLoadPicture1();
         }
         return $this->pictureArray[1];
+    }
+
+    public function lazyLoadPicture1() {
+        if (false === $this->lazyLoadState['Picture1']) {
+            $this->pictureArray[1] = $this->pictureMapper->getEntryById($this->getPictureId1());
+            $this->lazyLoadState['Picture1'] = true;
+        }
     }
 
     public function getPictureId2() {
@@ -50,9 +61,16 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
 
     public function getPicture2() {
         if (true == is_null($this->pictureArray[2])) {
-            $this->pictureArray[2] = $this->pictureMapper->getEntryById($this->getPictureId2());
+            $this->lazyLoadPicture2();
         }
         return $this->pictureArray[2];
+    }
+
+    public function lazyLoadPicture2() {
+        if (false === $this->lazyLoadState['Picture2']) {
+            $this->pictureArray[2] = $this->pictureMapper->getEntryById($this->getPictureId2());
+            $this->lazyLoadState['Picture2'] = true;
+        }
     }
 
     public function setPictureId1($id, $validation = true) {
@@ -62,12 +80,13 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
     }
 
     public function setPicture1($picture) {
-        $this->pictureArray[1] = $picture;
-        if (true == is_object($picture)) {
+        if (is_object($picture)) {
+            $this->proofObjectType('App_DataObject_Picture', $picture, __FUNCTION__);
             if ($this->getPictureId1() != $picture->getId()) {
                 $this->setData('PictureId1', $picture->getId());
             }
         }
+        $this->pictureArray[1] = $picture;
     }
 
     public function setPictureId2($id, $validation = true) {
@@ -77,12 +96,13 @@ class App_DataObject_PictureComparison extends Vpfw_DataObject_Abstract {
     }
 
     public function setPicture2($picture) {
-        $this->pictureArray[2] = $picture;
-        if (true == is_object($picture)) {
+        if (is_object($picture)) {
+            $this->proofObjectType('App_DataObject_Picture', $picture, __FUNCTION__);
             if ($this->getPictureId2() != $picture->getId()) {
                 $this->setData('PictureId2', $picture->getId());
             }
         }
+        $this->pictureArray[2] = $picture;
     }
 
     public function setWinnerByPictureId($picId) {

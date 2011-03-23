@@ -4,7 +4,7 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
      * @var Vpfw_Validator_RbacRole
      */
     private $validator;
-    
+
     /**
      * @var Vpfw_DataObject_RbacPermission[]
      */
@@ -14,7 +14,7 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
      * @var Vpfw_DataObject_RbacPermissions[]
      */
     private $permissionsByName;
-    
+
     /**
      * @var Vpfw_DataMapper_RbacPermission
      */
@@ -77,15 +77,12 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
      * alle bisher abgelegten RbacPermissions werden aus diesem Objekt
      * gelöscht. Die RbacPermissions werden selbst aber nicht gelöscht.
      *
-     * @param array $permissions
+     * @param Vpfw_DataObject_RbacPermisson[] $permissions
      */
     public function setPermissions(array $permissions) {
         $this->permissions = array();
         foreach ($permissions as $permission) {
-            /* @var $permission Vpfw_DataObject_RbacPermission */
-            if (false == $permission instanceof Vpfw_DataObject_RbacPermission) {
-                throw new Vpfw_Exception_InvalidArgument('Die Methode Vpfw_DataObject::setPermissions nimmt nur ein Array aus Objekten der Klasse Vpfw_DataObject_RbacPermission entgegen.');
-            }
+            $this->proofObjectType('Vpfw_DataObject_RbacPermission', $permission, __FUNCTION__);
             self::checkDataObjectForId($permission);
             $this->permissions[$permission->getId()] = $permission;
             $this->permissionsByName[$permission->getObject()->getName()] = $permission;

@@ -79,7 +79,13 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
                      SET
                          {Updates}
                      WHERE
-                         Id = ?'
+                         Id = ?',
+        'count' => 'SELECT
+                        COUNT(*) AS NrOfRows
+                    FROM
+                        {TableName}
+                    WHERE
+                        {WhereClause}',
     );
 
     /**
@@ -422,6 +428,28 @@ abstract class Vpfw_DataMapper_Abstract implements Vpfw_DataMapper_Interface, Vp
         }
         $stmt = $this->db->prepare($this->sqlQueries['delById']);
         $stmt->execute();
+    }
+
+    public function getNumberOfFieldValue(array $fieldValues) {
+        list($paramTypes, $whereClause, $values) = self::parseFieldValues($fieldValues);
+
+        $stmt = $this->db->prepare(str_replace('{WhereClause}', $whereClause, $this->sqlQueries['count']));
+        array_unshift($values, $paramTypes);
+        call_user_func_array(array($stmt, 'bind_param'), $values);
+        $stmt->execute();
+        $stmt->store_result();
+
+        $params = array();
+        $row = array();
+        $metaData = $stmt->result_metadata();
+        while ($field = $metaData->fetch_field()) {
+            $params[] = &$row[$field->name];
+        }
+        call_user_func_array(array($stmt, 'bind_result'), $params);
+
+        $row = $stmt->fetch();
+
+        return $row['NrOfRows'];
     }
 
     /**

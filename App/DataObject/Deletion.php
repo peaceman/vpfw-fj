@@ -24,7 +24,7 @@ class App_DataObject_Deletion extends Vpfw_DataObject_Abstract {
     public function __construct(App_DataMapper_Session $sessionMapper, App_Validator_Deletion $validator, $properties = null) {
         $this->validator = $validator;
         $this->sessionMapper = $sessionMapper;
-        
+
         $this->data = array(
             'Id' => null,
             'SessionId' => null,
@@ -101,10 +101,12 @@ class App_DataObject_Deletion extends Vpfw_DataObject_Abstract {
      * @param App_DataObject_Session
      */
     public function setSession($session) {
-        $this->session = $session;
         if (true == is_object($session)) {
-            $this->setData('SessionId', $session->getId());
+            $this->proofObjectType('App_DataObject_Session', $session, __FUNCTION__);
+            if ($this->getSessionId() != $session->getId())
+                $this->setData('SessionId', $session->getId());
         }
+        $this->session = $session;
     }
 
     /**
@@ -133,4 +135,4 @@ class App_DataObject_Deletion extends Vpfw_DataObject_Abstract {
         }
     }
 }
- 
+

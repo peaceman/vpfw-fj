@@ -80,8 +80,7 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
     }
 
     public function getNumberOfComments() {
-        return count($this->getComments());
-        //TODO Den DataMappern sollte ein getNumberOfFieldValue spendiert werden
+        return $this->commentMapper->getNumberOfFieldValue(array('i|PictureId|' . $this->getId()));
     }
 
     /**
@@ -239,12 +238,13 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
      * @param App_DataObject_Session
      */
     public function setSession($session) {
-        $this->session = $session;
         if (true == is_object($session)) {
+            $this->proofObjectType('App_DataObject_Session', $session, __FUNCTION__);
             if ($this->getSessionId() != $session->getId()) {
                 $this->setData('SessionId', $session->getId());
             }
         }
+        $this->session = $session;
     }
 
     /**
@@ -330,15 +330,16 @@ class App_DataObject_Picture extends Vpfw_DataObject_Abstract {
      */
     public function setDeletion($deletion) {
         if (true == is_object($deletion)) {
+            $this->proofObjectType('App_DataObject_Deletion', $deletion, __FUNCTION__);
             if ($this->getDeletionId() != $deletion->getId()) {
                 $this->setData('DeletionId', $deletion->getId());
             }
-            $this->deletion = $deletion;
         }
+        $this->deletion = $deletion;
     }
 
     public function getRating() {
         return $this->getPositiveRating() - $this->getNegativeRating();
     }
 }
- 
+
