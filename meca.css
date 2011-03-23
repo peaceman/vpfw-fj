@@ -54,10 +54,24 @@ body {
 	height: 38px;
 	top: 5px;
 	position: relative;
+    display: table;
+}
+
+.NavigationTab .TabText {
+    font-family: "Georgia";
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    font-weight: bold;
+}
+
+.NavigationTab:hover {
+    color:orange;
 }
 
 .NavigationTabActive {
 	height: 43px;
 	background-image: url("img/NavigationTabActive.png");
 	top: 0px;
+    color: orange;
 }
