@@ -7,6 +7,15 @@ class App_Controller_Action_Admin extends Vpfw_Controller_Action_Abstract {
         $this->needDataMapper('Deletion');
         $this->needDataMapper('Picture');
         $this->needDataMapper('PictureComment');
+        $this->registerForPreExecute(function($obj) {
+            $hasAccess = $obj->getSession()->getRbacUser()->hasAccessTo('admin');
+            if ($hasAccess == false) {
+                $view = new Vpfw_View_Std('App/Html/NoAccess.html');
+                $view->area = 'admin';
+                $obj->setView($view);
+                $obj->interruptExecution();
+            }
+        });
     }
 
     public function indexAction() {

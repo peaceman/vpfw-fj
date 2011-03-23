@@ -82,7 +82,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
     /**
      * @return Vpfw_DataObject_RbacRole[]
      */
-    public function getRoles() {
+    public function getRbacRoles() {
         if (empty($this->rbacRoles)) {
             $this->lazyLoadRbacRoles();
         }

@@ -48,6 +48,10 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
 
     protected $renderView = true;
 
+    protected $preExecuteCallbacks = array();
+
+    protected $postExecuteCallbacks = array();
+
     public function interruptExecution() {
         $this->isExecuted = true;
         throw new Vpfw_Exception_Interrupt();
@@ -55,6 +59,10 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
 
     public function disableViewRendering() {
         $this->renderView = false;
+    }
+
+    public function getSession() {
+        return $this->session;
     }
 
     protected function needDataMapper($shortMapperName) {
@@ -160,7 +168,9 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
         $this->request = is_null($this->request) ? $request : $this->request;
         $this->response = is_null($this->response) ? $response : $this->response;
         $this->session = is_null($this->session) ? $session : $this->session;
+        $this->preExecute();
         $this->{$this->actionToExecute}();
+        $this->postExecute();
         foreach ($this->childControllers as $placeHolderName => &$controller) {
             if (true == is_array($controller)) {
                 list($controllerName, $actionName) = $controller;
@@ -173,6 +183,31 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
             }
         }
         $this->isExecuted = true;
+    }
+
+    protected function preExecute() {
+        foreach ($this->preExecuteCallbacks as $callback) {
+            $callback($this);
+        }
+    }
+
+    protected function postExecute() {
+        foreach ($this->postExecuteCallbacks as $callback) {
+            $callback();
+        }
+    }
+
+    public function registerForPreExecute($callback) {
+        if (!is_callable($callback)) {
+            throw new Vpfw_Exception_Logical('Given value is not callable');
+        }
+        $this->preExecuteCallbacks[] = $callback;
+    }
+
+    public function registerForPostExecute($callback) {
+        if (!is_callable($callback)) {
+            throw new Vpfw_Exception_Logical('Given value is not callable');
+        }
     }
 
     /**

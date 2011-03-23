@@ -1,6 +1,7 @@
 <?php
 class App_Controller_Action_Navigation extends Vpfw_Controller_Action_Abstract {
     public function indexAction() {
+        $rbacUser = $this->session->getRbacUser();
         $linksArray = array(
             array(
                 'url' => Vpfw_Router_Http::url('show'),
@@ -37,10 +38,11 @@ class App_Controller_Action_Navigation extends Vpfw_Controller_Action_Abstract {
                 'url' => Vpfw_Router_Http::url('user', 'logout'),
                 'name' => 'Logout',
             );
-            $linksArray[] = array(
-                'url' => Vpfw_Router_Http::url('admin'),
-                'name' => 'Administration',
-            );
+            if ($rbacUser->hasAccessTo('admin'))
+                $linksArray[] = array(
+                    'url' => Vpfw_Router_Http::url('admin'),
+                    'name' => 'Administration',
+                );
         }
         $this->view->links = $linksArray;
     }

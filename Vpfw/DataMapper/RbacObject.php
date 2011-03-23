@@ -17,6 +17,9 @@ class Vpfw_DataMapper_RbacObject extends Vpfw_DataMapper_Abstract {
             throw new Vpfw_Exception_InvalidArgument('Der übergebene String sollte nicht leer sein');
         }
         $result = $this->getEntriesByFieldValue(array('s|Name|' . $name));
+        if (count($result) == 0) {
+            throw new Vpfw_Exception_Logical('Es konnte kein RbacObject mit dem Namen ' . $name . ' gefunden werden');
+        }
         return $result[0];
     }
 }

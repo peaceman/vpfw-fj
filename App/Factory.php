@@ -6,7 +6,7 @@ class App_Factory {
                                      Vpfw_Factory::getDataMapper('Session'),
                                      $request);
     }
-    
+
     public static function getValidator($type) {
         switch ($type) {
             case 'Picture':
@@ -84,7 +84,7 @@ class App_Factory {
         unset($properties['DelSessionId'],
                 $properties['DelTime'],
                 $properties['DelReason']);
-        $dataObject = new App_DataObject_User(Vpfw_Factory::getDataMapper('PictureComment'), Vpfw_Factory::getDataMapper('Picture'), Vpfw_Factory::getDataMapper('Deletion'), Vpfw_Factory::getValidator('User'), $properties);
+        $dataObject = new App_DataObject_User(Vpfw_Factory::getDataMapper('RbacRole'), Vpfw_Factory::getDataMapper('PictureComment'), Vpfw_Factory::getDataMapper('Picture'), Vpfw_Factory::getDataMapper('Deletion'), Vpfw_Factory::getValidator('User'), $properties);
         if (false == is_null($deletion)) {
             $dataObject->setDeletion($deletion);
         }
@@ -213,7 +213,7 @@ class App_Factory {
             /*
              * Löschen der Löschungsbezogenen Daten aus dem Eigenschaften-
              * array des Bildes
-             */           
+             */
             unset($properties['DelSessionId'],
                   $properties['DelTime'],
                   $properties['DelReason']);
