@@ -91,14 +91,12 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
 
     /**
      * Fügt eine RbacPermission dieser RbacRole hinzu.
-     * Benutzt lazyLoadPermissions
      *
      * @param Vpfw_DataObject_RbacPermission $permission
      * @return Vpfw_DataObject_RbacRole
      */
     public function addPermission(Vpfw_DataObject_RbacPermission $permission) {
         self::checkDataObjectForId($permission);
-        $this->lazyLoadPermissions();
         $this->permissions[$permission->getId()] = $permission;
         $this->permissionsByName[$permission->getObject()->getName()] = $permission;
         return $this;
@@ -114,7 +112,7 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
      */
     public function getPermission($objectName) {
         $this->lazyLoadPermissions();
-        if (true == array_key_exists($objectName, $this->permissionsByName)) {
+        if (true == isset($this->permissionsByName[$objectName])) {
             return $this->permissionsByName[$objectName];
         } else {
             return null;

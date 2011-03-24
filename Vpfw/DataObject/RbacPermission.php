@@ -149,7 +149,7 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
 
     public function lazyLoadObject() {
         if (false === $this->lazyLoadState['Object']) {
-            $this->object = $this->objectMapper->getEntryById($this->getObjectId());
+            $this->objectDao = $this->objectMapper->getEntryById($this->getObjectId());
             $this->lazyLoadState['Object'] = true;
         }
     }

@@ -1,7 +1,7 @@
 <?php
 class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
     public function indexAction() {
-        
+
     }
 
     public function loginAction() {
@@ -24,7 +24,7 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
         $form->setMethod('POST');
         $form->handleRequest();
         $this->view->form = $form;
-        
+
         if (true == $form->formWasSent() && true == $form->isAllValid()) {
             $validValues = $form->getValidValues();
             $loginState = $this->session->login($validValues['username'], $validValues['password']);
@@ -98,6 +98,13 @@ class App_Controller_Action_User extends Vpfw_Controller_Action_Abstract {
     }
 
     public function uploadedPicturesAction() {
+        $rbacUser = $this->session->getRbacUser();
+        if (!$rbacUser->hasAccessTo('user-uploadpictures')) {
+            $view = new Vpfw_View_Std('App/Html/NoAccess.html');
+            $view->area = 'user-uploadpictures';
+            $this->setView($view);
+            $this->interruptExecution();
+        }
         $this->view->pictures = Vpfw_Factory::getDataMapper('Picture')->getEntriesByUserId($this->session->getSession()->getUserId());
     }
 }

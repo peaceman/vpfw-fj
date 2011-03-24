@@ -8,7 +8,7 @@ class App_Validator_RuleViolation {
         $this->sessionMapper = $sessionMapper;
     }
     public function validateReason($reason) {
-        
+
     }
 
     public function validatePictureId($id) {
@@ -28,7 +28,9 @@ class App_Validator_RuleViolation {
     }
 
     public function validateTime($time) {
-        //TODO implement time validation
+        if (0 > $time) {
+            throw new Vpfw_Exception_Validation('Ein Timestamp sollte nicht negativ sein');
+        }
     }
 
     public function validateHandled($handled) {
