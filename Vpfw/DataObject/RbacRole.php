@@ -8,7 +8,7 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
     /**
      * @var Vpfw_DataObject_RbacPermission[]
      */
-    private $permissions;
+    private $permissions = array();
 
     /**
      * @var Vpfw_DataObject_RbacPermissions[]
@@ -35,7 +35,6 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
     public function __construct(Vpfw_DataMapper_RbacPermission $permissionMapper, Vpfw_Validator_RbacRole $validator, $properties = null) {
         $this->validator = $validator;
         $this->permissionMapper = $permissionMapper;
-        $this->permissions = new Vpfw_ObserverArray();
         $this->permissionsByName = new Vpfw_ObserverArray();
         $this->data = array(
             'Id' => null,
@@ -125,7 +124,7 @@ class Vpfw_DataObject_RbacRole extends Vpfw_DataObject_Abstract {
      */
     public function getPermissions() {
         $this->lazyLoadPermissions();
-        return $this->permissions->getArray();
+        return $this->permissions;
     }
 
     /**

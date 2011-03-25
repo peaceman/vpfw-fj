@@ -1,0 +1,34 @@
+<h3>RbacRoles - Übersicht</h3>
+<table>
+    <tr>
+        <th>RoleName</th>
+        <th>Aktionen</th>
+    </tr>
+    <?php $i = 0; foreach ($this->rbacRoles as $rbacRole): $i++; ?>
+    <?php $roleUrl = Vpfw_Router_Http::url('admin', 'rbacRole', array('rbacRoleId' => $rbacRole->getId())); ?>
+    <?php $roleDelUrl = Vpfw_Router_Http::url('admin', 'rbacRoleDel', array('rbacRoleId' => $rbacRole->getId())); ?>
+    <tr>
+        <td>
+            <a href="<?php echo $roleUrl; ?>">
+                <?php HE($rbacRole->getName()); ?>
+            </a>
+        </td>
+        <td>
+            <a href="<?php echo $roleDelUrl; ?>">
+                Löschen
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+    <tr>
+        <td colspan="2">
+            Keine Einträge vorhanden
+        </td>
+    </tr>
+    <?php endif; ?>
+</table>
+<hr />
+<a href="<?php echo Vpfw_Router_Http::url('admin', 'rbacRoleNew'); ?>">
+    Neue RbacRole anlegen
+</a>

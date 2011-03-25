@@ -1,0 +1,59 @@
+<h3>RbacObject</h3>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>
+            <?php HE($this->rbacObject->getName()); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>DefaultRight</td>
+        <td>
+            <?php echo $this->rbacObject->getDefault() ? 'Zulassen' : 'Verweigern' ?>
+        </td>
+    </tr>
+</table>
+<hr />
+<h3>Zugehörige RbacPermissions</h3>
+<table>
+    <tr>
+        <th>RbacRoleName</th>
+        <th>Zugriffsrecht</th>
+        <th>Aktionen</th>
+    </tr>
+    <?php $i = 0; foreach ($this->rbacObject->getPermissions() as $perm): $i++; ?>
+    <?php $role = $perm->getRole(); ?>
+    <?php $roleUrl = Vpfw_Router_Http::url('admin', 'rbacRole', array('rbacRoleId' => $role->getId())); ?>
+    <?php $permChangeUrl = Vpfw_Router_Http::url('admin', 'rbacPermissionChangeRight', array('rbacPermissionId' => $perm->getId())); ?>
+    <?php $permDelUrl = Vpfw_Router_Http::url('admin', 'rbacPermissionDel', array('rbacPermissionId' => $perm->getId())); ?>
+    <tr>
+        <td>
+            <a href="<?php echo $roleUrl; ?>">
+                <?php HE($role->getName()); ?>
+            </a>
+        </td>
+        <td>
+            <?php echo $perm->getState() ? 'Zulassen' : 'Verweigern' ?>
+        </td>
+        <td>
+            <a href="<?php echo $permChangeUrl; ?>">
+                Zugriffsrecht ändern
+            </a>
+            <a href="<?php echo $permDelUrl; ?>">
+                Löschen
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+    <tr>
+        <td colspan="3">
+            Keine Einträge vorhanden
+        </td>
+    </tr>
+    <?php endif; ?>
+</table>
+<hr />
+<a href="<?php echo Vpfw_Router_Http::url('admin', 'rbacPermissionNew', array('rbacObjectId' => $this->rbacObject->getId())) ?>">
+    Neue RbacPermission anlegen
+</a>

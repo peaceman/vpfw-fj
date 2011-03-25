@@ -1,0 +1,36 @@
+<h3>RbacObjects - Übersicht</h3>
+<table>
+    <tr>
+        <th>ObjectName</th>
+        <th>DefaultRight</th>
+        <th>Aktionen</th>
+    </tr>
+    <?php $i = 0; foreach ($this->rbacObjects as $rbacObject): $i++; ?>
+    <?php $rbacUrl = Vpfw_Router_Http::url('admin', 'rbacObject', array('rbacObjectId' => $rbacObject->getId())); ?>
+    <?php $rbacDelUrl = Vpfw_Router_Http::url('admin', 'rbacObjectDel', array('rbacObjectId' => $rbacObject->getId())); ?>
+    <tr>
+        <td>
+            <a href="<?php echo $rbacUrl; ?>">
+                <?php HE($rbacObject->getName()); ?>
+            </a>
+        </td>
+        <td>
+            <?php echo $rbacObject->getDefault() ? 'Zulassen' : 'Verweigern' ?>
+        </td>
+        <td>
+            <a href="<?php echo $rbacDelUrl; ?>">
+                Löschen
+            </a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php if ($i == 0): ?>
+        <tr>
+            <td colspan="3">Keine Einträge vorhanden</td>
+        </tr>
+    <?php endif; ?>
+</table>
+<hr />
+<a href="<?php echo Vpfw_Router_Http::url('admin', 'rbacObjectNew'); ?>">
+    Neues RbacObject anlegen
+</a>

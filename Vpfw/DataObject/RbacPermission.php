@@ -46,7 +46,7 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
             'Object' => false,
         );
         foreach ($this->data as &$val) {
-            $val = array('val' => null, 'changed' => null);
+            $val = array('val' => null, 'changed' => null, 'required' => true);
         }
         parent::__construct($properties);
     }
@@ -84,7 +84,7 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
     }
 
     public function setState($state, $validate = true) {
-        if ($this->getState() != $state) {
+        if ($this->getState() !== $state) {
             if (true == $validate) {
                 $this->validator->validateState($state);
             }
@@ -159,7 +159,7 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
      */
     public function getState() {
         $state = $this->getData('State');
-        if (0 === $state) {
+        if (null === $state) {
             return false;
         } else {
             return true;

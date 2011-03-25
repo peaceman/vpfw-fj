@@ -1,0 +1,37 @@
+<h3>Neues RbacObject anlegen</h3>
+<form action="<?php HE($this->form->getAction()); ?>" method="<?php HE($this->form->getMethod()); ?>">
+    <?php foreach ($this->form->getFormErrors() as $error): ?>
+    <h5>
+        <?php HE($error); ?>
+    </h5>
+    <?php endforeach; ?>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" name="name" value="<?php HE($this->form->getValueForField('name')) ?>"/>
+            </td>
+            <td>
+                <?php foreach ($this->form->getErrorsForField('name') as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Standardzugriffsrecht</td>
+            <td>
+                <select name="default">
+                    <option value="permit" <?php echo $this->form->getOptionStateForSelectField('default', 'permit') ?>>Zulassen</option>
+                    <option value="deny" <?php echo $this->form->getOptionStateForSelectField('default', 'deny') ?>>Verweigern</option>
+                </select>
+            </td>
+            <td>
+                <?php foreach ($this->form->getErrorsForField('default') as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol" />
+    <input type="submit" />
+</form>

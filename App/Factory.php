@@ -33,7 +33,6 @@ class App_Factory {
     }
 
     public static function getDataMapper($type) {
-        $className = 'App_DataMapper_' . $type;
         switch ($type) {
             case 'User':
                 return new App_DataMapper_User(Vpfw_Factory::getDatabase());
@@ -408,17 +407,17 @@ class App_Factory {
                     $picture2 = Vpfw_Factory::getDataMapper('Picture')->getEntryById($properties['PictureId2'], false);
                 } catch (Vpfw_Exception_OutOfRange $e) {
                     $picture2 = Vpfw_Factory::getDataMapper('Picture')->createEntry(
-                            array(
-                                'Id' => $properties['PictureId2'],
-                                'Md5' => $properties['Pic2Md5'],
-                                'Gender' => $properties['Pic2Gender'],
-                                'SessionId' => $properties['Pic2SessionId'],
-                                'UploadTime' => $properties['Pic2UploadTime'],
-                                'SiteHits' => $properties['Pic2SiteHits'],
-                                'PositiveRating' => $properties['Pic2PositiveRating'],
-                                'NegativeRating' => $properties['Pic2NegativeRating'],
-                                'DeletionId' => $properties['Pic2DeletionId'],
-                            ));
+                        array(
+                            'Id' => $properties['PictureId2'],
+                            'Md5' => $properties['Pic2Md5'],
+                            'Gender' => $properties['Pic2Gender'],
+                            'SessionId' => $properties['Pic2SessionId'],
+                            'UploadTime' => $properties['Pic2UploadTime'],
+                            'SiteHits' => $properties['Pic2SiteHits'],
+                            'PositiveRating' => $properties['Pic2PositiveRating'],
+                            'NegativeRating' => $properties['Pic2NegativeRating'],
+                            'DeletionId' => $properties['Pic2DeletionId'],
+                        ));
                 }
             }
 

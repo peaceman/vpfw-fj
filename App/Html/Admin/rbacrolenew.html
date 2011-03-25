@@ -1,0 +1,23 @@
+<h3>Neue RbacRole anlegen</h3>
+<form action="<?php HE($this->form->getAction()) ?>" name="<?php HE($this->form->getName()) ?>" method="<?php HE($this->form->getMethod()) ?>" >
+    <?php foreach ($this->form->getFormErrors() as $error): ?>
+    <h5>
+        <?php HE($error); ?>
+    </h5>
+    <?php endforeach; ?>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" name="name" value="<?php HE($this->form->getValueForField('name')) ?>"/>
+            </td>
+            <td>
+                <?php foreach ($this->form->getErrorsForField('name') as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol" />
+    <input type="submit" />
+</form>

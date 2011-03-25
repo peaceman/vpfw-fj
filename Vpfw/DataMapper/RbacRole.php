@@ -67,6 +67,20 @@ class Vpfw_DataMapper_RbacRole extends Vpfw_DataMapper_Abstract {
                                                 c.UserId = ?
                                             GROUP BY
                                                 a.Id";
+        $this->sqlQueries['getByObjectId'] = 'SELECT
+                                                  a.Id,
+                                                  a.Name,
+                                                  GROUP_CONCAT(b.Id) AS PermIds,
+                                                  GROUP_CONCAT(b.ObjectId) AS PermObjectIds,
+                                                  GROUP_CONCAT(b.State) AS PermStates
+                                              FROM
+                                                  {TableName} AS a
+                                              INNER JOIN
+                                                  rbac_permission AS b ON
+                                                  a.Id = b.RoleId AND
+                                                  b.ObjectId = ?
+                                              GROUP BY
+                                                  a.Id';
     }
 
     public function getEntriesByUserId($userId) {

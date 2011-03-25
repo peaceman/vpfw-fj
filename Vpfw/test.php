@@ -1,9 +1,9 @@
 <?php
-$var = null;
-$arr['var'] = null;
+include 'Interface/Observer.php';
+include 'ObserverArray.php';
+include 'Interface/Observable.php';
+$arr = new Vpfw_ObserverArray();
 echo '<pre>';
-echo 'expected true ';
-var_dump(isset($var));
-echo 'expected true ';
-var_dump(isset($arr['var']));
-unset($arr['lol']);
+echo 'expected 0 - ';
+var_dump(count($arr));
+$arr[] =

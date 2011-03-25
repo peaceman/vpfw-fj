@@ -193,7 +193,7 @@ abstract class Vpfw_Controller_Action_Abstract implements Vpfw_Controller_Action
 
     protected function postExecute() {
         foreach ($this->postExecuteCallbacks as $callback) {
-            $callback();
+            $callback($this);
         }
     }
 

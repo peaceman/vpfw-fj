@@ -32,7 +32,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
             }
         }
     }
-    
+
     private function getPictureFromRequestData() {
         $pictureId = (int)$this->request->getParameter('commentedPictureId');
         $picture = null;
@@ -44,7 +44,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
         }
         return $picture;
     }
-    
+
     private function getComparisonFromRequestData() {
         $comparison = null;
         if ($this->request->issetParameter('comparisonId')) {
@@ -78,7 +78,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                 'commentedPictureId' => $picture->getId(),
             ));
         }
-        
+
         $form = new Vpfw_Form($this->request, 'piccomment' . $picture->getId(), array($commentField));
         $form->setAction($formAction)->setMethod('post')->handleRequest();
         $this->view->setVar('form', $form);
@@ -97,13 +97,13 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
             } else {
                 $pictureComment->notifyObserver();
                 $this->request->setParameter('commentFormErrors', array('commentedPictureId' => $picture->getId(), 'errors' => $validationResult));
-                
+
                 if (!is_null($comparison)) {
                     $this->request->addActionControllerInfo(array('ControllerName' => 'show'));
                 } else {
                     $this->request->setParameter('pictureId', $picture->getId());
                     $this->request->addActionControllerInfo(array('ControllerName' => 'picture', 'MethodName' => 'show'));
-                }                
+                }
             }
         } elseif ($form->formWasSent()) {
             if (!is_null($comparison)) {
@@ -130,7 +130,7 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
              ->setEnctype('multipart/form-data')
              ->handleRequest();
         $this->view->form = $form;
-        
+
         if (true == $form->formWasSent() && true == $form->isAllValid()) {
             $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
             $pictureDao = $pictureMapper->createEntry();
@@ -213,7 +213,6 @@ class App_Controller_Action_Picture extends Vpfw_Controller_Action_Abstract {
                 $this->request->addActionControllerInfo(array('ControllerName' => 'index'));
             } else {
                 $comparisonMapper = Vpfw_Factory::getDataMapper('PictureComparison');
-                $pictureMapper = Vpfw_Factory::getDataMapper('Picture');
                 $comparisonDao = null;
                 try {
                     $comparisonDao = $comparisonMapper->getEntryById($this->request->getParameter('cId'));

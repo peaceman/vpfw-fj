@@ -1,0 +1,70 @@
+<h3>Neue RbacPermission anlegen</h3>
+<form action="<?php HE($this->form->getAction()) ?>" method="<?php HE($this->form->getMethod()) ?>" name="<?php HE($this->form->getName()) ?>">
+    <?php foreach ($this->form->getFormErrors() as $error): ?>
+    <h5>
+        <?php HE($error); ?>
+    </h5>
+    <?php endforeach; ?>
+    <table>
+        <tr>
+            <td>RbacRole</td>
+            <td>
+                <select name="roleId">
+                    <?php $i = 0; foreach ($this->rbacRoles as $role): $i++; ?>
+                    <option value="<?php HE($role->getId()) ?>" <?php echo $this->form->getOptionStateForSelectField('roleId', $role->getId()) ?> >
+                        <?php HE($role->getName()) ?>
+                    </option>
+                    <?php endforeach; ?>
+                    <?php if ($i == 0): ?>
+                    <option>Es sind keine RbacRollen im System hinterlegt</option>
+                    <?php endif; ?>
+                </select>
+            </td>
+            <td>
+                <?php foreach ($this->form->getErrorsForField('role') as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>RbacObject</td>
+            <td>
+                <select name="objectId">
+                    <?php $i = 0; foreach ($this->rbacObjects as $object): $i++; ?>
+                    <option value="<?php HE($object->getId()) ?>" <?php echo $this->form->getOptionStateForSelectField('objectId', $object->getId()) ?> >
+                        <?php HE($object->getName()) ?>
+                    </option>
+                    <?php endforeach; ?>
+                    <?php if ($i == 0): ?>
+                    <option>Es sind keine RbacObjekte im System hinterlegt</option>
+                    <?php endif; ?>
+                </select>
+            </td>
+            <td>
+                <?php foreach ($this->form->getErrorsForField('object') as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Zugriff</td>
+            <td>
+                <select name="right">
+                    <option value="permit" <?php echo $this->form->getOptionStateForSelectField('right', 'permit'); ?> >
+                        Zulassen
+                    </option>
+                    <option value="deny" <?php echo $this->form->getOptionStateForSelectField('right', 'deny'); ?> >
+                        Verweigern
+                    </option>
+                </select>
+            </td>
+            <td>
+                <?php foreach ($this->form->getErrorsForField('right') as $error): ?>
+                <?php HE($error); ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="form-<?php HE($this->form->getName()) ?>" value="lol" />
+    <input type="submit" />
+</form>

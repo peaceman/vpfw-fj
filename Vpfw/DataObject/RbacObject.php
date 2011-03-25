@@ -1,21 +1,58 @@
 <?php
 class Vpfw_DataObject_RbacObject extends Vpfw_DataObject_Abstract {
     /**
-     *
      * @var Vpfw_Validator_RbacObject
      */
     private $validator;
-    public function __construct(Vpfw_Validator_RbacObject $validator, $properties = null) {
+
+    /**
+     * @var Vpfw_DataObject_RbacPermission[]
+     */
+    private $permissions;
+
+    /**
+     * @var Vpfw_DataMapper_RbacPermission
+     */
+    private $permissionMapper;
+
+    /**
+     * @param Vpfw_DataMapper_Permission
+     * @param Vpfw_Validator_RbacObject $validator
+     * @param Vpfw_DataMapper_RbacRole $rbacRoleMapper
+     * @param array|null $properties
+     */
+    public function __construct(Vpfw_DataMapper_RbacPermission $permissionMapper, Vpfw_Validator_RbacObject $validator, $properties = null) {
+        $this->permissionMapper = $permissionMapper;
         $this->validator = $validator;
+        $this->permissions = new Vpfw_ObserverArray();
         $this->data = array(
             'Id' => null,
             'Default' => null,
             'Name' => null,
         );
         foreach ($this->data as &$val) {
-            $val = array('val' => null, 'changed' => null);
+            $val = array('val' => null, 'changed' => false, 'required' => true);
         }
+        $this->lazyLoadState = array(
+            'Permissions' => false,
+        );
         parent::__construct($properties);
+    }
+
+    public function getPermissions() {
+        if (count($this->permissions) == 0) {
+            $this->lazyLoadPermissions();
+        }
+        return $this->permissions->getArray();
+    }
+
+    private function lazyLoadPermissions() {
+        if (false === $this->lazyLoadState['Permissions']) {
+            $permissions = $this->permissionMapper->getEntriesByFieldValue(array('i|ObjectId|' . $this->getId()));
+            foreach ($permissions as $permission) {
+                $this->permissions[] = $permission;
+            }
+        }
     }
 
     public function getDefault() {

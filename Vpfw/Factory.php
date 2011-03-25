@@ -3,7 +3,7 @@ class Vpfw_Factory {
     public static $objectCache = array();
     /**
      *
-     * @var Vpfw_Config_Abstract 
+     * @var Vpfw_Config_Abstract
      */
     private static $configObject;
 
@@ -151,7 +151,7 @@ class Vpfw_Factory {
                 return new Vpfw_DataObject_Translation(self::getValidator('Translation'), $properties);
                 break;
             case 'RbacObject':
-                return new Vpfw_DataObject_RbacObject(self::getValidator('RbacObject'), $properties);
+                return new Vpfw_DataObject_RbacObject(self::getDataMapper('RbacPermission'), self::getValidator('RbacObject'), $properties);
                 break;
             case 'RbacPermission':
                 $roleDao = null;
