@@ -23,7 +23,7 @@ class Vpfw_Router_Http implements Vpfw_Router_Interface {
         }
 
         if (true == $request->issetParameter('4c7')) {
-            $methodName = strtolower($request->getParameter('4c7'));
+            $methodName = $request->getParameter('4c7');
         } else {
             $methodName = 'index';
         }

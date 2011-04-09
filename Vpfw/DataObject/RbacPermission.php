@@ -159,7 +159,7 @@ class Vpfw_DataObject_RbacPermission extends Vpfw_DataObject_Abstract {
      */
     public function getState() {
         $state = $this->getData('State');
-        if (null === $state) {
+        if (0 == $state) {
             return false;
         } else {
             return true;

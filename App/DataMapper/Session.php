@@ -4,7 +4,7 @@ class App_DataMapper_Session extends Vpfw_DataMapper_Abstract {
         $this->dataColumns = array(
             'Id' => 'i',
             'UserId' => 'i',
-            'Ip' => 'i',
+            'Ip' => 's',
             'StartTime' => 'i',
             'LastRequest' => 'i',
             'Hits' => 'i',

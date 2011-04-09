@@ -4,7 +4,7 @@ class App_DataMapper_User extends Vpfw_DataMapper_Abstract {
         $this->dataColumns = array(
             'Id' => 'i',
             'CreationTime' => 'i',
-            'CreationIp' => 'i',
+            'CreationIp' => 's',
             'DeletionId' => 'i',
             'Username' => 's',
             'Passhash' => 's',

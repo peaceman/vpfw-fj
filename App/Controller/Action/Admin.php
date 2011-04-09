@@ -240,6 +240,11 @@ class App_Controller_Action_Admin extends Vpfw_Controller_Action_Abstract {
         }
     }
 
+    public function rbacPermissionChangeRightAction() {
+        $rbacPermission = $this->getRbacPermissionFromRequestData();
+        $rbacPermission->setState(!$rbacPermission->getState());
+    }
+
     public function rbacPermissionsAction() {
         //TODO add paging
         $rbacPermissions = $this->rbacpermissionMapper->getAllEntries();

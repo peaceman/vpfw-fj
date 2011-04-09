@@ -79,8 +79,8 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
      */
     public function getIp() {
         $ip = $this->getData('Ip');
-        if (false == is_null($ip) && 0 != $ip) {
-            return long2ip($ip);
+        if (false == is_null($ip)) {
+            return inet_ntop($ip);
         } else {
             return null;
         }
@@ -153,7 +153,7 @@ class App_DataObject_Session extends Vpfw_DataObject_Abstract {
             if (true == $validate) {
                 $this->validator->validateIp($ip);
             }
-            $this->setData('Ip', ip2long($ip));
+            $this->setData('Ip', inet_pton($ip));
         }
     }
 

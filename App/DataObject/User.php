@@ -155,7 +155,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
      */
     public function getCreationIp() {
         $netIp = $this->getData('CreationIp');
-        return is_null($netIp) ? null : long2ip($netIp);
+        return is_null($netIp) ? null : inet_ntop($netIp);
     }
 
     /**
@@ -230,7 +230,7 @@ class App_DataObject_User extends Vpfw_DataObject_Abstract implements Vpfw_Rbac_
             if (true == $validate) {
                 $this->validator->validateCreationIp($ip);
             }
-            $this->setData('CreationIp', ip2long($ip));
+            $this->setData('CreationIp', inet_pton($ip));
         }
     }
 
