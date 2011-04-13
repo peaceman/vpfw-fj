@@ -3,3 +3,6 @@
 Platz Nr.: <?php HE($picturePlace); ?> mit einer Wertung von <?php HE($picture->getRating()) ?>
 <hr />
 <?php endforeach; ?>
+<?php if ($picturePlace == 0): ?>
+Es wurden noch keine Bilder für dieses Geschlecht hochgeladen
+<?php endif; ?>
