@@ -1,9 +1,9 @@
 # --------------------------------------------------------
 # Host:                         127.0.0.1
-# Server version:               5.1.37-community
-# Server OS:                    Win32
-# HeidiSQL version:             6.0.0.3603
-# Date/time:                    2011-02-08 14:53:49
+# Server version:               5.5.8
+# Server OS:                    Win64
+# HeidiSQL version:             6.0.0.3715
+# Date/time:                    2011-04-13 19:41:32
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -12,7 +12,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 # Dumping structure for table fj.deletion
-DROP TABLE IF EXISTS `deletion`;
 CREATE TABLE IF NOT EXISTS `deletion` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `SessionId` int(10) unsigned NOT NULL COMMENT 'Wer hat gelöscht?',
@@ -27,7 +26,6 @@ CREATE TABLE IF NOT EXISTS `deletion` (
 
 
 # Dumping structure for table fj.favorite_comparison
-DROP TABLE IF EXISTS `favorite_comparison`;
 CREATE TABLE IF NOT EXISTS `favorite_comparison` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `PictureId1` int(10) unsigned NOT NULL,
@@ -47,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `favorite_comparison` (
 
 
 # Dumping structure for table fj.picture
-DROP TABLE IF EXISTS `picture`;
 CREATE TABLE IF NOT EXISTS `picture` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Md5` char(32) NOT NULL COMMENT 'MD5 Hash des Bildes. Mit diesem Hash wird überprüft, ob sich das Bild bereits auf der Plattform existiert.',
@@ -70,7 +67,6 @@ CREATE TABLE IF NOT EXISTS `picture` (
 
 
 # Dumping structure for table fj.picture_comment
-DROP TABLE IF EXISTS `picture_comment`;
 CREATE TABLE IF NOT EXISTS `picture_comment` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `SessionId` int(10) unsigned NOT NULL COMMENT 'In welcher Session wurde dieser Kommentar verfasst?',
@@ -91,7 +87,6 @@ CREATE TABLE IF NOT EXISTS `picture_comment` (
 
 
 # Dumping structure for table fj.picture_comparison
-DROP TABLE IF EXISTS `picture_comparison`;
 CREATE TABLE IF NOT EXISTS `picture_comparison` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `PictureId1` int(10) unsigned NOT NULL,
@@ -107,7 +102,6 @@ CREATE TABLE IF NOT EXISTS `picture_comparison` (
 
 
 # Dumping structure for table fj.rbac_object
-DROP TABLE IF EXISTS `rbac_object`;
 CREATE TABLE IF NOT EXISTS `rbac_object` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Default` tinyint(3) unsigned NOT NULL,
@@ -120,7 +114,6 @@ CREATE TABLE IF NOT EXISTS `rbac_object` (
 
 
 # Dumping structure for table fj.rbac_permission
-DROP TABLE IF EXISTS `rbac_permission`;
 CREATE TABLE IF NOT EXISTS `rbac_permission` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `RoleId` int(10) unsigned NOT NULL,
@@ -137,7 +130,6 @@ CREATE TABLE IF NOT EXISTS `rbac_permission` (
 
 
 # Dumping structure for table fj.rbac_role
-DROP TABLE IF EXISTS `rbac_role`;
 CREATE TABLE IF NOT EXISTS `rbac_role` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(32) NOT NULL,
@@ -149,7 +141,6 @@ CREATE TABLE IF NOT EXISTS `rbac_role` (
 
 
 # Dumping structure for table fj.rbac_user2role
-DROP TABLE IF EXISTS `rbac_user2role`;
 CREATE TABLE IF NOT EXISTS `rbac_user2role` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `RoleId` int(10) unsigned NOT NULL,
@@ -165,7 +156,6 @@ CREATE TABLE IF NOT EXISTS `rbac_user2role` (
 
 
 # Dumping structure for table fj.ruleviolation
-DROP TABLE IF EXISTS `ruleviolation`;
 CREATE TABLE IF NOT EXISTS `ruleviolation` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `PictureId` int(10) unsigned NOT NULL COMMENT 'Um welches Bild handelt es sich?',
@@ -184,11 +174,10 @@ CREATE TABLE IF NOT EXISTS `ruleviolation` (
 
 
 # Dumping structure for table fj.session
-DROP TABLE IF EXISTS `session`;
 CREATE TABLE IF NOT EXISTS `session` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UserId` int(10) unsigned DEFAULT NULL COMMENT 'Optionales Feld',
-  `Ip` int(10) unsigned NOT NULL COMMENT 'IPv6 ?!',
+  `Ip` varbinary(16) NOT NULL COMMENT 'IPv6 ?!',
   `StartTime` int(10) unsigned NOT NULL,
   `LastRequest` int(10) unsigned NOT NULL,
   `Hits` int(10) unsigned NOT NULL COMMENT 'Anzahl der Requests aus dieser einen Session',
@@ -202,11 +191,10 @@ CREATE TABLE IF NOT EXISTS `session` (
 
 
 # Dumping structure for table fj.user
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `CreationTime` int(10) unsigned NOT NULL,
-  `CreationIp` int(10) unsigned NOT NULL,
+  `CreationIp` varbinary(16) NOT NULL,
   `DeletionId` int(10) unsigned DEFAULT NULL COMMENT 'Der Benutzer gilt als gelöscht, wenn hier eine Id vermerkt ist.',
   `Passhash` char(32) NOT NULL COMMENT 'MD5-Hash in der Hexdarstellung.',
   `Username` varchar(32) NOT NULL,
