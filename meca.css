@@ -7,6 +7,10 @@ body {
 	background-color: #303030;
 }
 
+img {
+	border: 0px;
+}
+
 #SiteBackground {
 	height: 366px;
 	background-image: url("img/background.png");
@@ -233,8 +237,8 @@ body {
 	display: inline;
 }
 
-#PictureList ul li a {
-	padding-right: 12px;
+#PictureList ul li img {
+	margin-right: 12px;
 }
 
 #FooterNavigation a {
