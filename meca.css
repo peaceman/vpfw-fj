@@ -54,6 +54,61 @@ body {
 	min-height: 501px;
 }
 
+#VsBody {
+	background-image: url("img/BodyBackground.jpg");
+	background-position: bottom;
+	background-repeat: no-repeat;
+	min-height: 501px;
+}
+
+#VsPictureLeft {
+	margin-top: 39px;
+	margin-left: 68px;
+	background-image: url("img/PictureBorder1.gif");
+	background-position: top;
+	background-repeat: no-repeat;
+	height: 297px;
+	width: 192px;
+	position: relative;
+	float: left;
+}
+
+#VsPictureLeft .Picture {
+	position: absolute;
+	top: 30px;
+	left: 28px;
+}
+
+.ThumbDown {
+	position: absolute;
+	left: 34px;
+	bottom: 0px;
+}
+
+.ThumbUp {
+	position: absolute;
+	bottom: 0px;
+	right: 34px;
+}
+
+#VsPictureRight {
+	background-position: top;
+	background-repeat: no-repeat;
+	margin-top: 39px;
+	margin-right: 69px;
+	float: right;
+	background-image: url("img/PictureBorder2.gif");
+	height: 297px;
+	width: 192px;
+	position: relative;
+}
+
+#VsPictureRight .Picture {
+	position: absolute;
+	top: 30px;
+	left: 28px;
+}
+
 #Footer {
 	height: 60px;
 	background-color: #4d4d4d;
@@ -180,4 +235,9 @@ body {
 
 #PictureList ul li a {
 	padding-right: 12px;
+}
+
+#FooterNavigation a {
+	text-decoration: none;
+	color: black;
 }
